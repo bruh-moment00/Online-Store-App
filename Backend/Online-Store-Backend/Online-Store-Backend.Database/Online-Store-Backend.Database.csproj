@@ -15,10 +15,10 @@
 
   <ItemGroup>
     <Folder Include="Contexts\" />
-    <Folder Include="Permissions\" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Online-Store-Backend.Core\Online-Store-Backend.Core.csproj" />
     <ProjectReference Include="..\Online-Store-Backend.Enums\Online-Store-Backend.Enums.csproj" />
   </ItemGroup>
 

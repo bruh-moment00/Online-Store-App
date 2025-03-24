@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Online_Store_Backend.Core.Entity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -12,12 +13,8 @@ namespace Online_Store_Backend.Database.Products.Models
     [Serializable]
     [DataContract]
     [Table("product_image", Schema = "public")]
-    class ProductImage
-    {
-        [Key]
-        [DataMember]
-        public Guid ID { get; set; }
-        
+    class ProductImage : BaseEntity
+    {        
         [DataMember]
         public String? ImageAddress { get; set; }
 

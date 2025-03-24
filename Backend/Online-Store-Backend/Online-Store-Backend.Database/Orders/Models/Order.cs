@@ -1,4 +1,5 @@
-﻿using Online_Store_Backend.Database.Products.Models;
+﻿using Online_Store_Backend.Core.Entity;
+using Online_Store_Backend.Database.Products.Models;
 using Online_Store_Backend.Database.Users.Models;
 using Online_Store_Backend.Enums;
 using System;
@@ -15,19 +16,12 @@ namespace Online_Store_Backend.Database.Orders.Models
     [Serializable]
     [DataContract]
     [Table("order", Schema = "public")]
-    class Order
+    class Order : BaseEntity
     {
-        [Key]
-        [DataMember]
-        public Guid OrderID { get; set; }
-
-        [DataMember]
-        public DateTime CreatedOn { get; set; }
-
         [DataMember]
         public SqlMoney TotalPrice { get; set; }
         
-        public ICollection<Product> OrderedProducts { get; set; }
+        public ICollection<OrderedProduct>? OrderedProducts { get; set; }
 
         [DataMember]
         public Guid UserID { get; set; }
@@ -37,12 +31,12 @@ namespace Online_Store_Backend.Database.Orders.Models
         public virtual User User { get; set; }
 
         [Required]
+        [DataMember]
         public OrderStatus Status { get; set; } = OrderStatus.Pending;
         
-        public Order(User user, ICollection<Product> products)
+        public Order(User user)
         {
             User = user;
-            OrderedProducts = products;
         }
     }
 }

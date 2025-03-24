@@ -1,4 +1,5 @@
-﻿using Online_Store_Backend.Database.Categories.Models;
+﻿using Online_Store_Backend.Core.Entity;
+using Online_Store_Backend.Database.Categories.Models;
 using Online_Store_Backend.Database.Orders.Models;
 using System;
 using System.Collections.Generic;
@@ -15,12 +16,8 @@ namespace Online_Store_Backend.Database.Products.Models
     [Serializable]
     [DataContract]
     [Table("product", Schema = "public")]
-    class Product
+    class Product : BaseEntity
     {       
-        [Key]
-        [DataMember]
-        public Guid ID { get; set; }
-
         [DataMember]
         [MaxLength(255)]
         [Required]
