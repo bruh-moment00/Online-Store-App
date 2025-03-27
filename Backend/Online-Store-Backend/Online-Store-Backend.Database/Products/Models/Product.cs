@@ -16,7 +16,7 @@ namespace Online_Store_Backend.Database.Products.Models
     [Serializable]
     [DataContract]
     [Table("product", Schema = "public")]
-    class Product : BaseEntity
+    public class Product : BaseEntity
     {       
         [DataMember]
         [MaxLength(255)]

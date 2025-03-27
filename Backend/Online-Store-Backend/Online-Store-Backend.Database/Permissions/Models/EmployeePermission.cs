@@ -16,7 +16,7 @@ namespace Online_Store_Backend.Database.Permissions.Models
     [Serializable]
     [DataContract]
     [Table("employee_permission", Schema = "public")]
-    class EmployeePermission : ConnectEntity
+    public class EmployeePermission : ConnectEntity
     {
         [DataMember]
         [Required]

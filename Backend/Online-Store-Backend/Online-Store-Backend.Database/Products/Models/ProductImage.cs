@@ -13,7 +13,7 @@ namespace Online_Store_Backend.Database.Products.Models
     [Serializable]
     [DataContract]
     [Table("product_image", Schema = "public")]
-    class ProductImage : BaseEntity
+    public class ProductImage : BaseEntity
     {        
         [DataMember]
         public String? ImageAddress { get; set; }

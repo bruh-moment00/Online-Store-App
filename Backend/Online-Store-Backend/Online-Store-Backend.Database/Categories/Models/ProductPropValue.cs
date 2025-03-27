@@ -15,7 +15,7 @@ namespace Online_Store_Backend.Database.Categories.Models
     [Serializable]
     [DataContract]
     [Table("product_property_value", Schema = "public")]
-    class ProductPropValue : ConnectEntity
+    public class ProductPropValue : ConnectEntity
     {
         [DataMember]
         [Required]

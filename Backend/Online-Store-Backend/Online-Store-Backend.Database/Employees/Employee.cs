@@ -13,7 +13,7 @@ namespace Online_Store_Backend.Database.Employees
     [Serializable]
     [DataContract]
     [Table("employee", Schema = "public")]
-    class Employee : BaseEntity
+    public class Employee : BaseEntity
     {
         [DataMember]
         [MaxLength(50)]

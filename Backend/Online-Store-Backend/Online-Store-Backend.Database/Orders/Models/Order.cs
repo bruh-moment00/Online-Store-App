@@ -16,7 +16,7 @@ namespace Online_Store_Backend.Database.Orders.Models
     [Serializable]
     [DataContract]
     [Table("order", Schema = "public")]
-    class Order : BaseEntity
+    public class Order : BaseEntity
     {
         [DataMember]
         public SqlMoney TotalPrice { get; set; }

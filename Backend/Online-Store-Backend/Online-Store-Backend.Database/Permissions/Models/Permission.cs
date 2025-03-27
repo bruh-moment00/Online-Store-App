@@ -12,7 +12,7 @@ namespace Online_Store_Backend.Database.Permissions.Models
     [Serializable]
     [DataContract]
     [Table("permission", Schema = "public")]
-    class Permission
+    public class Permission
     {
         [Key]
         [DataMember]

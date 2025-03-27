@@ -14,7 +14,7 @@ namespace Online_Store_Backend.Database.Orders.Models
     [Serializable]
     [DataContract]
     [Table("order_product", Schema = "public")]
-    class OrderedProduct : ConnectEntity
+    public class OrderedProduct : ConnectEntity
     {
         [DataMember]
         [Required]

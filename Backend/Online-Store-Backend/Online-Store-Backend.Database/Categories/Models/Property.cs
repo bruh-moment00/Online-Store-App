@@ -13,7 +13,7 @@ namespace Online_Store_Backend.Database.Categories.Models
     [Serializable]
     [DataContract]
     [Table("category_prop", Schema = "public")]
-    class Property
+    public class Property
     {
         [Key]
         [DataMember]

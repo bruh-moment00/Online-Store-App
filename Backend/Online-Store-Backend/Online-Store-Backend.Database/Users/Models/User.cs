@@ -14,7 +14,7 @@ namespace Online_Store_Backend.Database.Users.Models
     [Serializable]
     [DataContract]
     [Table("user", Schema = "public")]
-    class User : BaseEntity
+    public class User : BaseEntity
     {
         [DataMember]
         [MaxLength(50)]
