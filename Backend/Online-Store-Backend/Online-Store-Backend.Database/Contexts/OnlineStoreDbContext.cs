@@ -13,18 +13,21 @@ using Online_Store_Backend.Database.Users.Models;
 
 namespace Online_Store_Backend.Database.Contexts
 {
-    public class OnlineStoreDbContext : DbContext
+    public partial class OnlineStoreDbContext : DbContext
     {
-        protected readonly string ConnectionString;
-
-        public OnlineStoreDbContext(string connectionString)
-        {
-            ConnectionString = connectionString;
-        }
-
         public OnlineStoreDbContext(DbContextOptions<OnlineStoreDbContext> options) : base(options)
         {
-            
+            Database.EnsureCreated();
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseNpgsql();
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
         }
 
         public DbSet<Product> Products { get; set; }

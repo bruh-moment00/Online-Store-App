@@ -6,12 +6,23 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>Online_Store_Backend</RootNamespace>
     <UserSecretsId>457a885c-709d-4a1e-8522-4e85144aa250</UserSecretsId>
-    <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Online-Store-Backend.Database\Online-Store-Backend.Database.csproj" />
+    <ProjectReference Include="..\Online-Store-Backend.Domain\Online-Store-Backend.Domain.csproj" />
+    <ProjectReference Include="..\Online-Store-Backend.Enums\Online-Store-Backend.Enums.csproj" />
   </ItemGroup>
 
 </Project>

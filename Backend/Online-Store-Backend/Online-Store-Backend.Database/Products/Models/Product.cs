@@ -33,16 +33,12 @@ namespace Online_Store_Backend.Database.Products.Models
         public virtual Category? Category { get; set; }
 
         [DataMember]
-        public SqlMoney Price { get; set; }
+        public Double Price { get; set; }
 
         [DataMember]
         public virtual ICollection<ProductPropValue>? PropsValues { get; set; }
 
         [DataMember]
         public virtual ICollection<ProductImage>? Images { get; set; }
-        public Product(String name)
-        {
-            Name = name;
-        }
     }
 }

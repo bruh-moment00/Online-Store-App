@@ -19,7 +19,7 @@ namespace Online_Store_Backend.Database.Orders.Models
     public class Order : BaseEntity
     {
         [DataMember]
-        public SqlMoney TotalPrice { get; set; }
+        public Double TotalPrice { get; set; }
         
         public ICollection<OrderedProduct>? OrderedProducts { get; set; }
 
@@ -33,10 +33,5 @@ namespace Online_Store_Backend.Database.Orders.Models
         [Required]
         [DataMember]
         public OrderStatus Status { get; set; } = OrderStatus.Pending;
-        
-        public Order(User user)
-        {
-            User = user;
-        }
     }
 }
