@@ -29,6 +29,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.MapGet("/", (OnlineStoreDbContext db) => db.Users.ToList());
+app.MapGet("/", (OnlineStoreDbContext db) => db.Employees.ToList());
 
 app.Run();

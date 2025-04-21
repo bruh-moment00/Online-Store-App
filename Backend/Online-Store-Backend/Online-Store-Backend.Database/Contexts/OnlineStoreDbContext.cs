@@ -10,6 +10,7 @@ using Online_Store_Backend.Database.Employees;
 using Online_Store_Backend.Database.Orders.Models;
 using Online_Store_Backend.Database.Permissions.Models;
 using Online_Store_Backend.Database.Users.Models;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Online_Store_Backend.Database.Contexts
 {
@@ -17,7 +18,7 @@ namespace Online_Store_Backend.Database.Contexts
     {
         public OnlineStoreDbContext(DbContextOptions<OnlineStoreDbContext> options) : base(options)
         {
-            Database.EnsureCreated();
+            Database.Migrate();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -27,7 +28,20 @@ namespace Online_Store_Backend.Database.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            foreach (var entity in modelBuilder.Model.GetEntityTypes()
+                .Where(t => t.ClrType.GetProperties()
+                    .Any(p => p.CustomAttributes.Any(a => a.AttributeType == typeof(DatabaseGeneratedAttribute)))))
+            {
+                foreach (var property in entity.ClrType.GetProperties()
+                    .Where(p => p.PropertyType == typeof(Guid) && p.CustomAttributes
+                        .Any(a => a.AttributeType == typeof(DatabaseGeneratedAttribute))))
+                {
+                    modelBuilder
+                        .Entity(entity.ClrType)
+                        .Property(property.Name)
+                        .HasDefaultValueSql("GEN_RANDOM_UUID()");
+                }
+            }
         }
 
         public DbSet<Product> Products { get; set; }
