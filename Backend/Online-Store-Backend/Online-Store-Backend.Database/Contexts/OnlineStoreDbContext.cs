@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +18,7 @@ namespace Online_Store_Backend.Database.Contexts
     {
         public OnlineStoreDbContext(DbContextOptions<OnlineStoreDbContext> options) : base(options)
         {
-            Database.Migrate();
+
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

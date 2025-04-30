@@ -30,6 +30,6 @@ namespace Online_Store_Backend.Database.Permissions.Models
         public Int32 PermissionID { get; set; }
 
         [ForeignKey("PermissionID")]
-        public virtual required Permission Product { get; set; }
+        public virtual required Permission Permission { get; set; }
     }
 }
