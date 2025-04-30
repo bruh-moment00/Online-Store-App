@@ -17,6 +17,7 @@ RUN dotnet restore "./Online-Store-Backend/Online-Store-Backend.csproj"
 COPY . .
 WORKDIR "/src/Online-Store-Backend"
 RUN dotnet build "./Online-Store-Backend.csproj" -c $BUILD_CONFIGURATION -o /app/build
+RUN dotnet ef database update --connection-string "Host=db;Port=5432;Database=OnlineStoreDB;Username=root;Password=root"
 
 # Этот этап используется для публикации проекта службы, который будет скопирован на последний этап
 FROM build AS publish
