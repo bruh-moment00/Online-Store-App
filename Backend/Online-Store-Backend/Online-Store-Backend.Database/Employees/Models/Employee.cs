@@ -1,14 +1,9 @@
-﻿using Online_Store_Backend.Core.Entity;
-using System;
-using System.Collections.Generic;
+﻿using Online_Store_Backend.Database.Entity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Online_Store_Backend.Database.Employees
+namespace Online_Store_Backend.Database.Employees.Models
 {
     [Serializable]
     [DataContract]
@@ -18,22 +13,22 @@ namespace Online_Store_Backend.Database.Employees
         [DataMember]
         [MaxLength(50)]
         [Required]
-        public String FirstName { get; set; }
+        public string FirstName { get; set; }
 
         [DataMember]
         [MaxLength(50)]
         [Required]
-        public String? LastName { get; set; }
+        public string? LastName { get; set; }
 
         [DataMember]
         [MaxLength(20)]
         [Required]
-        public String? PhoneNum { get; set; }
+        public string? PhoneNum { get; set; }
 
         [DataMember]
         [MaxLength(100)]
         [Required]
-        public String? Email { get; set; }
+        public string? Email { get; set; }
 
         [DataMember]
         public bool? Gender { get; set; }
@@ -43,16 +38,10 @@ namespace Online_Store_Backend.Database.Employees
 
         [DataMember]
         [MaxLength(255)]
-        public String Login { get; set; }
+        public string Login { get; set; }
 
         [DataMember]
         [MaxLength(255)]
-        public String? PasswordHash { get; set; }
-
-        public Employee(String firstName, String login)
-        {
-            FirstName = firstName;
-            Login = login;
-        }
+        public string? PasswordHash { get; set; }
     }
 }

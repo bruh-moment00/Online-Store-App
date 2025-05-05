@@ -1,14 +1,8 @@
-﻿using Online_Store_Backend.Core.Entity;
+﻿using Online_Store_Backend.Database.Entity;
 using Online_Store_Backend.Database.Products.Models;
-using Online_Store_Backend.Enums;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Online_Store_Backend.Database.Categories.Models
 {

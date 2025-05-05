@@ -1,12 +1,6 @@
-﻿using Online_Store_Backend.Core.Entity;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using Online_Store_Backend.Database.Entity;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Online_Store_Backend.Database.Products.Models
 {

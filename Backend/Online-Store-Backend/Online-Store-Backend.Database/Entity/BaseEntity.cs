@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 
-namespace Online_Store_Backend.Core.Entity
+namespace Online_Store_Backend.Database.Entity
 {
     [Serializable]
     [DataContract(IsReference = true)]

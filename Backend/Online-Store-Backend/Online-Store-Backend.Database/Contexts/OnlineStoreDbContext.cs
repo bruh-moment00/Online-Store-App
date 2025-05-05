@@ -6,11 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Online_Store_Backend.Database.Products.Models;
 using Online_Store_Backend.Database.Categories.Models;
-using Online_Store_Backend.Database.Employees;
 using Online_Store_Backend.Database.Orders.Models;
 using Online_Store_Backend.Database.Permissions.Models;
 using Online_Store_Backend.Database.Users.Models;
 using System.ComponentModel.DataAnnotations.Schema;
+using Online_Store_Backend.Database.Employees.Models;
 
 namespace Online_Store_Backend.Database.Contexts
 {
