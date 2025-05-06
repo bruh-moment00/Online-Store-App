@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 
-namespace Online_Store_Backend.Database.Entity
+namespace Online_Store_Backend.Core.Entity
 {
     [Serializable]
     [DataContract(IsReference = true)]
@@ -11,7 +11,7 @@ namespace Online_Store_Backend.Database.Entity
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [DataMember]
-        public Guid ID { get; set; }
+        public Int64 ID { get; set; }
 
         public DateTime CreatedDateTime { get; set; } = DateTime.UtcNow;
 

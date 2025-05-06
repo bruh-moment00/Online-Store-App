@@ -1,4 +1,4 @@
-﻿using Online_Store_Backend.Database.Entity;
+﻿using Online_Store_Backend.Core.Entity;
 using Online_Store_Backend.Database.Orders.Models;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;

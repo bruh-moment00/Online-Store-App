@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Online_Store_Backend.Core.Entity;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 
@@ -7,12 +8,8 @@ namespace Online_Store_Backend.Database.Permissions.Models
     [Serializable]
     [DataContract]
     [Table("permission", Schema = "public")]
-    public class Permission
+    public class Permission : BaseEntity
     {
-        [Key]
-        [DataMember]
-        public Int32 ID { get; set; }
-
         [DataMember]
         public String? Name { get; set; }
 

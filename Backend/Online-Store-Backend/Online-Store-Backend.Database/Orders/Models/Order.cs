@@ -1,4 +1,4 @@
-﻿using Online_Store_Backend.Database.Entity;
+﻿using Online_Store_Backend.Core.Entity;
 using Online_Store_Backend.Database.Users.Models;
 using Online_Store_Backend.Enums;
 using System.ComponentModel.DataAnnotations;
@@ -18,7 +18,7 @@ namespace Online_Store_Backend.Database.Orders.Models
         public ICollection<OrderedProduct>? OrderedProducts { get; set; }
 
         [DataMember]
-        public Guid UserID { get; set; }
+        public Int64 UserID { get; set; }
 
         [Required]
         [ForeignKey("UserID")]

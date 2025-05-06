@@ -1,4 +1,4 @@
-﻿using Online_Store_Backend.Database.Entity;
+﻿using Online_Store_Backend.Core.Entity;
 using Online_Store_Backend.Database.Employees.Models;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -13,14 +13,14 @@ namespace Online_Store_Backend.Database.Permissions.Models
     {
         [DataMember]
         [Required]
-        public Guid EmployeeID { get; set; }
+        public Int64 EmployeeID { get; set; }
 
         [ForeignKey("EmployeeID")]
         public virtual required Employee Employee { get; set; }
 
         [DataMember]
         [Required]
-        public Int32 PermissionID { get; set; }
+        public Int64 PermissionID { get; set; }
 
         [ForeignKey("PermissionID")]
         public virtual required Permission Permission { get; set; }

@@ -1,1 +1,2 @@
-dotnet ef update database
+dotnet ef database update
+pause

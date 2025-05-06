@@ -1,4 +1,4 @@
-﻿using Online_Store_Backend.Database.Entity;
+﻿using Online_Store_Backend.Core.Entity;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 
@@ -13,7 +13,7 @@ namespace Online_Store_Backend.Database.Products.Models
         public String? ImageAddress { get; set; }
 
         [DataMember]
-        public Guid ProductID { get; set; }
+        public Int64 ProductID { get; set; }
 
         [ForeignKey("ProductID")]
         public Product? Product { get; set; }

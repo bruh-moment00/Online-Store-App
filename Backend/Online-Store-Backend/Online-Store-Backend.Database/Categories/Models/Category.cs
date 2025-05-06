@@ -1,4 +1,5 @@
-﻿using Online_Store_Backend.Database.Products.Models;
+﻿using Online_Store_Backend.Core.Entity;
+using Online_Store_Backend.Database.Products.Models;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
@@ -8,12 +9,8 @@ namespace Online_Store_Backend.Database.Categories.Models
     [Serializable]
     [DataContract]
     [Table("category", Schema = "public")]
-    public class Category
+    public class Category : BaseEntity
     {
-        [Key]
-        [DataMember]
-        public Int32 ID { get; set; }
-
         [DataMember]
         public String? Name { get; set; }
 

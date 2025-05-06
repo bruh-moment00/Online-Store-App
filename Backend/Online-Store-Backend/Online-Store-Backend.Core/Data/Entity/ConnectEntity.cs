@@ -6,16 +6,13 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Online_Store_Backend.Database.Entity
+namespace Online_Store_Backend.Core.Entity
 {
     [Serializable]
     [DataContract(IsReference = true)]
-    public abstract class ConnectEntity
+    public abstract class ConnectEntity : BaseEntity
     {
-        [Key]
         [DataMember]
-        public long ID { get; set; }
-        [DataMember]
-        public DateTime DateOfAdding { get; set; } = DateTime.Now;
+        public DateTime UpdateDateTime { get; set; } = DateTime.Now;
     }
 }

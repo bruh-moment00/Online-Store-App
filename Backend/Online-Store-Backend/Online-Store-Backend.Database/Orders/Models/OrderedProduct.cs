@@ -1,4 +1,4 @@
-﻿using Online_Store_Backend.Database.Entity;
+﻿using Online_Store_Backend.Core.Entity;
 using Online_Store_Backend.Database.Products.Models;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -13,14 +13,14 @@ namespace Online_Store_Backend.Database.Orders.Models
     {
         [DataMember]
         [Required]
-        public Guid OrderID { get; set; }
+        public Int64 OrderID { get; set; }
 
         [ForeignKey("OrderID")]
         public required virtual Order Order { get; set; }
 
         [DataMember]
         [Required]
-        public Guid ProductID { get; set; }
+        public Int64 ProductID { get; set; }
 
         [ForeignKey("ProductID")]
         public required virtual Product Product { get; set; }

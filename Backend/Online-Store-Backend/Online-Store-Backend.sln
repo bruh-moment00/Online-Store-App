@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Online-Store-Backend.Enums"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Online-Store-Backend.Migrations", "Online-Store-Backend.Migrations\Online-Store-Backend.Migrations.csproj", "{F6A13177-4AB8-40A4-BA31-B4A9B51A783D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Online-Store-Backend.Core", "Online-Store-Backend.Core\Online-Store-Backend.Core.csproj", "{BF96B585-93E0-4A48-AEF5-D3C09C0AE834}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{F6A13177-4AB8-40A4-BA31-B4A9B51A783D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6A13177-4AB8-40A4-BA31-B4A9B51A783D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6A13177-4AB8-40A4-BA31-B4A9B51A783D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF96B585-93E0-4A48-AEF5-D3C09C0AE834}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF96B585-93E0-4A48-AEF5-D3C09C0AE834}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF96B585-93E0-4A48-AEF5-D3C09C0AE834}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF96B585-93E0-4A48-AEF5-D3C09C0AE834}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

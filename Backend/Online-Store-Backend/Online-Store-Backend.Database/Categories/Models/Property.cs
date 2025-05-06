@@ -1,4 +1,5 @@
-﻿using Online_Store_Backend.Enums;
+﻿using Online_Store_Backend.Core.Entity;
+using Online_Store_Backend.Enums;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
@@ -8,14 +9,10 @@ namespace Online_Store_Backend.Database.Categories.Models
     [Serializable]
     [DataContract]
     [Table("category_prop", Schema = "public")]
-    public class Property
+    public class Property : BaseEntity
     {
-        [Key]
         [DataMember]
-        public Guid ID { get; set; }
-
-        [DataMember]
-        public Int32 CategoryID { get; set; }
+        public Int64 CategoryID { get; set; }
 
         [ForeignKey("CategoryID")]
         public virtual Category? Category { get; set; }

@@ -1,4 +1,4 @@
-﻿using Online_Store_Backend.Database.Entity;
+﻿using Online_Store_Backend.Core.Entity;
 using Online_Store_Backend.Database.Categories.Models;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -20,7 +20,7 @@ namespace Online_Store_Backend.Database.Products.Models
         public String? Description { get; set; }
 
         [DataMember]
-        public Int32? CategoryID { get; set; }
+        public Int64? CategoryID { get; set; }
 
         [ForeignKey("CategoryID")]
         public virtual Category? Category { get; set; }

@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Online_Store_Backend.Migrations.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -20,9 +20,12 @@ namespace Online_Store_Backend.Migrations.Migrations
                 schema: "public",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "integer", nullable: false)
+                    ID = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: true)
+                    Name = table.Column<string>(type: "text", nullable: true),
+                    CreatedDateTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -34,7 +37,8 @@ namespace Online_Store_Backend.Migrations.Migrations
                 schema: "public",
                 columns: table => new
                 {
-                    ID = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "GEN_RANDOM_UUID()"),
+                    ID = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     FirstName = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     LastName = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     PhoneNum = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
@@ -57,10 +61,13 @@ namespace Online_Store_Backend.Migrations.Migrations
                 schema: "public",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "integer", nullable: false)
+                    ID = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "text", nullable: true),
-                    Description = table.Column<string>(type: "text", nullable: true)
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    CreatedDateTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -72,7 +79,8 @@ namespace Online_Store_Backend.Migrations.Migrations
                 schema: "public",
                 columns: table => new
                 {
-                    ID = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "GEN_RANDOM_UUID()"),
+                    ID = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     FirstName = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     LastName = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     PhoneNum = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
@@ -95,10 +103,14 @@ namespace Online_Store_Backend.Migrations.Migrations
                 schema: "public",
                 columns: table => new
                 {
-                    ID = table.Column<Guid>(type: "uuid", nullable: false),
-                    CategoryID = table.Column<int>(type: "integer", nullable: false),
+                    ID = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    CategoryID = table.Column<long>(type: "bigint", nullable: false),
                     PropName = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    ValueType = table.Column<int>(type: "integer", nullable: false)
+                    ValueType = table.Column<int>(type: "integer", nullable: false),
+                    CreatedDateTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -117,10 +129,11 @@ namespace Online_Store_Backend.Migrations.Migrations
                 schema: "public",
                 columns: table => new
                 {
-                    ID = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "GEN_RANDOM_UUID()"),
+                    ID = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
                     Description = table.Column<string>(type: "text", nullable: true),
-                    CategoryID = table.Column<int>(type: "integer", nullable: true),
+                    CategoryID = table.Column<long>(type: "bigint", nullable: true),
                     Price = table.Column<double>(type: "double precision", nullable: false),
                     CreatedDateTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     IsActive = table.Column<bool>(type: "boolean", nullable: false),
@@ -144,9 +157,12 @@ namespace Online_Store_Backend.Migrations.Migrations
                 {
                     ID = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    EmployeeID = table.Column<Guid>(type: "uuid", nullable: false),
-                    PermissionID = table.Column<int>(type: "integer", nullable: false),
-                    DateOfAdding = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    EmployeeID = table.Column<long>(type: "bigint", nullable: false),
+                    PermissionID = table.Column<long>(type: "bigint", nullable: false),
+                    CreatedDateTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
+                    UpdateDateTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -172,9 +188,10 @@ namespace Online_Store_Backend.Migrations.Migrations
                 schema: "public",
                 columns: table => new
                 {
-                    ID = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "GEN_RANDOM_UUID()"),
+                    ID = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     TotalPrice = table.Column<double>(type: "double precision", nullable: false),
-                    UserID = table.Column<Guid>(type: "uuid", nullable: false),
+                    UserID = table.Column<long>(type: "bigint", nullable: false),
                     Status = table.Column<int>(type: "integer", nullable: false),
                     CreatedDateTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     IsActive = table.Column<bool>(type: "boolean", nullable: false),
@@ -197,9 +214,10 @@ namespace Online_Store_Backend.Migrations.Migrations
                 schema: "public",
                 columns: table => new
                 {
-                    ID = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "GEN_RANDOM_UUID()"),
+                    ID = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     ImageAddress = table.Column<string>(type: "text", nullable: true),
-                    ProductID = table.Column<Guid>(type: "uuid", nullable: false),
+                    ProductID = table.Column<long>(type: "bigint", nullable: false),
                     CreatedDateTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     IsActive = table.Column<bool>(type: "boolean", nullable: false),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
@@ -223,10 +241,13 @@ namespace Online_Store_Backend.Migrations.Migrations
                 {
                     ID = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    ProductID = table.Column<Guid>(type: "uuid", nullable: false),
-                    PropID = table.Column<Guid>(type: "uuid", nullable: false),
+                    ProductID = table.Column<long>(type: "bigint", nullable: false),
+                    PropID = table.Column<long>(type: "bigint", nullable: false),
                     Value = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
-                    DateOfAdding = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    CreatedDateTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
+                    UpdateDateTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -254,9 +275,12 @@ namespace Online_Store_Backend.Migrations.Migrations
                 {
                     ID = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    OrderID = table.Column<Guid>(type: "uuid", nullable: false),
-                    ProductID = table.Column<Guid>(type: "uuid", nullable: false),
-                    DateOfAdding = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    OrderID = table.Column<long>(type: "bigint", nullable: false),
+                    ProductID = table.Column<long>(type: "bigint", nullable: false),
+                    CreatedDateTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
+                    UpdateDateTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {

@@ -12,8 +12,8 @@ using Online_Store_Backend.Database.Contexts;
 namespace Online_Store_Backend.Migrations.Migrations
 {
     [DbContext(typeof(OnlineStoreDbContext))]
-    [Migration("20250430135049_init")]
-    partial class init
+    [Migration("20250506122934_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,11 +27,20 @@ namespace Online_Store_Backend.Migrations.Migrations
 
             modelBuilder.Entity("Online_Store_Backend.Database.Categories.Models.Category", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<long>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("bigint");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("ID"));
+
+                    b.Property<DateTime>("CreatedDateTime")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
 
                     b.Property<string>("Name")
                         .HasColumnType("text");
@@ -49,14 +58,23 @@ namespace Online_Store_Backend.Migrations.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("ID"));
 
-                    b.Property<DateTime>("DateOfAdding")
+                    b.Property<DateTime>("CreatedDateTime")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<Guid>("ProductID")
-                        .HasColumnType("uuid");
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
 
-                    b.Property<Guid>("PropID")
-                        .HasColumnType("uuid");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<long>("ProductID")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("PropID")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("UpdateDateTime")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Value")
                         .HasMaxLength(100)
@@ -73,12 +91,23 @@ namespace Online_Store_Backend.Migrations.Migrations
 
             modelBuilder.Entity("Online_Store_Backend.Database.Categories.Models.Property", b =>
                 {
-                    b.Property<Guid>("ID")
+                    b.Property<long>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("bigint");
 
-                    b.Property<int>("CategoryID")
-                        .HasColumnType("integer");
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("ID"));
+
+                    b.Property<long>("CategoryID")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("CreatedDateTime")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
 
                     b.Property<string>("PropName")
                         .IsRequired()
@@ -95,12 +124,13 @@ namespace Online_Store_Backend.Migrations.Migrations
                     b.ToTable("category_prop", "public");
                 });
 
-            modelBuilder.Entity("Online_Store_Backend.Database.Employees.Employee", b =>
+            modelBuilder.Entity("Online_Store_Backend.Database.Employees.Models.Employee", b =>
                 {
-                    b.Property<Guid>("ID")
+                    b.Property<long>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasDefaultValueSql("GEN_RANDOM_UUID()");
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("ID"));
 
                     b.Property<DateTime?>("BirthDate")
                         .HasColumnType("timestamp with time zone");
@@ -153,10 +183,11 @@ namespace Online_Store_Backend.Migrations.Migrations
 
             modelBuilder.Entity("Online_Store_Backend.Database.Orders.Models.Order", b =>
                 {
-                    b.Property<Guid>("ID")
+                    b.Property<long>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasDefaultValueSql("GEN_RANDOM_UUID()");
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("ID"));
 
                     b.Property<DateTime>("CreatedDateTime")
                         .HasColumnType("timestamp with time zone");
@@ -173,8 +204,8 @@ namespace Online_Store_Backend.Migrations.Migrations
                     b.Property<double>("TotalPrice")
                         .HasColumnType("double precision");
 
-                    b.Property<Guid>("UserID")
-                        .HasColumnType("uuid");
+                    b.Property<long>("UserID")
+                        .HasColumnType("bigint");
 
                     b.HasKey("ID");
 
@@ -191,14 +222,23 @@ namespace Online_Store_Backend.Migrations.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("ID"));
 
-                    b.Property<DateTime>("DateOfAdding")
+                    b.Property<DateTime>("CreatedDateTime")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<Guid>("OrderID")
-                        .HasColumnType("uuid");
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
 
-                    b.Property<Guid>("ProductID")
-                        .HasColumnType("uuid");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<long>("OrderID")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("ProductID")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("UpdateDateTime")
+                        .HasColumnType("timestamp with time zone");
 
                     b.HasKey("ID");
 
@@ -217,14 +257,23 @@ namespace Online_Store_Backend.Migrations.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("ID"));
 
-                    b.Property<DateTime>("DateOfAdding")
+                    b.Property<DateTime>("CreatedDateTime")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<Guid>("EmployeeID")
-                        .HasColumnType("uuid");
+                    b.Property<long>("EmployeeID")
+                        .HasColumnType("bigint");
 
-                    b.Property<int>("PermissionID")
-                        .HasColumnType("integer");
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<long>("PermissionID")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("UpdateDateTime")
+                        .HasColumnType("timestamp with time zone");
 
                     b.HasKey("ID");
 
@@ -237,14 +286,23 @@ namespace Online_Store_Backend.Migrations.Migrations
 
             modelBuilder.Entity("Online_Store_Backend.Database.Permissions.Models.Permission", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<long>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("bigint");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("ID"));
+
+                    b.Property<DateTime>("CreatedDateTime")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
                         .HasColumnType("text");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
 
                     b.Property<string>("Name")
                         .HasColumnType("text");
@@ -256,13 +314,14 @@ namespace Online_Store_Backend.Migrations.Migrations
 
             modelBuilder.Entity("Online_Store_Backend.Database.Products.Models.Product", b =>
                 {
-                    b.Property<Guid>("ID")
+                    b.Property<long>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasDefaultValueSql("GEN_RANDOM_UUID()");
+                        .HasColumnType("bigint");
 
-                    b.Property<int?>("CategoryID")
-                        .HasColumnType("integer");
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("ID"));
+
+                    b.Property<long?>("CategoryID")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreatedDateTime")
                         .HasColumnType("timestamp with time zone");
@@ -293,10 +352,11 @@ namespace Online_Store_Backend.Migrations.Migrations
 
             modelBuilder.Entity("Online_Store_Backend.Database.Products.Models.ProductImage", b =>
                 {
-                    b.Property<Guid>("ID")
+                    b.Property<long>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasDefaultValueSql("GEN_RANDOM_UUID()");
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("ID"));
 
                     b.Property<DateTime>("CreatedDateTime")
                         .HasColumnType("timestamp with time zone");
@@ -310,8 +370,8 @@ namespace Online_Store_Backend.Migrations.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
-                    b.Property<Guid>("ProductID")
-                        .HasColumnType("uuid");
+                    b.Property<long>("ProductID")
+                        .HasColumnType("bigint");
 
                     b.HasKey("ID");
 
@@ -322,10 +382,11 @@ namespace Online_Store_Backend.Migrations.Migrations
 
             modelBuilder.Entity("Online_Store_Backend.Database.Users.Models.User", b =>
                 {
-                    b.Property<Guid>("ID")
+                    b.Property<long>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasDefaultValueSql("GEN_RANDOM_UUID()");
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("ID"));
 
                     b.Property<DateTime?>("BirthDate")
                         .HasColumnType("timestamp with time zone");
@@ -437,7 +498,7 @@ namespace Online_Store_Backend.Migrations.Migrations
 
             modelBuilder.Entity("Online_Store_Backend.Database.Permissions.Models.EmployeePermission", b =>
                 {
-                    b.HasOne("Online_Store_Backend.Database.Employees.Employee", "Employee")
+                    b.HasOne("Online_Store_Backend.Database.Employees.Models.Employee", "Employee")
                         .WithMany()
                         .HasForeignKey("EmployeeID")
                         .OnDelete(DeleteBehavior.Cascade)
