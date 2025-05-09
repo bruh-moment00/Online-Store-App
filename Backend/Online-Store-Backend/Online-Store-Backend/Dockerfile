@@ -13,11 +13,15 @@ COPY ["Online-Store-Backend.Database/Online-Store-Backend.Database.csproj", "Onl
 COPY ["Online-Store-Backend.Core/Online-Store-Backend.Core.csproj", "Online-Store-Backend.Core/"]
 COPY ["Online-Store-Backend.Enums/Online-Store-Backend.Enums.csproj", "Online-Store-Backend.Enums/"]
 COPY ["Online-Store-Backend.Domain/Online-Store-Backend.Domain.csproj", "Online-Store-Backend.Domain/"]
+COPY ["Online-Store-Backend.Migrations/Online-Store-Backend.Migrations.csproj", "Online-Store-Backend.Migrations/"]
 RUN dotnet restore "./Online-Store-Backend/Online-Store-Backend.csproj"
 COPY . .
+WORKDIR "/src/Online-Store-Backend.Migrations"
+RUN dotnet tool install --global dotnet-ef
+ENV PATH="$PATH:/root/.dotnet/tools"
+
 WORKDIR "/src/Online-Store-Backend"
 RUN dotnet build "./Online-Store-Backend.csproj" -c $BUILD_CONFIGURATION -o /app/build
-RUN dotnet ef database update --connection-string "Host=db;Port=5432;Database=OnlineStoreDB;Username=root;Password=root"
 
 # Этот этап используется для публикации проекта службы, который будет скопирован на последний этап
 FROM build AS publish

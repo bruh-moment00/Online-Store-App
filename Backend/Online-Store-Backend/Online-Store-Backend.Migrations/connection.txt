@@ -1,0 +1,3 @@
+host.docker.internal
+or
+localhost

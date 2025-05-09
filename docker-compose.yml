@@ -8,6 +8,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
     ports:
       - 5000:8080
+    privileged: true
     depends_on: 
       - db
   db:
@@ -15,7 +16,6 @@ services:
     environment:
       POSTGRES_PASSWORD: root
       POSTGRES_USER: root
-      # POSTGRES_DB: OnlineStoreDB
+      POSTGRES_DB: OnlineStoreDB
     ports:
     - 5432:5432
-      
