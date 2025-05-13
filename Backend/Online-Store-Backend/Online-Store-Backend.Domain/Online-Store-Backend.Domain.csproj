@@ -12,11 +12,11 @@
     <Folder Include="Employees\Services\" />
     <Folder Include="Orders\Services\" />
     <Folder Include="Permissions\Services\" />
-    <Folder Include="Products\Services\" />
-    <Folder Include="Users\Services\" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Online-Store-Backend.Core\Online-Store-Backend.Core.csproj" />
+    <ProjectReference Include="..\Online-Store-Backend.Database\Online-Store-Backend.Database.csproj" />
     <ProjectReference Include="..\Online-Store-Backend.Enums\Online-Store-Backend.Enums.csproj" />
   </ItemGroup>
 

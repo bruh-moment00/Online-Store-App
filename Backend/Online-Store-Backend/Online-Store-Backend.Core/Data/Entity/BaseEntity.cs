@@ -11,7 +11,7 @@ namespace Online_Store_Backend.Core.Entity
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [DataMember]
-        public Int64 ID { get; set; }
+        public long ID { get; set; }
 
         public DateTime CreatedDateTime { get; set; } = DateTime.UtcNow;
 

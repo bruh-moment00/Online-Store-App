@@ -13,7 +13,7 @@ namespace Online_Store_Backend.Database.Products.Models
         public String? ImageAddress { get; set; }
 
         [DataMember]
-        public Int64 ProductID { get; set; }
+        public long ProductID { get; set; }
 
         [ForeignKey("ProductID")]
         public Product? Product { get; set; }

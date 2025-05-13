@@ -6,7 +6,7 @@ namespace Online_Store_Backend.Domain.Products.Dto
     {
         public String Name { get; set; }
         public String? Description { get; set; }
-        public Int32? CategoryID { get; set; }
+        public long? CategoryID { get; set; }
         public Double Price { get; set; }
     }
 }
