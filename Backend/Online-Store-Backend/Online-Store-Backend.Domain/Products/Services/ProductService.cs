@@ -1,10 +1,5 @@
 ﻿using Online_Store_Backend.Domain.Products.Dto;
 using Online_Store_Backend.Core.Data.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Online_Store_Backend.Database.Products.Models;
 using Online_Store_Backend.Domain.Products.Services.Interfaces;
 

@@ -13,16 +13,16 @@ namespace Online_Store_Backend.Database.Orders.Models
     {
         [DataMember]
         [Required]
-        public Int64 OrderID { get; set; }
+        public required long OrderID { get; set; }
 
         [ForeignKey("OrderID")]
-        public required virtual Order Order { get; set; }
+        public virtual Order Order { get; set; }
 
         [DataMember]
         [Required]
-        public Int64 ProductID { get; set; }
+        public required long ProductID { get; set; }
 
         [ForeignKey("ProductID")]
-        public required virtual Product Product { get; set; }
+        public virtual Product Product { get; set; }
     }
 }
