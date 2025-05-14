@@ -1,8 +1,9 @@
-﻿namespace Online_Store_Backend.Domain.Categories.Dto
+﻿using Online_Store_Backend.Domain.Base.Dto;
+
+namespace Online_Store_Backend.Domain.Categories.Dto
 {
-    public class CategoryDto
+    public class CategoryDto : BaseDto
     {
-        public Int32 ID { get; set; }
         public String? Name { get; set; }
     }
 }

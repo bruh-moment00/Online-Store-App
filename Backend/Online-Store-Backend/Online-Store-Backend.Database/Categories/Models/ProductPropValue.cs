@@ -13,17 +13,17 @@ namespace Online_Store_Backend.Database.Categories.Models
     {
         [DataMember]
         [Required]
-        public Int64 ProductID { get; set; }
+        public required long ProductID { get; set; }
 
         [ForeignKey("ProductID")]
-        public virtual required Product Product { get; set; }
+        public virtual Product Product { get; set; }
 
         [DataMember]
         [Required]
-        public Int64 PropID { get; set; }
+        public required long PropID { get; set; }
 
         [ForeignKey("PropID")]
-        public virtual required Property Property { get; set; }
+        public virtual Property Property { get; set; }
 
         [DataMember]
         [MaxLength(100)]

@@ -4,8 +4,8 @@ namespace Online_Store_Backend.Domain.Categories.Dto
 {
     public class ProductPropValueDto : ConnectDto
     {
-        public Guid ProductID { get; set; }
-        public Guid PropID { get; set; }
+        public long ProductID { get; set; }
+        public long PropID { get; set; }
         public String? Value { get; set; }
     }
 }
