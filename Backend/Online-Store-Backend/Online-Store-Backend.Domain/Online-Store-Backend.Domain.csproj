@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <Folder Include="Employees\Services\" />
-    <Folder Include="Permissions\Services\" />
   </ItemGroup>
 
   <ItemGroup>

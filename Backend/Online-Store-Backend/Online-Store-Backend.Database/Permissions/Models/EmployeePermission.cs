@@ -13,16 +13,16 @@ namespace Online_Store_Backend.Database.Permissions.Models
     {
         [DataMember]
         [Required]
-        public Int64 EmployeeID { get; set; }
+        public required long EmployeeID { get; set; }
 
         [ForeignKey("EmployeeID")]
-        public virtual required Employee Employee { get; set; }
+        public virtual Employee Employee { get; set; }
 
         [DataMember]
         [Required]
-        public Int64 PermissionID { get; set; }
+        public required long PermissionID { get; set; }
 
         [ForeignKey("PermissionID")]
-        public virtual required Permission Permission { get; set; }
+        public virtual Permission Permission { get; set; }
     }
 }
