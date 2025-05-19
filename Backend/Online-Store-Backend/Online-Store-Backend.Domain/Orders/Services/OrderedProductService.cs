@@ -22,11 +22,10 @@ namespace Online_Store_Backend.Domain.Orders.Services
             var entity = MapDtoToEntity(orderedProduct);
             return await this.orderedProductRepository.Insert(entity);
         }
-        public async Task<OrderedProductDto> UpdateOrderedProduct(OrderedProductDto orderedProduct)
+        public async Task<bool> UpdateOrderedProduct(OrderedProductDto orderedProduct)
         {
             var entity = MapDtoToEntity(orderedProduct);
-            await this.orderedProductRepository.Update(entity);
-            return orderedProduct;
+            return await this.orderedProductRepository.Update(entity) != 0;
         }
         public async Task<bool> DeleteOrderedProduct(long id) => await this.orderedProductRepository.Delete(id);
         private static OrderedProductDto MapEntityToDto(OrderedProduct orderedProduct)

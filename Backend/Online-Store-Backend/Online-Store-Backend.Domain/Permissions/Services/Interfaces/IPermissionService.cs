@@ -7,7 +7,7 @@ namespace Online_Store_Backend.Domain.Permissions.Services.Interfaces
         Task<PermissionDto> GetById(long id);
         Task<List<PermissionDto>> GetAll();
         Task<long> InsertPermission(PermissionDto permission);
-        Task<PermissionDto> UpdatePermission(PermissionDto permission);
+        Task<bool> UpdatePermission(PermissionDto permission);
         Task<bool> DeletePermission(long id);
     }
 }

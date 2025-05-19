@@ -25,11 +25,10 @@ namespace Online_Store_Backend.Domain.Permissions.Services
             var entity = MapDtoToEntity(permission);
             return await this.permissionRepository.Insert(entity);
         }
-        public async Task<PermissionDto> UpdatePermission(PermissionDto permission)
+        public async Task<bool> UpdatePermission(PermissionDto permission)
         {
             var entity = MapDtoToEntity(permission);
-            await this.permissionRepository.Update(entity);
-            return permission;
+            return await this.permissionRepository.Update(entity) != 0;
         }
         public async Task<bool> DeletePermission(long id) => await this.permissionRepository.Delete(id);
 

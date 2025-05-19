@@ -34,11 +34,10 @@ namespace Online_Store_Backend.Domain.Products.Services
             var entity = MapDtoToEntity(productImage);
             return await this.productImageRepository.Insert(entity);
         }
-        public async Task<ProductImageDto> UpdateProductImage(ProductImageDto productImage)
+        public async Task<bool> UpdateProductImage(ProductImageDto productImage)
         {
             var entity = MapDtoToEntity(productImage);
-            await this.productImageRepository.Update(entity);
-            return productImage;
+            return await this.productImageRepository.Update(entity) != 0;
         }
         public async Task<bool> DeleteProductImage(long id) => await this.productImageRepository.Delete(id);
         private static ProductImageDto MapEntityToDto(ProductImage productImage)

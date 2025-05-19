@@ -29,11 +29,10 @@ namespace Online_Store_Backend.Domain.Orders.Services
             var entity = MapDtoToEntity(order);
             return await this.orderRepository.Insert(entity);
         }
-        public async Task<OrderDto> UpdateOrder(OrderDto order)
+        public async Task<bool> UpdateOrder(OrderDto order)
         {
             var entity = MapDtoToEntity(order);
-            await this.orderRepository.Update(entity);
-            return order;
+            return await this.orderRepository.Update(entity) != 0;
         }
         public async Task<bool> DeleteOrder(long id) => await this.orderRepository.Delete(id);
         private static OrderDto MapEntityToDto(Order order)

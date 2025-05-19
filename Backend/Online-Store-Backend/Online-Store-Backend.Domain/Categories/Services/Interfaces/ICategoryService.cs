@@ -7,7 +7,7 @@ namespace Online_Store_Backend.Domain.Categories.Services.Interfaces
         Task<CategoryDto> GetById(long id);
         Task<List<CategoryDto>> GetAll();
         Task<long> InsertCategory(CategoryDto category);
-        Task<CategoryDto> UpdateCategory(CategoryDto category);
+        Task<bool> UpdateCategory(CategoryDto category);
         Task<bool> DeleteCategory(long id);
     }
 }

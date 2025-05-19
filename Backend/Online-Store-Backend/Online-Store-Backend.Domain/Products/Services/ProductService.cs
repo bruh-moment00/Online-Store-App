@@ -27,11 +27,10 @@ namespace Online_Store_Backend.Domain.Products.Services
             return await this.productRepository.Insert(entity);
         }
 
-        public async Task<ProductDto> UpdateProduct(ProductDto product)
+        public async Task<bool> UpdateProduct(ProductDto product)
         {
             var entity = MapDtoToEntity(product);
-            await this.productRepository.Update(entity);
-            return product;
+            return await this.productRepository.Update(entity) != 0;
         }
 
         public async Task<bool> DeleteProduct(long id) => await this.productRepository.Delete(id);

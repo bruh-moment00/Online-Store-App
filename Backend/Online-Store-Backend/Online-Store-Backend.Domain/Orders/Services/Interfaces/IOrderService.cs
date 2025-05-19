@@ -8,7 +8,7 @@ namespace Online_Store_Backend.Domain.Orders.Services.Interfaces
         Task<List<OrderDto>> GetAll();
         Task<List<OrderDto>> GetByUserId(long userId);
         Task<long> InsertOrder(OrderDto order);
-        Task<OrderDto> UpdateOrder(OrderDto order);
+        Task<bool> UpdateOrder(OrderDto order);
         Task<bool> DeleteOrder(long id);
     }
 }

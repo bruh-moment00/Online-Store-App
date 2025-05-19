@@ -19,11 +19,10 @@ namespace Online_Store_Backend.Domain.Categories.Services
             var entity = MapDtoToEntity(productPropValue);
             return await this.productPropValueRepository.Insert(entity);
         }
-        public async Task<ProductPropValueDto> UpdateProductPropValue(ProductPropValueDto productPropValue)
+        public async Task<bool> UpdateProductPropValue(ProductPropValueDto productPropValue)
         {
             var entity = MapDtoToEntity(productPropValue);
-            await this.productPropValueRepository.Update(entity);
-            return productPropValue;
+            return await this.productPropValueRepository.Update(entity) != 0;
         }
         public async Task<bool> DeleteProductPropValue(long id) => await this.productPropValueRepository.Delete(id);
 

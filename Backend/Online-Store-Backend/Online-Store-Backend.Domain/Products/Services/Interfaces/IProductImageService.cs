@@ -13,7 +13,7 @@ namespace Online_Store_Backend.Domain.Products.Services.Interfaces
         Task<List<ProductImageDto>> GetAll();
         Task<List<ProductImageDto>> GetByProductId(long productId);
         Task<long> InsertProductImage(ProductImageDto productImage);
-        Task<ProductImageDto> UpdateProductImage(ProductImageDto productImage);
+        Task<bool> UpdateProductImage(ProductImageDto productImage);
         Task<bool> DeleteProductImage(long id);
     }
 }

@@ -19,11 +19,10 @@ namespace Online_Store_Backend.Domain.Permissions.Services
             var entity = MapDtoToEntity(employeePermission);
             return await this.employeePermissionRepository.Insert(entity);
         }
-        public async Task<EmployeePermissionDto> UpdateEmployeePermission(EmployeePermissionDto employeePermission)
+        public async Task<bool> UpdateEmployeePermission(EmployeePermissionDto employeePermission)
         {
             var entity = MapDtoToEntity(employeePermission);
-            await this.employeePermissionRepository.Update(entity);
-            return employeePermission;
+            return await this.employeePermissionRepository.Update(entity) != 0;
         }
         public async Task<bool> DeleteEmployeePermission(long id) => await this.employeePermissionRepository.Delete(id);
 

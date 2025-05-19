@@ -6,7 +6,7 @@ namespace Online_Store_Backend.Domain.Permissions.Services.Interfaces
     {
         Task<List<EmployeePermissionDto>> GetByEmployeeId(long employeeId);
         Task<long> InsertEmployeePermission(EmployeePermissionDto employeePermissionDto);
-        Task<EmployeePermissionDto> UpdateEmployeePermission(EmployeePermissionDto employeePermissionDto);
+        Task<bool> UpdateEmployeePermission(EmployeePermissionDto employeePermissionDto);
         Task<bool> DeleteEmployeePermission(long id);
     }
 }

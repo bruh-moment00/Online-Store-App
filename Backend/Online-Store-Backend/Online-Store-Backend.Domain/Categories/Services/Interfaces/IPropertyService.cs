@@ -6,7 +6,7 @@ namespace Online_Store_Backend.Domain.Categories.Services.Interfaces
     {
         Task<List<PropertyDto>> GetByCategoryId(long categoryId);
         Task<long> InsertProperty(PropertyDto property);
-        Task<PropertyDto> UpdateProperty(PropertyDto property);
+        Task<bool> UpdateProperty(PropertyDto property);
         Task<bool> DeleteProperty(long id);
     }
 }

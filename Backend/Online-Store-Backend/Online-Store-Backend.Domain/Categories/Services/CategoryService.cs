@@ -24,11 +24,10 @@ namespace Online_Store_Backend.Domain.Categories.Services
             var entity = MapDtoToEntity(category);
             return await this.categoryRepository.Insert(entity);
         }
-        public async Task<CategoryDto> UpdateCategory(CategoryDto category)
+        public async Task<bool> UpdateCategory(CategoryDto category)
         {
             var entity = MapDtoToEntity(category);
-            await this.categoryRepository.Update(entity);
-            return category;
+            return await this.categoryRepository.Update(entity) != 0;
         }
         public async Task<bool> DeleteCategory(long id) => await this.categoryRepository.Delete(id);
         private static CategoryDto MapEntityToDto(Category category)

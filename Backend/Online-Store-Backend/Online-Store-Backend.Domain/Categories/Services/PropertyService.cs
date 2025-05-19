@@ -19,11 +19,10 @@ namespace Online_Store_Backend.Domain.Categories.Services
             var entity = MapDtoToEntity(property);
             return await this.propertyRepository.Insert(entity);
         }
-        public async Task<PropertyDto> UpdateProperty(PropertyDto property)
+        public async Task<bool> UpdateProperty(PropertyDto property)
         {
             var entity = MapDtoToEntity(property);
-            await this.propertyRepository.Update(entity);
-            return property;
+            return await this.propertyRepository.Update(entity) != 0;
         }
         public async Task<bool> DeleteProperty(long id) => await this.propertyRepository.Delete(id);
 

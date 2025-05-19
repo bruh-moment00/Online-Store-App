@@ -6,7 +6,7 @@ namespace Online_Store_Backend.Domain.Categories.Services.Interfaces
     {
         Task<List<ProductPropValueDto>> GetByProductId(long productId);
         Task<long> InsertProductPropValue(ProductPropValueDto productPropValue);
-        Task<ProductPropValueDto> UpdateProductPropValue(ProductPropValueDto productPropValue);
+        Task<bool> UpdateProductPropValue(ProductPropValueDto productPropValue);
         Task<bool> DeleteProductPropValue(long id);
     }
 }
