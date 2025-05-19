@@ -12,6 +12,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.10.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Online-Store-Backend.Core\Online-Store-Backend.Core.csproj" />
     <ProjectReference Include="..\Online-Store-Backend.Database\Online-Store-Backend.Database.csproj" />
     <ProjectReference Include="..\Online-Store-Backend.Enums\Online-Store-Backend.Enums.csproj" />
