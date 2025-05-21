@@ -8,7 +8,7 @@ namespace Online_Store_Backend.Domain.Employees.Dto
         public String? LastName { get; set; }
         public String? PhoneNum { get; set; }
         public String? Email { get; set; }
-        public bool Gender { get; set; }
+        public bool? Gender { get; set; }
         public DateTime? BirthDate { get; set; }
         public String Login { get; set; }
         public String? PasswordHash { get; set; }

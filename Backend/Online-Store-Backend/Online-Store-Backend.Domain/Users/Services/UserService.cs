@@ -2,11 +2,6 @@
 using Online_Store_Backend.Database.Users.Models;
 using Online_Store_Backend.Domain.Users.Dto;
 using Online_Store_Backend.Domain.Users.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Online_Store_Backend.Domain.Users.Services
 {

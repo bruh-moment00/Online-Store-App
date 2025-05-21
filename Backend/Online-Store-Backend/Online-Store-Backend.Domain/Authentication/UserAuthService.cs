@@ -2,32 +2,31 @@
 using Microsoft.IdentityModel.Tokens;
 using Online_Store_Backend.Core.AuthModels;
 using Online_Store_Backend.Core.Data.Repository;
+using Online_Store_Backend.Database.Employees.Models;
 using Online_Store_Backend.Database.Users.Models;
-using Online_Store_Backend.Domain.Users.Services.Interfaces;
-using System;
-using System.Collections.Generic;
+using Online_Store_Backend.Domain.Authentication.Interfaces;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace Online_Store_Backend.Domain.Users.Services
+namespace Online_Store_Backend.Domain.Authentication
 {
     public class UserAuthService : IUserAuthService
     {
         private readonly IRepositoryAsync<User> userRepository;
+        private readonly IRepositoryAsync<Employee> employeeRepository;
         private readonly IConfiguration configuration;
-        public UserAuthService(IRepositoryAsync<User> userRepository, IConfiguration configuration)
+        public UserAuthService(IRepositoryAsync<User> userRepository, IRepositoryAsync<Employee> employeeRepository, IConfiguration configuration)
         {
             this.userRepository = userRepository;
+            this.employeeRepository = employeeRepository;
             this.configuration = configuration;
         }
 
         public async Task<string> ValidateAndGetUserToken(UserAuth userData)
         {
-            var users = await userRepository.Filter(u => (u.Email == userData.Email) || 
-                (u.PhoneNum == userData.PhoneNum) || (u.Login == userData.Login));
+            var users = await userRepository.Filter(u => u.Email == userData.Email || 
+                u.PhoneNum == userData.PhoneNum || u.Login == userData.Login);
             var user = users.First();
 
             UserTokenData userToken = new UserTokenData()
@@ -41,6 +40,30 @@ namespace Online_Store_Backend.Domain.Users.Services
                 if (BCrypt.Net.BCrypt.Verify(userData.Password, user.PasswordHash))
                 {
                     var token = GenerateJwtToken(userToken);
+                    return token;
+                }
+            }
+
+            return null;
+        }
+
+        public async Task<string> ValidateAndGetEmployeeToken(UserAuth employeeData)
+        {
+            var employees = await employeeRepository.Filter(u => u.Email == employeeData.Email ||
+                u.PhoneNum == employeeData.PhoneNum || u.Login == employeeData.Login);
+            var employee = employees.First();
+
+            UserTokenData employeeToken = new UserTokenData()
+            {
+                Id = employee.ID,
+                Password = employeeData.Password
+            };
+
+            if (employee != null)
+            {
+                if (BCrypt.Net.BCrypt.Verify(employeeData.Password, employee.PasswordHash))
+                {
+                    var token = GenerateJwtToken(employeeToken);
                     return token;
                 }
             }
