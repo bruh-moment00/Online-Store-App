@@ -9,6 +9,7 @@ namespace Online_Store_Backend.Enums
     public enum PropValueType
     {
         Group,
-        Integer
+        Integer,
+        Boolean,
     }
 }
