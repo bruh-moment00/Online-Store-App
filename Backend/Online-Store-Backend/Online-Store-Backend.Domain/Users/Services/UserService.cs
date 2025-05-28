@@ -1,4 +1,4 @@
-using Online_Store_Backend.Core.Data.Repository;
+﻿using Online_Store_Backend.Core.Data.Repository;
 using Online_Store_Backend.Database.Users.Models;
 using Online_Store_Backend.Domain.Users.Dto;
 using Online_Store_Backend.Domain.Users.Services.Interfaces;
@@ -23,11 +23,13 @@ namespace Online_Store_Backend.Domain.Users.Services
         public async Task<long> InsertUser(UserDto user)
         {
             var entity = DtoToEntityMapping(user);
+            entity.PasswordHash = BCrypt.Net.BCrypt.HashPassword(user.Password);
             return await userRepository.Insert(entity);
         }
         public async Task<bool> UpdateUser(UserDto user)
         {
             var entity = DtoToEntityMapping(user);
+            entity.PasswordHash = BCrypt.Net.BCrypt.HashPassword(user.Password);
             return await userRepository.Update(entity) != 0;
         }
         public async Task<bool> DeleteUser(long id) => await userRepository.Delete(id);

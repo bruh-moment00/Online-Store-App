@@ -30,11 +30,13 @@ namespace Online_Store_Backend.Domain.Employees.Services
         public async Task<long> InsertEmployee(EmployeeDto user)
         {
             var entity = DtoToEntityMapping(user);
+            entity.PasswordHash = BCrypt.Net.BCrypt.HashPassword(user.PasswordHash);
             return await employeeRepository.Insert(entity);
         }
         public async Task<bool> UpdateEmployee(EmployeeDto user)
         {
             var entity = DtoToEntityMapping(user);
+            entity.PasswordHash = BCrypt.Net.BCrypt.HashPassword(user.PasswordHash);
             return await employeeRepository.Update(entity) != 0;
         }
         public async Task<bool> DeleteEmployee(long id) => await employeeRepository.Delete(id);
