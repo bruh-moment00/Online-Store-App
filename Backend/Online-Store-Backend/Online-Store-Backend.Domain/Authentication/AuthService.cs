@@ -11,35 +11,42 @@ using System.Text;
 
 namespace Online_Store_Backend.Domain.Authentication
 {
-    public class UserAuthService : IUserAuthService
+    public class AuthService : IAuthService
     {
         private readonly IRepositoryAsync<User> userRepository;
         private readonly IRepositoryAsync<Employee> employeeRepository;
+        private readonly IRepositoryAsync<UserToken> userTokenRepository;
+        private readonly IRepositoryAsync<EmployeeToken> employeeTokenRepository;
         private readonly IConfiguration configuration;
-        public UserAuthService(IRepositoryAsync<User> userRepository, IRepositoryAsync<Employee> employeeRepository, IConfiguration configuration)
+        public AuthService(IRepositoryAsync<User> userRepository,
+                               IRepositoryAsync<Employee> employeeRepository,
+                               IRepositoryAsync<UserToken> userTokenRepository,
+                               IRepositoryAsync<EmployeeToken> employeeTokenRepository,
+                               IConfiguration configuration)
         {
             this.userRepository = userRepository;
             this.employeeRepository = employeeRepository;
+            this.userTokenRepository = userTokenRepository;
+            this.employeeTokenRepository = employeeTokenRepository;
             this.configuration = configuration;
         }
 
-        public async Task<string> ValidateAndGetUserToken(UserAuth userData)
+        public async Task<string?> ValidateAndGetUserTokenAsync(AuthData userData)
         {
             var users = await userRepository.Filter(u => u.Email == userData.Email || 
                 u.PhoneNum == userData.PhoneNum || u.Login == userData.Login);
-            var user = users.First();
-
-            UserTokenData userToken = new UserTokenData()
-            {
-                Id = user.ID,
-                Password = userData.Password
-            };
+            var user = users.FirstOrDefault();
 
             if (user != null)
             {
                 if (BCrypt.Net.BCrypt.Verify(userData.Password, user.PasswordHash))
                 {
-                    var token = GenerateJwtToken(userToken);
+                    var token = GenerateJwtToken(user.ID);
+                    await userTokenRepository.Insert(new UserToken
+                    {
+                        UserID = user.ID,
+                        Token = token,
+                    });
                     return token;
                 }
             }
@@ -47,23 +54,22 @@ namespace Online_Store_Backend.Domain.Authentication
             return null;
         }
 
-        public async Task<string> ValidateAndGetEmployeeToken(UserAuth employeeData)
+        public async Task<string?> ValidateAndGetEmployeeTokenAsync(AuthData employeeData)
         {
             var employees = await employeeRepository.Filter(u => u.Email == employeeData.Email ||
                 u.PhoneNum == employeeData.PhoneNum || u.Login == employeeData.Login);
             var employee = employees.First();
 
-            UserTokenData employeeToken = new UserTokenData()
-            {
-                Id = employee.ID,
-                Password = employeeData.Password
-            };
-
             if (employee != null)
             {
                 if (BCrypt.Net.BCrypt.Verify(employeeData.Password, employee.PasswordHash))
                 {
-                    var token = GenerateJwtToken(employeeToken);
+                    var token = GenerateJwtToken(employee.ID);
+                    await employeeTokenRepository.Insert(new EmployeeToken
+                    {
+                        EmployeeID = employee.ID,
+                        Token = token,
+                    });
                     return token;
                 }
             }
@@ -71,7 +77,7 @@ namespace Online_Store_Backend.Domain.Authentication
             return null;
         }
 
-        private string GenerateJwtToken(UserTokenData user)
+        private string GenerateJwtToken(long id)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(configuration["JWT:key"]);
@@ -79,7 +85,7 @@ namespace Online_Store_Backend.Domain.Authentication
             {
                 Subject = new ClaimsIdentity(new[]
                 {
-                    new Claim("id", user.Id.ToString()),
+                    new Claim("id", id.ToString()),
                 }),
                 Expires = DateTime.UtcNow.AddHours(1),
                 Issuer = configuration["Jwt:Issuer"],

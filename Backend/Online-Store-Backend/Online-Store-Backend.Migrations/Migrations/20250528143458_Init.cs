@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Online_Store_Backend.Migrations.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -84,7 +84,7 @@ namespace Online_Store_Backend.Migrations.Migrations
                     FirstName = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     LastName = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     PhoneNum = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
-                    Email = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    Email = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
                     Gender = table.Column<bool>(type: "boolean", nullable: true),
                     BirthDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     Login = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true),
@@ -151,6 +151,33 @@ namespace Online_Store_Backend.Migrations.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "employee_token",
+                schema: "public",
+                columns: table => new
+                {
+                    ID = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    EmployeeID = table.Column<long>(type: "bigint", nullable: false),
+                    ExpirationDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Token = table.Column<string>(type: "text", nullable: true),
+                    CreatedDateTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
+                    UpdateDateTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_employee_token", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_employee_token_employee_EmployeeID",
+                        column: x => x.EmployeeID,
+                        principalSchema: "public",
+                        principalTable: "employee",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "employee_permission",
                 schema: "public",
                 columns: table => new
@@ -202,6 +229,33 @@ namespace Online_Store_Backend.Migrations.Migrations
                     table.PrimaryKey("PK_order", x => x.ID);
                     table.ForeignKey(
                         name: "FK_order_user_UserID",
+                        column: x => x.UserID,
+                        principalSchema: "public",
+                        principalTable: "user",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "user_token",
+                schema: "public",
+                columns: table => new
+                {
+                    ID = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UserID = table.Column<long>(type: "bigint", nullable: false),
+                    ExpirationDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Token = table.Column<string>(type: "text", nullable: true),
+                    CreatedDateTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
+                    UpdateDateTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_user_token", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_user_token_user_UserID",
                         column: x => x.UserID,
                         principalSchema: "public",
                         principalTable: "user",
@@ -320,6 +374,12 @@ namespace Online_Store_Backend.Migrations.Migrations
                 column: "PermissionID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_employee_token_EmployeeID",
+                schema: "public",
+                table: "employee_token",
+                column: "EmployeeID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_order_UserID",
                 schema: "public",
                 table: "order",
@@ -360,6 +420,12 @@ namespace Online_Store_Backend.Migrations.Migrations
                 schema: "public",
                 table: "product_property_value",
                 column: "PropID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_user_token_UserID",
+                schema: "public",
+                table: "user_token",
+                column: "UserID");
         }
 
         /// <inheritdoc />
@@ -367,6 +433,10 @@ namespace Online_Store_Backend.Migrations.Migrations
         {
             migrationBuilder.DropTable(
                 name: "employee_permission",
+                schema: "public");
+
+            migrationBuilder.DropTable(
+                name: "employee_token",
                 schema: "public");
 
             migrationBuilder.DropTable(
@@ -382,11 +452,15 @@ namespace Online_Store_Backend.Migrations.Migrations
                 schema: "public");
 
             migrationBuilder.DropTable(
-                name: "employee",
+                name: "user_token",
                 schema: "public");
 
             migrationBuilder.DropTable(
                 name: "permission",
+                schema: "public");
+
+            migrationBuilder.DropTable(
+                name: "employee",
                 schema: "public");
 
             migrationBuilder.DropTable(

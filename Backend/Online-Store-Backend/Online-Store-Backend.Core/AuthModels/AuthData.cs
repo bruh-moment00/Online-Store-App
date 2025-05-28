@@ -2,7 +2,7 @@
 
 namespace Online_Store_Backend.Core.AuthModels
 {
-    public class UserAuth
+    public class AuthData
     {
         public string? Login { get; set; }
         public string? PhoneNum { get; set; }

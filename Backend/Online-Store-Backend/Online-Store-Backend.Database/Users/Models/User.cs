@@ -28,7 +28,6 @@ namespace Online_Store_Backend.Database.Users.Models
         
         [DataMember]
         [MaxLength(100)]
-        [Required]
         public String? Email { get; set; }
 
         [DataMember]

@@ -42,5 +42,7 @@ namespace Online_Store_Backend.Database.Contexts
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<ProductImage> ProductImages { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<UserToken> UserTokens { get; set; }
+        public DbSet<EmployeeToken> EmployeeTokens { get; set; }
     }
 }

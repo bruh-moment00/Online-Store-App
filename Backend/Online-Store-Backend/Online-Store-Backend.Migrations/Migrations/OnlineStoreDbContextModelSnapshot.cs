@@ -377,6 +377,42 @@ namespace Online_Store_Backend.Migrations.Migrations
                     b.ToTable("product_image", "public");
                 });
 
+            modelBuilder.Entity("Online_Store_Backend.Database.Users.Models.EmployeeToken", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("ID"));
+
+                    b.Property<DateTime>("CreatedDateTime")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<long>("EmployeeID")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("ExpirationDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Token")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("UpdateDateTime")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("EmployeeID");
+
+                    b.ToTable("employee_token", "public");
+                });
+
             modelBuilder.Entity("Online_Store_Backend.Database.Users.Models.User", b =>
                 {
                     b.Property<long>("ID")
@@ -392,7 +428,6 @@ namespace Online_Store_Backend.Migrations.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
 
@@ -431,6 +466,42 @@ namespace Online_Store_Backend.Migrations.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("user", "public");
+                });
+
+            modelBuilder.Entity("Online_Store_Backend.Database.Users.Models.UserToken", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("ID"));
+
+                    b.Property<DateTime>("CreatedDateTime")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("ExpirationDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Token")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("UpdateDateTime")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<long>("UserID")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("user_token", "public");
                 });
 
             modelBuilder.Entity("Online_Store_Backend.Database.Categories.Models.ProductPropValue", b =>
@@ -530,6 +601,28 @@ namespace Online_Store_Backend.Migrations.Migrations
                         .IsRequired();
 
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("Online_Store_Backend.Database.Users.Models.EmployeeToken", b =>
+                {
+                    b.HasOne("Online_Store_Backend.Database.Employees.Models.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
+                });
+
+            modelBuilder.Entity("Online_Store_Backend.Database.Users.Models.UserToken", b =>
+                {
+                    b.HasOne("Online_Store_Backend.Database.Users.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Online_Store_Backend.Database.Categories.Models.Category", b =>

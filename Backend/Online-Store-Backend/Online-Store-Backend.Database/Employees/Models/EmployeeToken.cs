@@ -7,6 +7,7 @@ namespace Online_Store_Backend.Database.Users.Models
 {
     [Serializable]
     [DataContract]
+    [Table("employee_token", Schema = "public")]
     public class EmployeeToken : ConnectEntity
     {
         [DataMember]

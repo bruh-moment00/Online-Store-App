@@ -1,4 +1,4 @@
-﻿using Online_Store_Backend.Core.Data.Repository;
+using Online_Store_Backend.Core.Data.Repository;
 using Online_Store_Backend.Database.Users.Models;
 using Online_Store_Backend.Domain.Users.Dto;
 using Online_Store_Backend.Domain.Users.Services.Interfaces;
@@ -47,7 +47,7 @@ namespace Online_Store_Backend.Domain.Users.Services
                 BirthDate = user.BirthDate,
                 PhoneNum = user.PhoneNum,
                 Login = user.Login,
-                PasswordHash = user.PasswordHash
+                Password = user.PasswordHash
             };
         }
         private static User DtoToEntityMapping(UserDto user)

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Online_Store_Backend.Core.Data.Repository;
 using Online_Store_Backend.Database.Contexts;
 using Online_Store_Backend.Domain.Categories.Services;
@@ -13,6 +14,8 @@ using Online_Store_Backend.Domain.Products.Services;
 using Online_Store_Backend.Domain.Products.Services.Interfaces;
 using Online_Store_Backend.Domain.Users.Services;
 using Online_Store_Backend.Domain.Users.Services.Interfaces;
+using Online_Store_Backend.Domain.Authentication.Interfaces;
+using Online_Store_Backend.Domain.Authentication;
 
 namespace Online_Store_Backend
 {
@@ -28,7 +31,7 @@ namespace Online_Store_Backend
 
             services.AddTransient(typeof(IRepositoryAsync<>), typeof(RepositoryAsync<>));
 
-            services.AddTransient<ICategoryService, CategoryService>();
+            services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IProductPropValueService, ProductPropValueService>();
             services.AddScoped<IPropertyService, PropertyService>();
             services.AddScoped<IEmployeeService, EmployeeService>();
@@ -39,6 +42,10 @@ namespace Online_Store_Backend
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IProductImageService, ProductImageService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IAuthService, AuthService>();    
+
+            services.AddAuthentication("Bearer").AddJwtBearer(JwtBearerDefaults.AuthenticationScheme);
+         
         }
     }
 }

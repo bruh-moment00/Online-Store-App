@@ -6,6 +6,7 @@ namespace Online_Store_Backend.Database.Users.Models
 {
     [Serializable]
     [DataContract]
+    [Table("user_token", Schema = "public")]
     public class UserToken : ConnectEntity
     {
         [DataMember]

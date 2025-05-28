@@ -4,6 +4,7 @@ using Online_Store_Backend.Database.Contexts;
 
 var builder = WebApplication.CreateBuilder(args);
 
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 string connection = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.ConfigureServices(connection);
 var app = builder.Build();
@@ -18,6 +19,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+app.UseAuthentication();
 
 app.MapControllers();
 

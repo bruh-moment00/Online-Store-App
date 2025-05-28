@@ -11,6 +11,6 @@ namespace Online_Store_Backend.Domain.Users.Dto
         public bool? Gender { get; set; }
         public DateTime? BirthDate { get; set; }
         public String? Login { get; set; }
-        public String? PasswordHash { get; set; }
+        public String? Password { get; set; }
     }
 }
