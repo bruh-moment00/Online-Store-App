@@ -16,6 +16,6 @@ namespace Online_Store_Backend.Database.Products.Models
         public long ProductID { get; set; }
 
         [ForeignKey("ProductID")]
-        public Product? Product { get; set; }
+        public virtual Product? Product { get; set; }
     }
 }
