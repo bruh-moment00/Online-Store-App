@@ -2,6 +2,7 @@
 using Online_Store_Backend.Core.Data.Repository;
 using Online_Store_Backend.Database.Products.Models;
 using Online_Store_Backend.Domain.Products.Services.Interfaces;
+using Online_Store_Backend.Domain.Pagination;
 
 namespace Online_Store_Backend.Domain.Products.Services
 {
@@ -15,10 +16,20 @@ namespace Online_Store_Backend.Domain.Products.Services
             return entity == null ? null : MapEntityToDto(entity);
         }
 
-        public async Task<List<ProductDto>> GetAll()
+        public async Task<PaginationDto<ProductDto>> GetProducts(long? categoryId = null, int pageNumber = 1, int pageSize = 10)
         {
-            var entities = await this.productRepository.Filter(x => !x.IsDeleted);
-            return entities.Select(MapEntityToDto).ToList();
+            var entities = await this.productRepository.Filter(x => !x.IsDeleted); 
+            if (categoryId.HasValue)
+            {
+                entities = entities.Where(c => c.CategoryID == categoryId);
+            }
+
+            PaginationEntity<Product> paginatedProducts = new PaginationEntity<Product>(entities, pageNumber, pageSize);
+            return new PaginationDto<ProductDto>(entities.Select(MapEntityToDto).ToList(), 
+                                                 paginatedProducts.TotalCount,
+                                                 paginatedProducts.PageNumber,
+                                                 paginatedProducts.PageSize,
+                                                 paginatedProducts.TotalPages);
         }
 
         public async Task<long> InsertProduct(ProductDto product)
