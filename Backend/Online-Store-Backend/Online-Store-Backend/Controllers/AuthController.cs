@@ -55,5 +55,27 @@ namespace Online_Store_Backend.Controllers
 
             return Ok(loginResponse);
         }
+
+        [AllowAnonymous]
+        public async Task<IActionResult> ValidateUserToken([FromQuery] string token)
+        {
+            if (string.IsNullOrWhiteSpace(token))
+            {
+                return BadRequest("Токен не может быть пустым");
+            }
+            var isValid = await userAuthService.ValidateUserTokenAsync(token);
+            return Ok(isValid);
+        }
+
+        [AllowAnonymous]
+        public async Task<IActionResult> ValidateEmployeeToken([FromQuery] string token)
+        {
+            if (string.IsNullOrWhiteSpace(token))
+            {
+                return BadRequest("Токен не может быть пустым");
+            }
+            var isValid = await userAuthService.ValidateEmployeeTokenAsync(token);
+            return Ok(isValid);
+        }
     }
 }
