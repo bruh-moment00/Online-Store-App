@@ -16,6 +16,7 @@ using Online_Store_Backend.Domain.Users.Services;
 using Online_Store_Backend.Domain.Users.Services.Interfaces;
 using Online_Store_Backend.Domain.Authentication.Interfaces;
 using Online_Store_Backend.Domain.Authentication;
+using Microsoft.AspNetCore.Identity;
 
 namespace Online_Store_Backend
 {
@@ -26,6 +27,7 @@ namespace Online_Store_Backend
             services.AddControllers();
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
+            services.AddCors();
             services.AddScoped<DbContext, OnlineStoreDbContext>();
             services.AddDbContext<OnlineStoreDbContext>(options => options.UseNpgsql(connectionString));
 
