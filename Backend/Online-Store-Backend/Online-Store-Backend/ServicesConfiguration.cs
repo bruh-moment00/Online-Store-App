@@ -16,17 +16,50 @@ using Online_Store_Backend.Domain.Users.Services;
 using Online_Store_Backend.Domain.Users.Services.Interfaces;
 using Online_Store_Backend.Domain.Authentication.Interfaces;
 using Online_Store_Backend.Domain.Authentication;
-using Microsoft.AspNetCore.Identity;
+using Microsoft.OpenApi.Models;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.OAuth;
 
 namespace Online_Store_Backend
 {
     internal static class ServicesConfiguration
     {
-        internal static void ConfigureServices(this IServiceCollection services, string connectionString)
+        internal static void ConfigureServices(this IServiceCollection services, IConfiguration configuration, string connectionString)
         {
             services.AddControllers();
             services.AddEndpointsApiExplorer();
-            services.AddSwaggerGen();
+            services.AddSwaggerGen(options =>
+            {
+                options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    In = ParameterLocation.Header,
+                    Description = "Please enter a valid token",
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "Bearer"
+                });
+                options.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type=ReferenceType.SecurityScheme,
+                                Id="Bearer"
+                            },
+                            Scheme = "oauth2",
+                            Name = "Bearer",
+                            In = ParameterLocation.Header,
+                        },
+                        new string[]{}
+                    }
+                });
+
+                options.CustomSchemaIds(type => type.ToString());
+            });
+
             services.AddCors();
             services.AddScoped<DbContext, OnlineStoreDbContext>();
             services.AddDbContext<OnlineStoreDbContext>(options => options.UseNpgsql(connectionString));
@@ -46,8 +79,27 @@ namespace Online_Store_Backend
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IAuthService, AuthService>();    
 
-            services.AddAuthentication("Bearer").AddJwtBearer(JwtBearerDefaults.AuthenticationScheme);
-         
+            services
+                .AddAuthentication(x =>
+                {
+                    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
+                .AddJwtBearer(x =>
+                {
+                    x.RequireHttpsMetadata = false;
+                    x.SaveToken = true;
+                    x.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"])),
+                        ValidateIssuer = false,
+                        ValidateAudience = false,
+                        ValidAudience = configuration["Jwt:Audience"],
+                        ValidateLifetime = false,
+                    };
+                });
+
+            services.AddAuthorization();
         }
     }
 }

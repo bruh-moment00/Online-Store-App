@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 string connection = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.ConfigureServices(connection);
+builder.Services.ConfigureServices(builder.Configuration, connection);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -18,8 +18,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
 app.UseAuthentication();
+app.UseAuthorization();
+
 app.UseCors();
 
 app.MapControllers();
