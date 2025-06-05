@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Online_Store_Backend.AuthHelpers;
 using Online_Store_Backend.Domain.Users.Dto;
 using Online_Store_Backend.Domain.Users.Services.Interfaces;
 
@@ -23,8 +24,13 @@ namespace Online_Store_Backend.Controllers
             return Ok(users);
         }
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<IActionResult> GetUserById(long id)
         {
+            if (!(HttpContext.User.IsInRole("employee") || AuthHelper.CheckSameUserId(HttpContext, id)))
+            {
+                return Forbid("Access denied");
+            }
             var user = await userService.GetById(id);
             if (user == null)
             {
