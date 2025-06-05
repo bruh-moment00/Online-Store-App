@@ -41,7 +41,7 @@ namespace Online_Store_Backend.Domain.Authentication
             {
                 if (BCrypt.Net.BCrypt.Verify(userData.Password, user.PasswordHash))
                 {
-                    var token = GenerateJwtToken(user.ID);
+                    var token = GenerateJwtToken(user.ID, "user");
                     await userTokenRepository.Insert(new UserToken
                     {
                         UserID = user.ID,
@@ -54,6 +54,18 @@ namespace Online_Store_Backend.Domain.Authentication
             return null;
         }
 
+        public async Task<bool> ValidateUserTokenAsync(string token)
+        {
+            var userToken = await userTokenRepository.Filter(ut => ut.Token == token && DateTime.UtcNow < ut.ExpirationDate);
+            return userToken.Any();
+        }
+
+        public async Task<bool> ValidateEmployeeTokenAsync(string token)
+        {
+            var employeeToken = await employeeTokenRepository.Filter(et => et.Token == token && DateTime.UtcNow < et.ExpirationDate);
+            return employeeToken.Any();
+        }
+
         public async Task<string?> ValidateAndGetEmployeeTokenAsync(AuthData employeeData)
         {
             var employees = await employeeRepository.Filter(u => u.Email == employeeData.Email ||
@@ -64,7 +76,7 @@ namespace Online_Store_Backend.Domain.Authentication
             {
                 if (BCrypt.Net.BCrypt.Verify(employeeData.Password, employee.PasswordHash))
                 {
-                    var token = GenerateJwtToken(employee.ID);
+                    var token = GenerateJwtToken(employee.ID, "employee");
                     await employeeTokenRepository.Insert(new EmployeeToken
                     {
                         EmployeeID = employee.ID,
@@ -77,17 +89,19 @@ namespace Online_Store_Backend.Domain.Authentication
             return null;
         }
 
-        private string GenerateJwtToken(long id)
+        private string GenerateJwtToken(long id, string role)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(configuration["JWT:key"]);
+            var key = Encoding.UTF8.GetBytes(configuration["Jwt:Key"]);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[]
                 {
+                    new Claim(ClaimTypes.Role, role),
                     new Claim("id", id.ToString()),
                 }),
-                Expires = DateTime.UtcNow.AddHours(1),
+
+                Expires = DateTime.UtcNow.AddDays(30),
                 Issuer = configuration["Jwt:Issuer"],
                 Audience = configuration["Jwt:Audience"],
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)

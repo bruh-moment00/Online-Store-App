@@ -36,6 +36,7 @@ namespace Online_Store_Backend.Controllers
             return Ok(products);
         }
 
+        [Authorize(Roles = "employee")]
         [HttpPost]
         public async Task<ActionResult<long>> InsertProduct([FromBody] ProductDto product)
         {
@@ -47,6 +48,7 @@ namespace Online_Store_Backend.Controllers
             return productId > 0 ? Ok(productId) : BadRequest("Failed to insert product");
         }
 
+        [Authorize(Roles = "employee")]
         [HttpPut("{id}")]
         public async Task<ActionResult<bool>> UpdateProduct(long id, [FromBody] ProductDto product)
         {
@@ -58,6 +60,7 @@ namespace Online_Store_Backend.Controllers
             return result ? Ok(result) : NotFound("Product not found or update failed");
         }
 
+        [Authorize(Roles = "employee")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduct(long id)
         {

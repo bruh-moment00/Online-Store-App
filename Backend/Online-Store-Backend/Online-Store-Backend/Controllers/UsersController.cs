@@ -16,13 +16,14 @@ namespace Online_Store_Backend.Controllers
             this.userService = userService;
         }
         [HttpGet]
+        [Authorize(Roles = "employee")]
         public async Task<IActionResult> GetAllUsers()
         {
             var users = await userService.GetAll();
             return Ok(users);
         }
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetUserById(int id)
+        public async Task<IActionResult> GetUserById(long id)
         {
             var user = await userService.GetById(id);
             if (user == null)
@@ -43,6 +44,7 @@ namespace Online_Store_Backend.Controllers
             return Ok(createdUserID);
         }
         [HttpPut("{id}")]
+        [Authorize]
         public async Task<IActionResult> UpdateUser(int id, [FromBody] UserDto user)
         {
             if (user == null || id != user.ID)
@@ -57,6 +59,7 @@ namespace Online_Store_Backend.Controllers
             return Ok(updatedUser);
         }
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<IActionResult> DeleteUser(int id)
         {
             var result = await userService.DeleteUser(id);

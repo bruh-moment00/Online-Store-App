@@ -36,7 +36,7 @@ namespace Online_Store_Backend.Controllers
             return Ok(categories);
         }
 
-        [Authorize]
+        [Authorize(Roles = "employee")]
         [HttpPost]
         public async Task<ActionResult<long>> InsertCategory([FromBody] CategoryDto category)
         {
@@ -48,7 +48,7 @@ namespace Online_Store_Backend.Controllers
             return categoryId > 0 ? Ok(categoryId) : BadRequest("Failed to insert category");
         }
 
-        [Authorize]
+        [Authorize(Roles = "employee")]
         [HttpPut("{id}")]
         public async Task<ActionResult<bool>> UpdateCategory(long id, [FromBody] CategoryDto category)
         {
@@ -60,7 +60,7 @@ namespace Online_Store_Backend.Controllers
             return result ? Ok(result) : NotFound("Category not found or update failed");
         }
 
-        [Authorize]
+        [Authorize(Roles = "employee")]
         [HttpDelete("{id}")]
         public async Task<ActionResult<bool>> DeleteCategory(long id)
         {
