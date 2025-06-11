@@ -1,10 +1,11 @@
 import React from "react";
-import { Button, Col, Form } from "react-bootstrap";
+import { Button, Col, Form, FormLabel } from "react-bootstrap";
 
 import { useForm } from "react-hook-form";
 
 import { login } from "../Services/AuthService";
 import { useNavigate } from "react-router-dom";
+import type { AxiosError } from "axios";
 
 type FormData = {
   email: string;
@@ -13,6 +14,7 @@ type FormData = {
 
 export const LoginForm = () => {
   const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState("");
 
   const navigate = useNavigate();
   const {
@@ -24,11 +26,16 @@ export const LoginForm = () => {
 
   const submitForm = (data: FormData) => {
     setLoading(true);
+    setError("");
     login(data.email, data.password).then(() => {
       navigate("/Profile");
-      setLoading(false);
       window.location.reload();
-    });
+    })
+    .catch((e: AxiosError) => {
+      console.log(e.response);
+      setError(JSON.stringify(e.response?.data));
+    })
+    .finally(() => setLoading(false));
   };
 
   return (
@@ -63,6 +70,8 @@ export const LoginForm = () => {
           />
         </Col>
       </Form.Group>
+      <FormLabel>{error}</FormLabel>
+      <br />
       {loading ? (
         <Button variant="primary" type="button" disabled className="mt-3">
           Войти

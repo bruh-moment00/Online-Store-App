@@ -11,6 +11,7 @@ import { ProductPage } from "./Pages/Products/ProductPage";
 import { ProductsListPage } from "./Pages/Products/ProductsListPage";
 //import { AddProductPage } from "./Pages/Products/AddProduct";
 import { LoginPage } from "./Pages/LoginPage";
+import AuthLayout from "./Routing/AuthLayout";
 // import { ProfilePage } from "./Pages/ProfilePage";
 
 function App() {
@@ -20,11 +21,14 @@ function App() {
         <div className="content-wrap">
           <Header />
           <Routes>
-            <Route path="" element={<MainPage />} />
-            { <Route path="products" element={<ProductsListPage />} /> }
-            <Route path="products/:productId" element={<ProductPage />} />
-            {/* <Route path="products/Create" element={<AddProductPage />} /> */}
             <Route path="login" element={<LoginPage />} />
+            <Route element={<AuthLayout />}>
+              <Route path="" element={<MainPage />}  />
+              <Route path="products" element={<ProductsListPage />} />
+              <Route path="products/:productId" element={<ProductPage />} />
+            </Route>
+            
+            {/* <Route path="products/Create" element={<AddProductPage />} /> */}
             {/* <Route path="Profile" element={<ProfilePage />} /> */}
           </Routes>
         </div>

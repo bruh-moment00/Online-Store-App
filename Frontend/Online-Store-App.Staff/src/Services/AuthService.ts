@@ -9,7 +9,7 @@ export const login = (
   password: string
 ): Promise<string | undefined> => {
   return axios
-    .post(webAPIUrl + "/Auth/LogIn", {
+    .post(webAPIUrl + "/login/employee", {
       email: email,
       password: password,
     })
@@ -17,7 +17,6 @@ export const login = (
       if (response.data) {
         localStorage.setItem("token", JSON.stringify(response.data));
       }
-
       return response.data;
     });
 };
