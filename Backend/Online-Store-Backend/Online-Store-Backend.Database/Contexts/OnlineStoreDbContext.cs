@@ -28,7 +28,18 @@ namespace Online_Store_Backend.Database.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
+            modelBuilder.Entity<Employee>(employee =>
+            {
+                employee.HasIndex(e => e.Email).IsUnique();
+                employee.HasIndex(e => e.PhoneNum).IsUnique();
+                employee.HasIndex(e => e.Login).IsUnique();
+            });
+            modelBuilder.Entity<User>(user =>
+            {
+                user.HasIndex(u => u.Email).IsUnique();
+                user.HasIndex(u => u.PhoneNum).IsUnique();
+                user.HasIndex(u => u.Login).IsUnique();
+            });
         }
 
         public DbSet<Product> Products { get; set; }
