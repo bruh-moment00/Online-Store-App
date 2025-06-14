@@ -26,4 +26,8 @@
     <ProjectReference Include="..\Online-Store-Backend.Enums\Online-Store-Backend.Enums.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
 </Project>
