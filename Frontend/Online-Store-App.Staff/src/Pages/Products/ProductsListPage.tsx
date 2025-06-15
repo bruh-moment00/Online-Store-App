@@ -34,7 +34,7 @@ export const ProductsListPage = () => {
 
   return (
     <Page title="Товары">
-      <Link to="./Create">
+      <Link to="./create">
         <Button variant="outline-primary">Добавить</Button>
       </Link>
       <hr />

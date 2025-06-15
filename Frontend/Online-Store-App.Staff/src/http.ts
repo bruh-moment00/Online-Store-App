@@ -15,7 +15,7 @@ export interface HttpResponse<RESB> {
 export const http = async <RESB, REQB = undefined>(
   config: HttpRequest<REQB>
 ): Promise<HttpResponse<RESB>> => {
-  const request = new Request(`${webAPIUrl}${config.path}`, {
+  const request = new Request(`${webAPIUrl}/${config.path}`, {
     method: config.method || "get",
     headers: {
       "Content-Type": "application/json",
@@ -25,7 +25,7 @@ export const http = async <RESB, REQB = undefined>(
 
   const accessToken = authHeader();
   if (accessToken) {
-    request.headers.set("Authorization", `Bearer ${accessToken}`);
+    request.headers.set("Authorization", `${accessToken}`);
   }
 
   const response = await fetch(request);

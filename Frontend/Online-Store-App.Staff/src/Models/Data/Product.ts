@@ -11,3 +11,10 @@ export interface Product extends BaseEntity {
 export interface ProductDataWithPaging extends ListDataWithPaging {
     items: Product[];
 }
+
+export interface ProductForPost {
+    name: string;
+    description: string;
+    categoryId: number;
+    price: number;
+}

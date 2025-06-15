@@ -1,5 +1,9 @@
 import { type BaseEntity } from "./Base/BaseEntity";
 
 export interface Category extends BaseEntity {
-    Name: string;
+    name: string;
+}
+
+export interface CategoryForPost {
+    name: string;
 }

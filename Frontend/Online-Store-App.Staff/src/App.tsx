@@ -9,7 +9,7 @@ import { Footer } from "./LayoutComponents/Footer";
 import { MainPage } from "./Pages/MainPage";
 import { ProductPage } from "./Pages/Products/ProductPage";
 import { ProductsListPage } from "./Pages/Products/ProductsListPage";
-//import { AddProductPage } from "./Pages/Products/AddProduct";
+import { AddProductPage } from "./Pages/Products/AddProductPage";
 import { LoginPage } from "./Pages/LoginPage";
 import AuthLayout from "./Routing/AuthLayout";
 // import { ProfilePage } from "./Pages/ProfilePage";
@@ -26,9 +26,8 @@ function App() {
               <Route path="" element={<MainPage />}  />
               <Route path="products" element={<ProductsListPage />} />
               <Route path="products/:productId" element={<ProductPage />} />
+              <Route path="products/create" element={<AddProductPage />} />
             </Route>
-            
-            {/* <Route path="products/Create" element={<AddProductPage />} /> */}
             {/* <Route path="Profile" element={<ProfilePage />} /> */}
           </Routes>
         </div>
