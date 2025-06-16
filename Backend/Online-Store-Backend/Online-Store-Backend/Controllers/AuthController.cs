@@ -58,7 +58,7 @@ namespace Online_Store_Backend.Controllers
 
         [AllowAnonymous]
         [HttpPost("validateUser")]
-        public async Task<IActionResult> ValidateUserToken([FromQuery] string token)
+        public async Task<IActionResult> ValidateUserToken([FromBody] string token)
         {
             if (string.IsNullOrWhiteSpace(token))
             {
@@ -70,7 +70,7 @@ namespace Online_Store_Backend.Controllers
 
         [AllowAnonymous]
         [HttpPost("validateEmployee")]
-        public async Task<IActionResult> ValidateEmployeeToken([FromQuery] string token)
+        public async Task<IActionResult> ValidateEmployeeToken([FromBody] string token)
         {
             if (string.IsNullOrWhiteSpace(token))
             {

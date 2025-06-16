@@ -27,6 +27,4 @@ app.UseCors(builder => builder.AllowAnyOrigin()
 
 app.MapControllers();
 
-app.MapGet("/", (OnlineStoreDbContext db) => db.Employees.ToList());
-
 app.Run();

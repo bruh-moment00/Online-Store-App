@@ -36,7 +36,7 @@ namespace Online_Store_Backend.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
+        [Authorize(Roles = "employee")]
         public async Task<IActionResult> CreateEmployee([FromBody] EmployeeDto employee)
         {
             if (employee == null)
