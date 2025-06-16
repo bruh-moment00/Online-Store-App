@@ -1,8 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
+import { Container, Navbar, Nav, NavDropdown, Button, } from "react-bootstrap";
+import { logout } from "../Services/AuthService";
 
 export const Header = () => {
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    logout();
+    navigate("/login", {replace: true});
+  };
+
   return (
     <header>
       <Navbar expand="sm" bg="white" className="border-bottom box-shadow">
@@ -18,7 +25,7 @@ export const Header = () => {
               </Nav.Link>
               <NavDropdown title="Работа с базой">
                 <NavDropdown.Item>
-                  <Link to="/Products">Товары</Link>
+                  <Link to="/products">Товары</Link>
                 </NavDropdown.Item>
                 <NavDropdown.Item>
                   <Link to="/">Склад</Link>
@@ -27,6 +34,9 @@ export const Header = () => {
                   <Link to="/">Заказы</Link>
                 </NavDropdown.Item>
               </NavDropdown>
+              <Nav.Link>
+                <Button onClick={handleLogout}>Выход</Button>
+              </Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>

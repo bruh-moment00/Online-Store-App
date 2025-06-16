@@ -28,7 +28,7 @@ export const LoginForm = () => {
     setLoading(true);
     setError("");
     login(data.email, data.password).then(() => {
-      navigate("/Profile");
+      navigate("/profile");
       window.location.reload();
     })
     .catch((e: AxiosError) => {

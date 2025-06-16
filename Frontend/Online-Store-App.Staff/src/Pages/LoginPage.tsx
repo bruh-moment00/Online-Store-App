@@ -7,7 +7,7 @@ export const LoginPage = () => {
   const navigate = useNavigate();
   React.useEffect(() => {
     if (localStorage.getItem("token")) {
-      navigate("/Profile");
+      navigate("/profile");
     }
   });
 
