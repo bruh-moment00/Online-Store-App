@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 export const LoginPage = () => {
   const navigate = useNavigate();
   React.useEffect(() => {
-    if (localStorage.getItem("token")) {
+    if (localStorage.getItem("employee_token")) {
       navigate("/profile");
     }
   });

@@ -15,14 +15,14 @@ export const login = (
     })
     .then((response) => {
       if (response.data) {
-        localStorage.setItem("token", JSON.stringify(response.data));
+        localStorage.setItem("employee_token", JSON.stringify(response.data));
       }
       return response.data;
     });
 };
 
 export const logout = () => {
-  localStorage.removeItem("token");
+  localStorage.removeItem("employee_token");
 };
 
 export const getCurrentUser = (): Promise<User | undefined> => {

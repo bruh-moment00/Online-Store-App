@@ -10,6 +10,10 @@ export const Header = () => {
     navigate("/login", {replace: true});
   };
 
+  if (!localStorage.getItem("employee_token")){
+    return null;
+  }
+
   return (
     <header>
       <Navbar expand="sm" bg="white" className="border-bottom box-shadow">
