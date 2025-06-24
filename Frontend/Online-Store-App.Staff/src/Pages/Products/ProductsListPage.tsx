@@ -33,9 +33,9 @@ export const ProductsListPage = () => {
   }, [searchParams]);
 
   return (
-    <Page title="Товары">
+    <Page title="Список товаров" tabTitle="Список товаров">
       <Link to="./create">
-        <Button variant="outline-primary">Добавить</Button>
+        <Button variant="outline-primary">Создать новый товар</Button>
       </Link>
       <hr />
       {productsLoading ? (

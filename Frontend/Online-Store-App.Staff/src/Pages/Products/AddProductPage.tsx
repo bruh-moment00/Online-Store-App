@@ -64,7 +64,7 @@ export const AddProductPage = () => {
   }, []);
 
   return (
-    <Page title="Добавить товар">
+    <Page title="Добавить новый товар" tabTitle="Добавить товар">
       <form onSubmit={handleSubmit(submitForm)}>
         <fieldset>
           <FormGroup>

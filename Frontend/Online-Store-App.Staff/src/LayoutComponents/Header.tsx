@@ -25,7 +25,7 @@ export const Header = () => {
           <Navbar.Collapse>
             <Nav className="me-auto">
               <Nav.Link>
-                <Link to="/">На главную</Link>
+                <Link to="/" >На главную</Link>
               </Nav.Link>
               <NavDropdown title="Работа с базой">
                 <NavDropdown.Item>
@@ -38,9 +38,9 @@ export const Header = () => {
                   <Link to="/">Заказы</Link>
                 </NavDropdown.Item>
               </NavDropdown>
-              <Nav.Link>
-                <Button onClick={handleLogout}>Выход</Button>
-              </Nav.Link>
+              <Nav.Item>
+                <Button onClick={handleLogout} variant="danger">Выход</Button>
+              </Nav.Item>
             </Nav>
           </Navbar.Collapse>
         </Container>

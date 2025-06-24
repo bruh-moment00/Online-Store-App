@@ -12,27 +12,28 @@ import { ProductsListPage } from "./Pages/Products/ProductsListPage";
 import { AddProductPage } from "./Pages/Products/AddProductPage";
 import { LoginPage } from "./Pages/LoginPage";
 import AuthLayout from "./Routing/AuthLayout";
+import { EditProductPage } from "./Pages/Products/EditProductPage";
+import { Container } from "react-bootstrap";
 // import { ProfilePage } from "./Pages/ProfilePage";
 
 function App() {
   return (
     <BrowserRouter>
-      <div className="page-container">
-        <div className="content-wrap">
-          <Header />
-          <Routes>
-            <Route path="login" element={<LoginPage />} />
-            <Route element={<AuthLayout />}>
-              <Route path="" element={<MainPage />}  />
-              <Route path="products" element={<ProductsListPage />} />
-              <Route path="products/:productId" element={<ProductPage />} />
-              <Route path="products/create" element={<AddProductPage />} />
-            </Route>
-            {/* <Route path="Profile" element={<ProfilePage />} /> */}
-          </Routes>
-        </div>
+      <Container>
+        <Header />
+        <Routes>
+          <Route path="login" element={<LoginPage />} />
+          <Route element={<AuthLayout />}>
+            <Route path="" element={<MainPage />}  />
+            <Route path="products" element={<ProductsListPage />} />
+            <Route path="products/:productId" element={<ProductPage />} />
+            <Route path="products/:productId/edit" element={<EditProductPage />} />
+            <Route path="products/create" element={<AddProductPage />} />
+          </Route>
+          {/* <Route path="Profile" element={<ProfilePage />} /> */}
+        </Routes>
         <Footer />
-      </div>
+      </Container>
     </BrowserRouter>
   );
 }

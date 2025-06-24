@@ -4,11 +4,13 @@ import { Title } from "./Title";
 
 interface Props {
   title?: string;
+  tabTitle?: string;
   children: React.ReactNode;
 }
 
-export const Page = ({ title, children }: Props) => (
+export const Page = ({ title, tabTitle, children }: Props) => (
   <Container className="mt-2">
+    {tabTitle && <title>{tabTitle}</title>}
     {title && <Title>{title}</Title>}
     {children}
   </Container>

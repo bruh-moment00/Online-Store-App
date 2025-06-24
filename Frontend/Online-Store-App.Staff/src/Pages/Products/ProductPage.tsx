@@ -2,13 +2,14 @@ import React from "react";
 
 import { Page } from "../../LayoutComponents/Page";
 
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import { type Product } from "../../Models/Data/Product";
 import { BackButton } from "../../Components/BackButton";
 import { getProductById } from "../../Services/DataOperations/ProductsService";
 import { type Category } from "../../Models/Data/Category";
 import { getCategoryById } from "../../Services/DataOperations/CategoriesService";
+import { Button } from "react-bootstrap";
 
 export const ProductPage = () => {
   const [product, setProduct] = React.useState<Product | null>(null);
@@ -40,11 +41,8 @@ export const ProductPage = () => {
   }, [productId]);
 
   return (
-    <Page>
+    <Page title="Подробно {product?.name}" tabTitle="Подробно">
       <div>
-        <div>
-          <h1>Подробно</h1>
-        </div>
         <div>
           <dl className="row">
             <dt className="col-sm-2">Наименование</dt>
@@ -61,7 +59,12 @@ export const ProductPage = () => {
             <dd className="col-sm-10">{category?.name}</dd>
           </dl>
         </div>
-        <div>
+        <div className="col-sm-6">
+          <Link to="edit">
+          <Button>Редактировать</Button>
+          </Link>
+        </div>
+        <div className="col-sm-6">
           <BackButton />
         </div>
       </div>

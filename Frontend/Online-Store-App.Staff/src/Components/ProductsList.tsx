@@ -7,7 +7,7 @@ interface Props {
 }
 
 export const ProductList = ({ data }: Props) => (
-  <div>
+  <div className="">
     <Table>
       <thead>
         <tr>
@@ -22,7 +22,7 @@ export const ProductList = ({ data }: Props) => (
         {data!.map((product) => (
           <tr key={product.id}>
             <td>
-              <Link to={`/Products/${product.id}`}>
+              <Link to={`/products/${product.id}`}>
                 {product.name}
                 <br />
                 {/* {product.image ? (
@@ -35,7 +35,7 @@ export const ProductList = ({ data }: Props) => (
             <td>{product.price}</td>
             <td>{product.categoryID}</td>
             <td>
-              Изменить | <Link to={`/Products/${product.id}`}>Подробно</Link> |
+              Изменить | <Link to={`/products/${product.id}`}>Подробно</Link> |
               Удалить
             </td>
           </tr>

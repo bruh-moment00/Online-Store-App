@@ -3,10 +3,10 @@ import { Page } from "../LayoutComponents/Page";
 
 export const MainPage = () => {
   return (
-    <Page>
+    <Page tabTitle="Главная">
       <div className="row">
         <div className="col-xs-12 col-sm-12 col-md-4">
-          <Link to="/Products">
+          <Link to="/products">
             <div className="floating-block transition">
               <h4>Список товаров</h4>
               <p>Добавление, редактирование и удаление товаров</p>
@@ -40,7 +40,7 @@ export const MainPage = () => {
           </Link>
         </div>
         <div className="col-xs-12 col-sm-12 col-md-4">
-          <Link to="/">
+          <Link to="/profile">
             <div className="floating-block transition">
               <h4>Профиль</h4>
               <p>Просмотр информации об аккаунте и редактирование</p>
