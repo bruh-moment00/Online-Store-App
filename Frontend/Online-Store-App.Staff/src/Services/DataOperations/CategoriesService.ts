@@ -5,7 +5,7 @@ export const getCategoryById = async (
     productId: number
 ): Promise<Category | null> => {
     const result = await http<Category>({
-        path: `/categories/${productId}`
+        path: `categories/${productId}`
     });
     if (result.ok && result.body){
         return result.body;

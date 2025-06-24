@@ -7,20 +7,30 @@ import { useParams } from "react-router-dom";
 import { type Product } from "../../Models/Data/Product";
 import { BackButton } from "../../Components/BackButton";
 import { getProductById } from "../../Services/DataOperations/ProductsService";
+import { type Category } from "../../Models/Data/Category";
+import { getCategoryById } from "../../Services/DataOperations/CategoriesService";
 
 export const ProductPage = () => {
   const [product, setProduct] = React.useState<Product | null>(null);
+  const [category, setCategory] = React.useState<Category | null> (null);
 
   const { productId } = useParams();
 
   React.useEffect(() => {
     let cancelled = false;
+    
     const doGetProduct = async (productId: number) => {
       const foundProduct = await getProductById(productId);
       if (!cancelled) {
         setProduct(foundProduct);
+
+        if (foundProduct) {
+          const foundCategory = await getCategoryById(foundProduct.categoryID);
+          setCategory(foundCategory);
+        }
       }
     };
+
     if (productId) {
       doGetProduct(Number(productId));
     }
@@ -47,8 +57,8 @@ export const ProductPage = () => {
             <dd className="col-sm-10">{product?.specs}</dd> */}
             {/* <dt className="col-sm-2">Производитель</dt>
             <dd className="col-sm-10">{product?.brand.name}</dd> */}
-            {/* <dt className="col-sm-2">Категория</dt>
-            <dd className="col-sm-10">{product?.category.name}</dd> */}
+            <dt className="col-sm-2">Категория</dt>
+            <dd className="col-sm-10">{category?.name}</dd>
           </dl>
         </div>
         <div>
