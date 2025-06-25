@@ -23,7 +23,7 @@ namespace Online_Store_Backend.Controllers
         [HttpPost]
         public async Task<IActionResult> UploadImage(IFormFile image, long productID)
         {
-            string path = environment.WebRootPath + "\\images\\products" + productID;
+            string path = environment.WebRootPath + "\\images\\products\\" + productID;
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
@@ -35,13 +35,26 @@ namespace Online_Store_Backend.Controllers
                 fileStream.Flush();
                 ProductImageDto productImage = new ProductImageDto
                 {
-                    ImageAddress = path + "\\" + image.FileName,
+                    ImageAddress = $"images/products/{productID}/{image.FileName}",
                     ProductID = productID,
                 };
 
                 var imageId = await productImageService.InsertProductImage(productImage);
                 return imageId >= 0 ? Ok(imageId) : BadRequest("Failed to upload image");
             }
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<IActionResult> GetImagesByProductID(long productID)
+        {
+            var images = await productImageService.GetByProductId(productID);
+            var paths = images.Select(i =>
+            {
+                return Url.Content(i.ImageAddress);
+            }).ToList();
+
+            return Ok(paths);
         }
     }
 }
