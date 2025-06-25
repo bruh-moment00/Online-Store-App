@@ -9,3 +9,14 @@ export interface Employee extends BaseEntity {
     BirthDate: Date;
     Login: Date;
 }
+
+export interface EmployeeForPost {
+    FirstName: string;
+    LastName: string;
+    PhoneNum: string;
+    Email: string;
+    Gender: boolean;
+    BirthDate: Date;
+    Login: Date;
+    Password: string;
+} 
