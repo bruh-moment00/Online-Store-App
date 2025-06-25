@@ -70,7 +70,8 @@ namespace Online_Store_Backend.Domain.Authentication
         {
             var employees = await employeeRepository.Filter(u => u.Email == employeeData.Email ||
                 u.PhoneNum == employeeData.PhoneNum || u.Login == employeeData.Login);
-            var employee = employees.First();
+
+            var employee = employees.FirstOrDefault();
 
             if (employee != null)
             {
