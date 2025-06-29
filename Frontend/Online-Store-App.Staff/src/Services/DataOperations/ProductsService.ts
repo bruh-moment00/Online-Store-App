@@ -1,5 +1,5 @@
 import { http } from "../../http";
-import type { Product, ProductDataWithPaging, ProductForPost } from "../../Models/Data/Product";
+import type { Product, ProductDataWithPaging, ProductForPost, ProductForPut } from "../../Models/Data/Product";
 
 export const getProductById = async (
     productId: number
@@ -38,5 +38,35 @@ export const postProduct = async (
     }
     else {
         return undefined;
+    }
+}
+
+export const putPropertyValue = async (
+    property: ProductForPut
+): Promise<boolean | undefined> => {
+    const result = await http<boolean, ProductForPut>({
+        path: "products",
+        method: "put",
+        body: property
+    });
+    if (result.ok && result.body) {
+        return result.body;
+    }
+    else {
+        return false;
+    }
+}
+
+export const deleteProduct = async (
+    productId: number
+): Promise<number | null> => {
+    const result = await http<number>({
+        path: `products/${productId}`,
+        method: "delete"
+    });
+    if (result.ok && result.body){
+        return result.body;
+    } else {
+        return null;
     }
 }

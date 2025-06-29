@@ -18,3 +18,11 @@ export interface ProductForPost {
     categoryId: number;
     price: number;
 }
+
+export interface ProductForPut {
+    ID: number;
+    name: string;
+    description: string;
+    categoryId: number;
+    price: number;
+}
