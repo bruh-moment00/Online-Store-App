@@ -9,9 +9,18 @@ namespace Online_Store_Backend.Domain.Categories.Services
     {
         private readonly IRepositoryAsync<ProductPropValue> productPropValueRepository;
         public ProductPropValueService(IRepositoryAsync<ProductPropValue> productPropValueRepository) => this.productPropValueRepository = productPropValueRepository;
-        public async Task<List<ProductPropValueDto>> GetByProductId(long productId)
+        public async Task<ProductPropValueDto> GetById(long id)
         {
-            var entities = await this.productPropValueRepository.Filter(x => x.ProductID == productId && !x.IsDeleted);
+            var entity = await this.productPropValueRepository.FindById(id);
+            return MapEntityToDto(entity);
+        }
+        public async Task<List<ProductPropValueDto>> GetProductPropValues(long? productId = null)
+        {
+            var entities = await this.productPropValueRepository.Filter(x => !x.IsDeleted);
+            if (productId.HasValue)
+            {
+                entities = entities.Where(c => c.ProductID == productId);
+            }
             return entities.Select(MapEntityToDto).ToList();
         }
         public async Task<long> InsertProductPropValue(ProductPropValueDto productPropValue)
