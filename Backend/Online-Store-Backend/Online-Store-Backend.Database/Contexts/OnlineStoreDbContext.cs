@@ -40,6 +40,7 @@ namespace Online_Store_Backend.Database.Contexts
                 user.HasIndex(u => u.PhoneNum).IsUnique();
                 user.HasIndex(u => u.Login).IsUnique();
             });
+            modelBuilder.Entity<ProductPropValue>().HasIndex(ppv => new { ppv.ProductID, ppv.PropID }).IsUnique();
         }
 
         public DbSet<Product> Products { get; set; }
