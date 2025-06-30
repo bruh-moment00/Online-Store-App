@@ -50,9 +50,9 @@ namespace Online_Store_Backend.Controllers
 
         [Authorize(Roles = "employee")]
         [HttpPut("{id}")]
-        public async Task<ActionResult<bool>> UpdateProduct(long id, [FromBody] ProductDto product)
+        public async Task<ActionResult<bool>> UpdateProduct([FromBody] ProductDto product)
         {
-            if (product == null || product.ID != id)
+            if (product == null)
             {
                 return BadRequest("Product data is invalid");
             }

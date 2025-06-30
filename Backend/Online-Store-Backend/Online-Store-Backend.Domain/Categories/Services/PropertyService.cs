@@ -9,9 +9,18 @@ namespace Online_Store_Backend.Domain.Categories.Services
     {
         private readonly IRepositoryAsync<Property> propertyRepository;
         public PropertyService(IRepositoryAsync<Property> propertyRepository) => this.propertyRepository = propertyRepository;
-        public async Task<List<PropertyDto>> GetByCategoryId(long categoryId)
+        public async Task<PropertyDto> GetById(long id)
         {
-            var entities = await this.propertyRepository.Filter(x => x.CategoryID == categoryId && !x.IsDeleted);
+            var entity = await propertyRepository.FindById(id);
+            return entity == null ? null : MapEntityToDto(entity);
+        }
+        public async Task<List<PropertyDto>> GetProperties(long? categoryId = null)
+        {
+            var entities = await this.propertyRepository.Filter(x => !x.IsDeleted);
+            if (categoryId.HasValue)
+            {
+                entities = entities.Where(c => c.CategoryID == categoryId);
+            }
             return entities.Select(MapEntityToDto).ToList();
         }
         public async Task<long> InsertProperty(PropertyDto property)
