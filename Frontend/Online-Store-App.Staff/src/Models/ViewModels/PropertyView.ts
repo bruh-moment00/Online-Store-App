@@ -1,9 +1,9 @@
 import type { PropValueType } from "../../Enums/PropValueType";
 
 export interface PropertyView {
-    PropertyId: number;
-    Name: string;
-    ValueId: number;
-    ValueType: PropValueType;
-    Value: string;
+    id: number;
+    name: string;
+    valueId: number;
+    valueType: PropValueType;
+    value: string;
 }

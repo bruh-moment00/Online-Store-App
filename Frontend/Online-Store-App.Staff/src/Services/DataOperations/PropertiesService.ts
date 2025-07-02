@@ -149,7 +149,7 @@ export const getPropertiesViewByProductId = async(
     const result = await http<PropertyView[]>({
         path: `properties/view?productId=${productId}`
     });
-    if (result.ok || result.body) {
+    if (result.ok && result.body) {
         return result.body;
     } else {
         return undefined;

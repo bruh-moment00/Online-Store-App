@@ -10,10 +10,15 @@ import { getProductById } from "../../Services/DataOperations/ProductsService";
 import { type Category } from "../../Models/Data/Category";
 import { getCategoryById } from "../../Services/DataOperations/CategoriesService";
 import { Button } from "react-bootstrap";
+import { getPropertiesViewByProductId } from "../../Services/DataOperations/PropertiesService";
+import { type PropertyView } from "../../Models/ViewModels/PropertyView";
+import { PropertiesList } from "../../Components/PropertiesList";
 
 export const ProductPage = () => {
   const [product, setProduct] = React.useState<Product | null>(null);
   const [category, setCategory] = React.useState<Category | null> (null);
+  const [properties, setProperties] = React.useState<PropertyView[] | undefined> (undefined);
+  const [propertiesLoading, setPropertiesLoading] = React.useState(true);
 
   const { productId } = useParams();
 
@@ -28,6 +33,9 @@ export const ProductPage = () => {
         if (foundProduct) {
           const foundCategory = await getCategoryById(foundProduct.categoryID);
           setCategory(foundCategory);
+          const foundProps = await getPropertiesViewByProductId(productId);
+          setProperties(foundProps);
+          setPropertiesLoading(false);
         }
       }
     };
@@ -41,7 +49,7 @@ export const ProductPage = () => {
   }, [productId]);
 
   return (
-    <Page title="Подробно {product?.name}" tabTitle="Подробно">
+    <Page title={`Подробно ${product?.name}`} tabTitle="Подробно">
       <div>
         <div>
           <dl className="row">
@@ -51,8 +59,7 @@ export const ProductPage = () => {
             <dd className="col-sm-10">{product?.price}</dd>
             <dt className="col-sm-2">Описание</dt>
             <dd className="col-sm-10">{product?.description}</dd>
-            {/* <dt className="col-sm-2">Характеристики</dt>
-            <dd className="col-sm-10">{product?.specs}</dd> */}
+            {propertiesLoading ? <div>Загрузка</div> : <PropertiesList data={properties} /> }         
             {/* <dt className="col-sm-2">Производитель</dt>
             <dd className="col-sm-10">{product?.brand.name}</dd> */}
             <dt className="col-sm-2">Категория</dt>
