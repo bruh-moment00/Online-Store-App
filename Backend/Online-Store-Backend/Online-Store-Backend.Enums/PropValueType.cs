@@ -10,6 +10,7 @@ namespace Online_Store_Backend.Enums
     {
         Group,
         Integer,
+        Double,
         Boolean,
     }
 }
