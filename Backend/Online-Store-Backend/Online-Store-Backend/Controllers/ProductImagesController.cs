@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Online_Store_Backend.Domain.Products.Dto;
 using Online_Store_Backend.Domain.Products.Services.Interfaces;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Online_Store_Backend.Controllers
 {
@@ -48,13 +49,23 @@ namespace Online_Store_Backend.Controllers
         [HttpGet]
         public async Task<IActionResult> GetImagesByProductID(long productID)
         {
-            var images = await productImageService.GetByProductId(productID);
-            var paths = images.Select(i =>
-            {
-                return Url.Content(i.ImageAddress);
-            }).ToList();
+            string path = environment.WebRootPath + "\\images\\products\\" + productID;
 
-            return Ok(paths);
+            if (Directory.Exists(path))
+            {
+                IEnumerable<string> images = new List<string>();
+                await Task.Run(() =>
+                {
+                    images = Directory.EnumerateFiles(path).Select(i =>
+                    {
+                        return $"images/products/{productID}/{Path.GetFileName(i)}";
+                    })
+                    .ToList();                   
+                });
+                return Ok(images);
+            }
+
+            return NotFound("No images found for this product");
         }
     }
 }
