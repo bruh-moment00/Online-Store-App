@@ -1,11 +1,12 @@
 ﻿using Online_Store_Backend.Domain.Orders.Dto;
+using Online_Store_Backend.Domain.Pagination;
 
 namespace Online_Store_Backend.Domain.Orders.Services.Interfaces
 {
     public interface IOrderService
     {
         Task<OrderDto> GetById(long id);
-        Task<List<OrderDto>> GetAll();
+        Task<PaginationDto<OrderDto>> GetAll(int pageNumber = 1, int pageSize = 10);
         Task<List<OrderDto>> GetByUserId(long userId);
         Task<long> InsertOrder(OrderDto order);
         Task<bool> UpdateOrder(OrderDto order);
