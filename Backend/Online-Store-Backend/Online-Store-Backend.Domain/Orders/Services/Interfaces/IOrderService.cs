@@ -6,7 +6,7 @@ namespace Online_Store_Backend.Domain.Orders.Services.Interfaces
     public interface IOrderService
     {
         Task<OrderDto> GetById(long id);
-        Task<PaginationDto<OrderDto>> GetAll(int pageNumber = 1, int pageSize = 10);
+        Task<PaginationDto<OrderDto>> GetOrders(long? userId ,int pageNumber = 1, int pageSize = 10);
         Task<List<OrderDto>> GetByUserId(long userId);
         Task<long> InsertOrder(OrderDto order);
         Task<bool> UpdateOrder(OrderDto order);

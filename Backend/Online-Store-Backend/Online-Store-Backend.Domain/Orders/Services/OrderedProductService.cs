@@ -12,6 +12,11 @@ namespace Online_Store_Backend.Domain.Orders.Services
         {
             this.orderedProductRepository = orderedProductRepository;
         }
+        public async Task<OrderedProductDto> GetById(long id)
+        {
+            var entity = await this.orderedProductRepository.FindById(id);
+            return entity == null ? null : MapEntityToDto(entity);
+        }
         public async Task<List<OrderedProductDto>> GetByOrderId(long orderId)
         {
             var entities = await this.orderedProductRepository.Filter(x => x.OrderID == orderId && !x.IsDeleted);

@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Online_Store_Backend.AuthHelpers;
 using Online_Store_Backend.Domain.Orders.Dto;
 using Online_Store_Backend.Domain.Orders.Services.Interfaces;
-using System.Threading.Tasks;
 
 namespace Online_Store_Backend.Controllers
 {
@@ -33,11 +31,19 @@ namespace Online_Store_Backend.Controllers
             else return Ok(order);
         }
 
-        [Authorize(Roles = "employee")]
+        [Authorize]
         [HttpGet]
-        public async Task<IActionResult> GetOrders(int page = 1, int size = 10)
+        public async Task<IActionResult> GetOrders(long? userId = null ,int page = 1, int size = 10)
         {
-            var orders = await orderService.GetAll(page, size);
+            if (userId == null && !HttpContext.User.IsInRole("employee"))
+            {
+                return Forbid("Access denied");
+            }
+            else if (userId.HasValue && !(HttpContext.User.IsInRole("employee") || AuthHelper.CheckSameUserId(HttpContext, (long)userId)))
+            {
+                return Forbid("Access denied");
+            }
+            var orders = await orderService.GetOrders(userId, page, size);
             return Ok(orders);
         }
 
@@ -76,6 +82,58 @@ namespace Online_Store_Backend.Controllers
         {
             var result = await orderService.DeleteOrder(id);
             return result ? Ok(result) : NotFound("Order not found or delete failed");
+        }
+
+        [Authorize]
+        [HttpGet("products")]
+        public async Task<IActionResult> GetOrderedProducts(long orderId)
+        {
+            var order = await orderService.GetById(orderId);
+            if (order == null)
+            {
+                return NotFound("Order not found");
+            }
+            else if (!(HttpContext.User.IsInRole("employee") || AuthHelper.CheckSameUserId(HttpContext, order.UserID)))
+            {
+                return Forbid("Access denied");
+            }
+            var orderedProducts = await orderedProductService.GetByOrderId(orderId);
+            return Ok(orderedProducts);
+        }
+
+        [Authorize]
+        [HttpPost("products")]
+        public async Task<ActionResult<long>> AddProductToOrder([FromBody] OrderedProductDto orderedProduct)
+        {
+            var order = await orderService.GetById(orderedProduct.OrderID);
+            if (orderedProduct == null || order == null)
+            {
+                return BadRequest("Ordered product is null or order not found");
+            }
+            else if (!(HttpContext.User.IsInRole("employee") || AuthHelper.CheckSameUserId(HttpContext, order.UserID)))
+            {
+                return Forbid("Access denied");
+            }
+            var result = await orderedProductService.InsertOrderedProduct(orderedProduct);
+            return Ok(result);
+        }
+
+        [Authorize]
+        [HttpDelete("products/{id}")]
+        public async Task<IActionResult> DeleteOrderedProduct(long id)
+        {
+            var orderedProduct = await orderedProductService.GetById(id);
+            if (orderedProduct == null)
+            {
+                return NotFound("Ordered product not found");
+            }
+            var order = await orderService.GetById(orderedProduct.OrderID);
+            if (!(HttpContext.User.IsInRole("employee") || AuthHelper.CheckSameUserId(HttpContext, order.UserID)))
+            {
+                return Forbid("Access denied");
+            }
+            var result = await orderedProductService.DeleteOrderedProduct(id);
+            return result ? Ok(result) : NotFound("Delete failed");
         }
     }
 }

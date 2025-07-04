@@ -3,7 +3,6 @@ using Online_Store_Backend.Database.Orders.Models;
 using Online_Store_Backend.Domain.Orders.Dto;
 using Online_Store_Backend.Domain.Orders.Services.Interfaces;
 using Online_Store_Backend.Domain.Pagination;
-using Online_Store_Backend.Domain.Products.Dto;
 
 namespace Online_Store_Backend.Domain.Orders.Services
 {
@@ -16,9 +15,13 @@ namespace Online_Store_Backend.Domain.Orders.Services
             var entity = await this.orderRepository.FindById(id);
             return entity == null ? null : MapEntityToDto(entity);
         }
-        public async Task<PaginationDto<OrderDto>> GetAll(int pageNumber = 1, int pageSize = 10)
+        public async Task<PaginationDto<OrderDto>> GetOrders(long? userId, int pageNumber = 1, int pageSize = 10)
         {
             var entities = await this.orderRepository.Filter(x => !x.IsDeleted);
+            if (userId.HasValue)
+            {
+                entities = entities.Where(c => c.UserID == userId);
+            }
 
             PaginationEntity<Order> paginatedOrders = new PaginationEntity<Order>(entities, pageNumber, pageSize);
             return new PaginationDto<OrderDto>(entities.Select(MapEntityToDto).ToList(),
