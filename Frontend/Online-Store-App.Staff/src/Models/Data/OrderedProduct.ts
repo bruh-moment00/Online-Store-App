@@ -4,3 +4,8 @@ export interface OrderedProduct extends ConnectEntity {
     OrderID: number;
     ProductID: number;
 }
+
+export interface OrderedProductForPost {
+    OrderID: number;
+    ProductID: number;
+}

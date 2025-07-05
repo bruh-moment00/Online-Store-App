@@ -20,7 +20,7 @@ export interface ProductForPost {
 }
 
 export interface ProductForPut {
-    ID: number;
+    id: number;
     name: string;
     description: string;
     categoryId: number;
