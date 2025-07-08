@@ -13,12 +13,16 @@ import { Button } from "react-bootstrap";
 import { getPropertiesViewByProductId } from "../../Services/DataOperations/PropertiesService";
 import { type PropertyView } from "../../Models/ViewModels/PropertyView";
 import { PropertiesList } from "../../Components/PropertiesList";
+import { getImagesURLByProductId } from "../../Services/DataOperations/ProductImagesService";
+import { ImagesCarousel } from "../../Components/ImagesCarousel";
 
 export const ProductPage = () => {
   const [product, setProduct] = React.useState<Product | null>(null);
   const [category, setCategory] = React.useState<Category | null> (null);
   const [properties, setProperties] = React.useState<PropertyView[] | undefined> (undefined);
   const [propertiesLoading, setPropertiesLoading] = React.useState(true);
+  const [imagesURLs, setImagesURLs] = React.useState<string[] | undefined>(undefined);
+  const [imagesRetrieving, setImagesRetrieving] = React.useState(true);
 
   const { productId } = useParams();
 
@@ -36,6 +40,9 @@ export const ProductPage = () => {
           const foundProps = await getPropertiesViewByProductId(productId);
           setProperties(foundProps);
           setPropertiesLoading(false);
+          const foundImagesURLs = await getImagesURLByProductId(productId);
+          setImagesURLs(foundImagesURLs);
+          setImagesRetrieving(false);
         }
       }
     };
@@ -53,6 +60,7 @@ export const ProductPage = () => {
       <div>
         <div>
           <dl className="row">
+            {imagesRetrieving ? <div></div> : <ImagesCarousel data={imagesURLs} /> }
             <dt className="col-sm-2">Наименование</dt>
             <dd className="col-sm-10">{product?.name}</dd>
             <dt className="col-sm-2">Цена</dt>
