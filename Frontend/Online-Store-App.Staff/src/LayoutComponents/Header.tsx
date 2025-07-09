@@ -10,7 +10,7 @@ export const Header = () => {
     navigate("/login", {replace: true});
   };
 
-  if (!localStorage.getItem("employee_token")){
+  if (!localStorage.getItem("token")){
     return null;
   }
 
