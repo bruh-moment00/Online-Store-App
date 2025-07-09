@@ -31,6 +31,17 @@ export const Paging = ({
     navigate(`?${searchParams.toString()}`);
   };
 
+  pageSize = Number(searchParams.get("pageSize"));
+  const pageSizesDropDownItems = [];
+  for (let i = 5; i <= 20; i += 5) {
+    pageSizesDropDownItems.push(<Dropdown.Item 
+      onClick={(event: React.MouseEvent<HTMLElement>) => {
+        searchParams.set("pageSize", i.toString());
+        navigate(`?${searchParams.toString()}`);}}>
+          {i}
+      </Dropdown.Item>)
+  }
+
   return (
     <div>
       <Pagination>
@@ -70,17 +81,7 @@ export const Paging = ({
       <Dropdown>
         <Dropdown.Toggle>Элементов на странице: {pageSize}</Dropdown.Toggle>
         <Dropdown.Menu>
-          <Dropdown.Item
-            onClick={(event: React.MouseEvent<HTMLElement>) => {
-              searchParams.set("pageSize", "5");
-              navigate(`?${searchParams.toString()}`);
-            }}
-          >
-            5
-          </Dropdown.Item>
-          <Dropdown.Item>10</Dropdown.Item>
-          <Dropdown.Item>15</Dropdown.Item>
-          <Dropdown.Item>20</Dropdown.Item>
+          {pageSizesDropDownItems}
         </Dropdown.Menu>
       </Dropdown>
     </div>
