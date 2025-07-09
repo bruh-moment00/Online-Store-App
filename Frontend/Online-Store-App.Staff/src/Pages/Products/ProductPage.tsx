@@ -4,16 +4,16 @@ import { Page } from "../../LayoutComponents/Page";
 
 import { Link, useParams } from "react-router-dom";
 
-import { type Product } from "../../Models/Data/Product";
+import { type Product } from "../../../../Online-Store-App.Commonlib/src/Models/Data/Product";
 import { BackButton } from "../../Components/BackButton";
-import { getProductById } from "../../Services/DataOperations/ProductsService";
-import { type Category } from "../../Models/Data/Category";
-import { getCategoryById } from "../../Services/DataOperations/CategoriesService";
+import { getProductById } from "../../../../Online-Store-App.Commonlib/src/Services/DataOperations/ProductsService";
+import { type Category } from "../../../../Online-Store-App.Commonlib/src/Models/Data/Category";
+import { getCategoryById } from "../../../../Online-Store-App.Commonlib/src/Services/DataOperations/CategoriesService";
 import { Button } from "react-bootstrap";
-import { getPropertiesViewByProductId } from "../../Services/DataOperations/PropertiesService";
-import { type PropertyView } from "../../Models/ViewModels/PropertyView";
+import { getPropertiesViewByProductId } from "../../../../Online-Store-App.Commonlib/src/Services/DataOperations/PropertiesService";
+import { type PropertyView } from "../../../../Online-Store-App.Commonlib/src/Models/ViewModels/PropertyView";
 import { PropertiesList } from "../../Components/PropertiesList";
-import { getImagesURLByProductId } from "../../Services/DataOperations/ProductImagesService";
+import { getImagesURLByProductId } from "../../../../Online-Store-App.Commonlib/src/Services/DataOperations/ProductImagesService";
 import { ImagesCarousel } from "../../Components/ImagesCarousel";
 
 export const ProductPage = () => {

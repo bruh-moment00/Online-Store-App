@@ -1,4 +1,4 @@
-import { type Product } from "../Models/Data/Product";
+import { type Product } from "../../../Online-Store-App.Commonlib/src/Models/Data/Product";
 import { Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
 

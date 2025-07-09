@@ -4,8 +4,8 @@ import { Nav, Button } from "react-bootstrap";
 
 import { Link, useSearchParams } from "react-router-dom";
 
-import { type ProductDataWithPaging } from "../../Models/Data/Product";
-import { getProducts } from "../../Services/DataOperations/ProductsService";
+import { type ProductDataWithPaging } from "../../../../Online-Store-App.Commonlib/src/Models/Data/Product";
+import { getProducts } from "../../../../Online-Store-App.Commonlib/src/Services/DataOperations/ProductsService";
 import { Page } from "../../LayoutComponents/Page";
 import { ProductList } from "../../Components/ProductsList";
 import { Paging } from "../../Components/Paging";

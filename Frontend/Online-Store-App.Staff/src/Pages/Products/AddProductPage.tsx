@@ -2,14 +2,14 @@ import React from "react";
 import { Page } from "../../LayoutComponents/Page";
 
 import { useForm } from "react-hook-form";
-import { postProduct } from "../../Services/DataOperations/ProductsService";
+import { postProduct } from "../../../../Online-Store-App.Commonlib/src/Services/DataOperations/ProductsService";
 import {
   Form,
   FormGroup,
   Button,
 } from "react-bootstrap";
-import { type Category } from "../../Models/Data/Category";
-import { getCategories } from "../../Services/DataOperations/CategoriesService";
+import { type Category } from "../../../../Online-Store-App.Commonlib/src/Models/Data/Category";
+import { getCategories } from "../../../../Online-Store-App.Commonlib/src/Services/DataOperations/CategoriesService";
 import { Navigate, useNavigate } from "react-router";
 
 type FormData = {

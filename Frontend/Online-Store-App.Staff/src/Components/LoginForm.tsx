@@ -3,9 +3,9 @@ import { Button, Col, Form, FormLabel } from "react-bootstrap";
 
 import { useForm } from "react-hook-form";
 
-import { login } from "../Services/AuthService";
 import { useNavigate } from "react-router-dom";
 import type { AxiosError } from "axios";
+import { login } from "../../../Online-Store-App.Commonlib/src/Services/AuthService";
 
 type FormData = {
   email: string;
