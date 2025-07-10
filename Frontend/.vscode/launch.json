@@ -8,8 +8,12 @@
             "url": "http://localhost:5173",
             "pathMappings": [
                 {
+                    "url": "http://localhost:5173/@fs/C:/Gitlab/Online-Store-App/Frontend/Online-Store-App.CommonLib",
+                    "path": "${workspaceFolder}/Online-Store-App.Commonlib"
+                },
+                {
                     "url": "http://localhost:5173/",
-                    "path": "${workspaceFolder}/Online-Store-App.Staff"
+                    "path": "${workspaceFolder}/Online-Store-App.Commonlib/src"
                 }
             ]
         }
