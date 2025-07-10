@@ -20,7 +20,6 @@ export const ProductPage = () => {
   const [product, setProduct] = React.useState<Product | null>(null);
   const [category, setCategory] = React.useState<Category | null> (null);
   const [properties, setProperties] = React.useState<PropertyView[] | undefined> (undefined);
-  const [propertiesLoading, setPropertiesLoading] = React.useState(true);
   const [imagesURLs, setImagesURLs] = React.useState<string[] | undefined>(undefined);
   const [imagesRetrieving, setImagesRetrieving] = React.useState(true);
 
@@ -39,7 +38,6 @@ export const ProductPage = () => {
           setCategory(foundCategory);
           const foundProps = await getPropertiesViewByProductId(productId);
           setProperties(foundProps);
-          setPropertiesLoading(false);
           const foundImagesURLs = await getImagesURLByProductId(productId);
           setImagesURLs(foundImagesURLs);
           setImagesRetrieving(false);
@@ -67,7 +65,7 @@ export const ProductPage = () => {
             <dd className="col-sm-10">{product?.price}</dd>
             <dt className="col-sm-2">Описание</dt>
             <dd className="col-sm-10">{product?.description}</dd>
-            {propertiesLoading && !(properties && properties?.length > 0) ? <div>Загрузка</div> : <PropertiesList data={properties} /> }
+            {!(properties && properties?.length > 0) ? <></> : <PropertiesList data={properties} /> }
             <dt className="col-sm-2">Категория</dt>
             <dd className="col-sm-10">{category?.name}</dd>
           </dl>
