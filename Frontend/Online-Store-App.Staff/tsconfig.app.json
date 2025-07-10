@@ -23,5 +23,12 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src", "../Online-Store-App.CommonLib/src"]
+  "include": [
+    "src", 
+    "../Online-Store-App.CommonLib/src/*.ts",
+    "../Online-Store-App.CommonLib/src/*.tsx"
+  ],
+  "references": [
+    { "path": "../Online-Store-App.CommonLib"}
+  ]
 }
