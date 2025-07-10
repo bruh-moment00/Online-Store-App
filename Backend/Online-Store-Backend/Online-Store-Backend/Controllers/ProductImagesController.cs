@@ -22,7 +22,7 @@ namespace Online_Store_Backend.Controllers
 
         [Authorize(Roles = "employee")]
         [HttpPost]
-        public async Task<IActionResult> UploadImage(IFormFile image, long productID)
+        public async Task<IActionResult> UploadImage([FromBody] IFormFile image, long productID)
         {
             string path = environment.WebRootPath + "\\images\\products\\" + productID;
             if (!Directory.Exists(path))

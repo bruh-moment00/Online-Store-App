@@ -10,3 +10,17 @@ export const getImagesURLByProductId = async (productId: number): Promise<string
         return undefined;
     }
 }
+
+export const uploadImage = async (image: File, productId: number): Promise<number | undefined> => {
+    const result = await http<number, File>({
+        path: `products/images?productID=${productId}`,
+        method: "post",
+        body: image
+    });
+    if (result.ok && result.body) {
+        return result.body;
+    }
+    else {
+        return undefined;
+    }    
+}
