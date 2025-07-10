@@ -67,9 +67,7 @@ export const ProductPage = () => {
             <dd className="col-sm-10">{product?.price}</dd>
             <dt className="col-sm-2">Описание</dt>
             <dd className="col-sm-10">{product?.description}</dd>
-            {propertiesLoading ? <div>Загрузка</div> : <PropertiesList data={properties} /> }         
-            {/* <dt className="col-sm-2">Производитель</dt>
-            <dd className="col-sm-10">{product?.brand.name}</dd> */}
+            {propertiesLoading && !(properties && properties?.length > 0) ? <div>Загрузка</div> : <PropertiesList data={properties} /> }
             <dt className="col-sm-2">Категория</dt>
             <dd className="col-sm-10">{category?.name}</dd>
           </dl>
