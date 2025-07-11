@@ -25,7 +25,7 @@ namespace Online_Store_Backend.Domain.Products.Services
             }
 
             PaginationEntity<Product> paginatedProducts = new PaginationEntity<Product>(entities, pageNumber, pageSize);
-            return new PaginationDto<ProductDto>(entities.Select(MapEntityToDto).ToList(), 
+            return new PaginationDto<ProductDto>(paginatedProducts.Items.Select(MapEntityToDto).ToList(), 
                                                  paginatedProducts.TotalCount,
                                                  paginatedProducts.PageNumber,
                                                  paginatedProducts.PageSize,

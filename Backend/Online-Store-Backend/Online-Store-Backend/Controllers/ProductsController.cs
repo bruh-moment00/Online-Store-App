@@ -30,9 +30,9 @@ namespace Online_Store_Backend.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public async Task<IActionResult> GetProducts(long? categoryId = null, int page = 1, int size = 10)
+        public async Task<IActionResult> GetProducts(long? categoryId = null, int pageNumber = 1, int pageSize = 10)
         {
-            var products = await productService.GetProducts(categoryId, page, size);
+            var products = await productService.GetProducts(categoryId, pageNumber, pageSize);
             return Ok(products);
         }
 

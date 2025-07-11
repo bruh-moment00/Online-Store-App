@@ -30,8 +30,8 @@ export const Paging = ({
     searchParams.set("pageNumber", number.toString());
     navigate(`?${searchParams.toString()}`);
   };
-
-  pageSize = Number(searchParams.get("pageSize"));
+  if (searchParams.get("pageSize"))
+    pageSize = Number(searchParams.get("pageSize"));
   const pageSizesDropDownItems = [];
   for (let i = 5; i <= 20; i += 5) {
     pageSizesDropDownItems.push(<Dropdown.Item 
