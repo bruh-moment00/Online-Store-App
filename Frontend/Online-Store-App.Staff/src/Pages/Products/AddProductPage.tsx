@@ -10,7 +10,7 @@ import {
 } from "react-bootstrap";
 import { type Category } from "../../../../Online-Store-App.Commonlib/src/Models/Data/Category";
 import { getCategories } from "../../../../Online-Store-App.Commonlib/src/Services/DataOperations/CategoriesService";
-import { Navigate, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 
 type FormData = {
   name: string;
@@ -71,9 +71,6 @@ export const AddProductPage = () => {
             <label className="control-label">Категория</label>
             <Form.Select id="categoryId" {...register('category', { required: true })}>
               <option unselectable="on">Выберите категорию</option>
-              {/* <option>
-                <input type="text"></input>
-              </option> */}
               {categoriesLoading ? (
                 <option>Загрузка...</option>
               ) : (
