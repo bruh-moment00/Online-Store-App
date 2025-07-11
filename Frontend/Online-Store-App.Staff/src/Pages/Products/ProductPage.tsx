@@ -2,11 +2,11 @@ import React from "react";
 
 import { Page } from "../../LayoutComponents/Page";
 
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 import { type Product } from "../../../../Online-Store-App.Commonlib/src/Models/Data/Product";
 import { BackButton } from "../../Components/BackButton";
-import { getProductById } from "../../../../Online-Store-App.Commonlib/src/Services/DataOperations/ProductsService";
+import { deleteProduct, getProductById } from "../../../../Online-Store-App.Commonlib/src/Services/DataOperations/ProductsService";
 import { type Category } from "../../../../Online-Store-App.Commonlib/src/Models/Data/Category";
 import { getCategoryById } from "../../../../Online-Store-App.Commonlib/src/Services/DataOperations/CategoriesService";
 import { Button } from "react-bootstrap";
@@ -24,6 +24,17 @@ export const ProductPage = () => {
   const [imagesRetrieving, setImagesRetrieving] = React.useState(true);
 
   const { productId } = useParams();
+
+  const navigate = useNavigate();
+
+  const handleDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
+    if (product && confirm("Точно удалить данный товар?")) {
+      const result = deleteProduct(product.id);
+      if (result != null) {
+        navigate("/products")
+      }      
+    }
+  }
 
   React.useEffect(() => {
     let cancelled = false;
@@ -72,8 +83,9 @@ export const ProductPage = () => {
         </div>
         <div className="col-sm-6">
           <Link to="edit">
-          <Button>Редактировать</Button>
+            <Button>Редактировать</Button>
           </Link>
+          <Button variant="danger" onClick={handleDelete}>Удалить</Button>
         </div>
         <div className="col-sm-6">
           <BackButton />
