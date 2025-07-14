@@ -12,7 +12,7 @@ import { getCategoryById } from "../../../../Online-Store-App.Commonlib/src/Serv
 import { Button } from "react-bootstrap";
 import { getPropertiesViewByProductId } from "../../../../Online-Store-App.Commonlib/src/Services/DataOperations/PropertiesService";
 import { type PropertyView } from "../../../../Online-Store-App.Commonlib/src/Models/ViewModels/PropertyView";
-import { PropertiesList } from "../../Components/PropertiesList";
+import { PropertiesList } from "../../Components/Properties/PropertiesList";
 import { getImagesURLByProductId } from "../../../../Online-Store-App.Commonlib/src/Services/DataOperations/ProductImagesService";
 import { ImagesCarousel } from "../../Components/ImagesCarousel";
 

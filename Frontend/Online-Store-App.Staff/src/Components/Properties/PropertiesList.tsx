@@ -1,5 +1,5 @@
 import { Table } from "react-bootstrap";
-import type { PropertyView } from "../../../Online-Store-App.Commonlib/src/Models/ViewModels/PropertyView";
+import type { PropertyView } from "../../../../Online-Store-App.Commonlib/src/Models/ViewModels/PropertyView";
 
 interface Props {
   data: PropertyView[] | undefined;

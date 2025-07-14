@@ -1,4 +1,4 @@
-import { type Product } from "../../../Online-Store-App.Commonlib/src/Models/Data/Product";
+import { type Product } from "../../../../Online-Store-App.Commonlib/src/Models/Data/Product";
 import { Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
@@ -25,11 +25,6 @@ export const ProductList = ({ data }: Props) => (
               <Link to={`/products/${product.id}`}>
                 {product.name}
                 <br />
-                {/* {product.image ? (
-                  <img src={product.image} height="150" alt="" />
-                ) : (
-                  ""
-                )} */}
               </Link>
             </td>
             <td>{product.price}</td>
