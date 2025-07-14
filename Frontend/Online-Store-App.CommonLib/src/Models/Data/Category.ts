@@ -7,3 +7,8 @@ export interface Category extends BaseEntity {
 export interface CategoryForPost {
     name: string;
 }
+
+export interface CategoryForPut {
+    id: number;
+    name: string;
+}
