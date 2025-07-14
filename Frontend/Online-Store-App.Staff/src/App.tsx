@@ -14,6 +14,7 @@ import { LoginPage } from "./Pages/LoginPage";
 import AuthLayout from "./Routing/AuthLayout";
 import { EditProductPage } from "./Pages/Products/EditProductPage";
 import { Container } from "react-bootstrap";
+import { CategoriesListPage } from "./Pages/Categories/CategoriesListPage";
 // import { ProfilePage } from "./Pages/ProfilePage";
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
             <Route path="products/:productId" element={<ProductPage />} />
             <Route path="products/:productId/edit" element={<EditProductPage />} />
             <Route path="products/create" element={<AddProductPage />} />
+            <Route path="categories" element={<CategoriesListPage />} />
           </Route>
           {/* <Route path="Profile" element={<ProfilePage />} /> */}
         </Routes>

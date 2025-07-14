@@ -14,10 +14,10 @@ export const MainPage = () => {
           </Link>
         </div>
         <div className="col-xs-12 col-sm-12 col-md-4">
-          <Link to="/">
+          <Link to="/categories">
             <div className="floating-block transition">
-              <h4>Склад</h4>
-              <p>Просмотр и добавление списка товаров на складе</p>
+              <h4>Категории</h4>
+              <p>Управление категориями</p>
             </div>
           </Link>
         </div>
