@@ -1,0 +1,1 @@
+export const PropValueTypeName: string[] = ["Строка", "Целое число", "Вещественное число", "Есть/Нет"] 
