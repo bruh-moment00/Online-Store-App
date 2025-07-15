@@ -59,7 +59,6 @@ export const CategoryPage = () => {
           <dl className="row">
             <dt className="col-sm-2">Наименование</dt>
             <dd className="col-sm-10">{category?.name}</dd>
-            <h6>Характеристики товаров в категории</h6>
             {!(properties && properties?.length > 0) ? <></> : <CategoryPropertiesList data={properties} /> }
           </dl>
         </div>

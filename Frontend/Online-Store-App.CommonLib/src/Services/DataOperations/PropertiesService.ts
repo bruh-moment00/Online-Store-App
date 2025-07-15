@@ -47,7 +47,7 @@ export const putProperty = async (
     property: PropertyForPut
 ): Promise<boolean | undefined> => {
     const result = await http<boolean, PropertyForPut>({
-        path: "properties",
+        path: `properties/${property.id}`,
         method: "put",
         body: property
     });

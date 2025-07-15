@@ -1,5 +1,6 @@
 import { Table } from "react-bootstrap";
 import type { Property } from "../../../../Online-Store-App.Commonlib/src/Models/Data/Property";
+import { PropValueTypeName } from "../../../../Online-Store-App.CommonLib/src/EnumStrings/PropValueType";
 
 interface Props {
   data: Property[] | undefined;
@@ -10,15 +11,15 @@ export const CategoryPropertiesList = ({ data }: Props) => (
     <Table>
       <thead>
         <tr>
-          <th>Характеристики</th>
-          <th></th>
+          <th>Характеристики товаров в категории</th>
+          <th>Тип значения</th>
         </tr>
       </thead>
       <tbody>
         {data!.map((property) => (
           <tr key={property.id}>
             <td>{property.propName}</td>
-            <td>{property.valueType}</td>
+            <td>{PropValueTypeName[property.valueType]}</td>
           </tr>
         ))}
       </tbody>

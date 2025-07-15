@@ -1,20 +1,20 @@
 import { type BaseEntity } from "./Base/BaseEntity";
 
 export interface Property extends BaseEntity {
-    categoryId: number;
+    categoryID: number;
     propName: string;
     valueType: number;
 }
 
 export interface PropertyForPost {
     categoryID: number;
-    propName: String;
+    propName: string;
     valueType: number;
 }
 
 export interface PropertyForPut {
     id: number
     categoryID: number;
-    propName: String;
+    propName: string;
     valueType: number;
 }
