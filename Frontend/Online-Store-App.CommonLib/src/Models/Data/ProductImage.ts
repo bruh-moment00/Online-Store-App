@@ -1,6 +1,6 @@
 import { type BaseEntity } from "./Base/BaseEntity";
 
 export interface OrderedProduct extends BaseEntity {
-    ImageAddress: string;
-    ProductID: number;
+    imageAddress: string;
+    productID: number;
 }

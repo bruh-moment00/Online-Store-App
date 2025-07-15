@@ -1,11 +1,11 @@
 import { type ConnectEntity } from "./Base/ConnectEntity";
 
 export interface OrderedProduct extends ConnectEntity {
-    OrderID: number;
-    ProductID: number;
+    orderID: number;
+    productID: number;
 }
 
 export interface OrderedProductForPost {
-    OrderID: number;
-    ProductID: number;
+    orderID: number;
+    productID: number;
 }
