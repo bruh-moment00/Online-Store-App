@@ -45,7 +45,7 @@ export const putCategory = async (
     category: CategoryForPut
 ): Promise<boolean | undefined> => {
     const result = await http<boolean, CategoryForPut>({
-        path: "categories",
+        path: `categories/${category.id}`,
         method: "put",
         body: category
     });
