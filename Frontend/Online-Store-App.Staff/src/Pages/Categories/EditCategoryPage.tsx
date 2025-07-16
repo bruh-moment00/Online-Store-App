@@ -42,7 +42,7 @@ export const EditCategoryPage = () => {
         <div>
             {category ? <EditCategoryForm category={category} /> : <></>}  
             <h4>Характеристики</h4>
-            {(properties) ? <EditCategoryPropertiesForm properties={properties} /> : <></>}         
+            {(properties) ? <EditCategoryPropertiesForm categoryId={category!.id} properties={properties} /> : <></>}         
         </div>
     </Page>
 )
