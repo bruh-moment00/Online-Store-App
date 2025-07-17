@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
+using System.Web;
 using Microsoft.AspNetCore.Mvc;
 using Online_Store_Backend.Domain.Products.Dto;
 using Online_Store_Backend.Domain.Products.Services.Interfaces;
@@ -66,6 +65,52 @@ namespace Online_Store_Backend.Controllers
             }
 
             return NotFound("No images found for this product");
+        }
+
+        [Authorize]
+        [HttpPut]
+        public async Task<IActionResult> RenameImage(string address, string newName)
+        {
+            string fileName = environment.WebRootPath + '\\' + address.Replace('/', '\\');
+            if (System.IO.File.Exists(fileName))
+            {
+                bool resultOk = false;
+                await Task.Run(() =>
+                {
+                    string? path = Path.GetDirectoryName(fileName);
+                    string ext = Path.GetExtension(fileName);   
+                    try
+                    {
+                        System.IO.File.Move(fileName, path + "\\" + newName + ext);
+                        resultOk = true;
+                    } 
+                    catch (IOException ex)
+                    {
+                        resultOk = false;
+                    }
+                    
+                });
+                return resultOk ? Ok(true) : BadRequest("Cannot rename file");
+                
+            }
+            return BadRequest("File not exist");
+        }
+
+        [Authorize]
+        [HttpDelete]
+        public async Task<IActionResult> DeleteImage(string address)
+        {
+            string fileName = environment.WebRootPath + '\\' + address.Replace('/', '\\');
+            if (System.IO.File.Exists(fileName))
+            {
+                await Task.Run(() =>
+                {
+                    System.IO.File.Delete(fileName);
+                });
+                return Ok(true);
+            }
+
+            return BadRequest("File not exist");
         }
     }
 }
