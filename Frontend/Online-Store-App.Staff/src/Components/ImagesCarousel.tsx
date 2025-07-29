@@ -1,5 +1,5 @@
 import { Carousel } from "react-bootstrap"
-import { server } from "../../../Online-Store-App.Commonlib/src/AppSettings";
+import { server } from "commonlib/src/AppSettings";
 
 interface Props {
     data: string[] | undefined

@@ -1,6 +1,6 @@
 import { Table } from "react-bootstrap";
-import type { Property } from "../../../../Online-Store-App.Commonlib/src/Models/Data/Property";
-import { PropValueTypeName } from "../../../../Online-Store-App.CommonLib/src/EnumStrings/PropValueType";
+import type { Property } from "commonlib/src/Models/Data/Property";
+import { PropValueTypeName } from "commonlib/src/EnumStrings/PropValueType";
 
 interface Props {
   data: Property[] | undefined;

@@ -1,10 +1,10 @@
 import React from "react";
 import { Page } from "../../LayoutComponents/Page"
 import { createSearchParams, useParams } from "react-router-dom";
-import { getProperties } from "../../../../Online-Store-App.Commonlib/src/Services/DataOperations/PropertiesService";
-import type { Property } from "../../../../Online-Store-App.Commonlib/src/Models/Data/Property";
-import type { Category } from "../../../../Online-Store-App.Commonlib/src/Models/Data/Category";
-import { getCategoryById } from "../../../../Online-Store-App.Commonlib/src/Services/DataOperations/CategoriesService";
+import { getProperties } from "commonlib/src/Services/DataOperations/PropertiesService";
+import type { Property } from "commonlib/src/Models/Data/Property";
+import type { Category } from "commonlib/src/Models/Data/Category";
+import { getCategoryById } from "commonlib/src/Services/DataOperations/CategoriesService";
 import { EditCategoryForm } from "../../Components/Categories/EditCategoryForm";
 import { EditCategoryPropertiesForm } from "../../Components/Categories/EditCategoryPropertiesForm";
 

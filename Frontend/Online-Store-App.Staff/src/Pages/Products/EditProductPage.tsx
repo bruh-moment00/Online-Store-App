@@ -1,15 +1,12 @@
 import React from "react";
-import type { Product } from "../../../../Online-Store-App.Commonlib/src/Models/Data/Product";
+import type { Product } from "commonlib/src/Models/Data/Product";
 import { Page } from "../../LayoutComponents/Page"
-import type { Category } from "../../../../Online-Store-App.Commonlib/src/Models/Data/Category";
 import { createSearchParams, useParams } from "react-router-dom";
-import { getCategoryById } from "../../../../Online-Store-App.Commonlib/src/Services/DataOperations/CategoriesService";
-import { getImagesURLByProductId } from "../../../../Online-Store-App.Commonlib/src/Services/DataOperations/ProductImagesService";
-import { getProductById } from "../../../../Online-Store-App.Commonlib/src/Services/DataOperations/ProductsService";
-import { getProperties, getPropertiesViewByProductId } from "../../../../Online-Store-App.Commonlib/src/Services/DataOperations/PropertiesService";
-import type { Property } from "../../../../Online-Store-App.Commonlib/src/Models/Data/Property";
-import type { ProductPropValue } from "../../../../Online-Store-App.Commonlib/src/Models/Data/ProductPropValue";
-import { useForm } from "react-hook-form";
+import { getImagesURLByProductId } from "commonlib/src/Services/DataOperations/ProductImagesService";
+import { getProductById } from "commonlib/src/Services/DataOperations/ProductsService";
+import { getProperties, getPropertiesViewByProductId, getPropertyValueById, getPropertyValues } from "commonlib/src/Services/DataOperations/PropertiesService";
+import type { Property } from "commonlib/src/Models/Data/Property";
+import type { ProductPropValue } from "commonlib/src/Models/Data/ProductPropValue";
 import { EditProductForm } from "../../Components/Products/EditProductForm";
 
 type FormPropertiesValuesData = {

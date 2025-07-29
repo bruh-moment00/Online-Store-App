@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 
 import { Container, Navbar, Nav, NavDropdown, Button, } from "react-bootstrap";
-import { logout } from "../../../Online-Store-App.Commonlib/src/Services/AuthService";
+import { logout } from "commonlib/src/Services/AuthService";
 
 export const Header = () => {
   const navigate = useNavigate();

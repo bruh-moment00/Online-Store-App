@@ -13,6 +13,7 @@
     "@uidotdev/usehooks": "^2.4.1",
     "axios": "^1.10.0",
     "bootstrap": "^5.3.7",
+    "commonlib": "file:../Online-Store-App.CommonLib",
     "history": "^5.3.0",
     "react": "^19.1.0",
     "react-bootstrap": "^2.10.10",

@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 
 import { useNavigate } from "react-router-dom";
 import type { AxiosError } from "axios";
-import { login } from "../../../Online-Store-App.Commonlib/src/Services/AuthService";
+import { login } from "commonlib/src/Services/AuthService";
 
 type FormData = {
   email: string;

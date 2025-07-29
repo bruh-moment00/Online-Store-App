@@ -1,9 +1,9 @@
 import { useForm } from "react-hook-form";
-import type { Property } from "../../../../Online-Store-App.Commonlib/src/Models/Data/Property";
+import type { Property } from "commonlib/src/Models/Data/Property";
 import React from "react";
 import { Button, Form, FormGroup } from "react-bootstrap";
-import { PropValueTypeName } from "../../../../Online-Store-App.CommonLib/src/EnumStrings/PropValueType";
-import { deleteProperty, getPropertyById, postProperty, putProperty } from "../../../../Online-Store-App.Commonlib/src/Services/DataOperations/PropertiesService";
+import { PropValueTypeName } from "commonlib/src/EnumStrings/PropValueType";
+import { deleteProperty, getPropertyById, postProperty, putProperty } from "commonlib/src/Services/DataOperations/PropertiesService";
 
 type FormData = {
     id: number;

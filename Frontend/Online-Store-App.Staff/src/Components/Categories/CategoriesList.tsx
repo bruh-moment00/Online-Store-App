@@ -1,6 +1,6 @@
 import { Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import type { Category } from "../../../../Online-Store-App.Commonlib/src/Models/Data/Category";
+import type { Category } from "commonlib/src/Models/Data/Category";
 
 interface Props {
   data: Category[] | undefined;

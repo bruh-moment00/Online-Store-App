@@ -2,8 +2,8 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { Button, Form, FormGroup } from "react-bootstrap";
 import { BackButton } from "../BackButton";
-import { putCategory } from "../../../../Online-Store-App.Commonlib/src/Services/DataOperations/CategoriesService";
-import type { Category } from "../../../../Online-Store-App.Commonlib/src/Models/Data/Category";
+import { putCategory } from "commonlib/src/Services/DataOperations/CategoriesService";
+import type { Category } from "commonlib/src/Models/Data/Category";
 
 type FormData = {
     name: string;

@@ -2,14 +2,14 @@ import React from "react";
 import { Page } from "../../LayoutComponents/Page";
 
 import { useForm } from "react-hook-form";
-import { postProduct } from "../../../../Online-Store-App.Commonlib/src/Services/DataOperations/ProductsService";
+import { postProduct } from "commonlib/src/Services/DataOperations/ProductsService";
 import {
   Form,
   FormGroup,
   Button,
 } from "react-bootstrap";
-import { type Category } from "../../../../Online-Store-App.Commonlib/src/Models/Data/Category";
-import { getCategories } from "../../../../Online-Store-App.Commonlib/src/Services/DataOperations/CategoriesService";
+import { type Category } from "commonlib/src/Models/Data/Category";
+import { getCategories } from "commonlib/src/Services/DataOperations/CategoriesService";
 import { useNavigate } from "react-router";
 
 type FormData = {
@@ -95,6 +95,7 @@ export const AddProductPage = () => {
           <FormGroup>
             <Button type="submit">Добавить</Button>
           </FormGroup>
+          {successfullySubmitted ? <text>Добавлено успешно, перенаправление...</text> : <></>}
         </fieldset>
       </form>
     </Page>

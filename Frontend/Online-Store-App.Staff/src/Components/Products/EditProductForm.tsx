@@ -1,9 +1,9 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import type { Product } from "../../../../Online-Store-App.Commonlib/src/Models/Data/Product";
+import type { Product } from "commonlib/src/Models/Data/Product";
 import { Button, Form, FormGroup } from "react-bootstrap";
 import { BackButton } from "../BackButton";
-import { putProduct } from "../../../../Online-Store-App.Commonlib/src/Services/DataOperations/ProductsService";
+import { putProduct } from "commonlib/src/Services/DataOperations/ProductsService";
 
 type FormData = {
     name: string;

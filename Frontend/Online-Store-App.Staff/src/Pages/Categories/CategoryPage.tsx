@@ -5,12 +5,12 @@ import { Page } from "../../LayoutComponents/Page";
 import { createSearchParams, Link, useNavigate, useParams } from "react-router-dom";
 
 import { BackButton } from "../../Components/BackButton";
-import { type Category } from "../../../../Online-Store-App.Commonlib/src/Models/Data/Category";
-import { deleteCategory, getCategoryById } from "../../../../Online-Store-App.Commonlib/src/Services/DataOperations/CategoriesService";
+import { type Category } from "commonlib/src/Models/Data/Category";
+import { deleteCategory, getCategoryById } from "commonlib/src/Services/DataOperations/CategoriesService";
 import { Button } from "react-bootstrap";
-import type { Property } from "../../../../Online-Store-App.Commonlib/src/Models/Data/Property";
+import type { Property } from "commonlib/src/Models/Data/Property";
 import { CategoryPropertiesList } from "../../Components/Categories/CategoryProperties";
-import { getProperties } from "../../../../Online-Store-App.Commonlib/src/Services/DataOperations/PropertiesService";
+import { getProperties } from "commonlib/src/Services/DataOperations/PropertiesService";
 
 export const CategoryPage = () => {
   const [category, setCategory] = React.useState<Category | null> (null);

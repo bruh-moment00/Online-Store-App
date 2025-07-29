@@ -3,8 +3,8 @@ import { Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 
 import { Page } from "../../LayoutComponents/Page";
-import { getCategories, postCategory } from "../../../../Online-Store-App.Commonlib/src/Services/DataOperations/CategoriesService";
-import type { Category } from "../../../../Online-Store-App.Commonlib/src/Models/Data/Category";
+import { getCategories, postCategory } from "commonlib/src/Services/DataOperations/CategoriesService";
+import type { Category } from "commonlib/src/Models/Data/Category";
 import { CategoriesList } from "../../Components/Categories/CategoriesList";
 
 export const CategoriesListPage = () => {
