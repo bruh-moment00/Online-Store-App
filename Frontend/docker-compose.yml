@@ -1,0 +1,12 @@
+services:
+  staff:
+    image: staff
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    network_mode: "host"
+    develop:
+      watch:
+        - action: sync
+          path: ./Online-Store-App.Staff
+          target: /app/Online-Store-App.Staff
