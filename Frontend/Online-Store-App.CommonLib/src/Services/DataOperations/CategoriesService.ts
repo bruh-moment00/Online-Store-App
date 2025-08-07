@@ -3,14 +3,14 @@ import type { Category, CategoryForPost, CategoryForPut } from "../../Models/Dat
 
 export const getCategoryById = async (
     categoryId: number
-): Promise<Category | null> => {
+): Promise<Category | undefined> => {
     const result = await http<Category>({
         path: `categories/${categoryId}`
     });
     if (result.ok && result.body){
         return result.body;
     } else {
-        return null;
+        return undefined;
     }
 }
 
@@ -59,7 +59,7 @@ export const putCategory = async (
 
 export const deleteCategory = async (
     categoryId: number
-): Promise<number | null> => {
+): Promise<number | undefined> => {
     const result = await http<number>({
         path: `categories/${categoryId}`,
         method: "delete"
@@ -67,6 +67,6 @@ export const deleteCategory = async (
     if (result.ok && result.body){
         return result.body;
     } else {
-        return null;
+        return undefined;
     }
 }

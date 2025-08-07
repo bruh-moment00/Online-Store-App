@@ -17,8 +17,8 @@ import { getImagesURLByProductId } from "commonlib/src/Services/DataOperations/P
 import { ImagesCarousel } from "../../Components/ImagesCarousel";
 
 export const ProductPage = () => {
-  const [product, setProduct] = React.useState<Product | null>(null);
-  const [category, setCategory] = React.useState<Category | null> (null);
+  const [product, setProduct] = React.useState<Product | undefined>(undefined);
+  const [category, setCategory] = React.useState<Category | undefined> (undefined);
   const [properties, setProperties] = React.useState<PropertyView[] | undefined> (undefined);
   const [imagesURLs, setImagesURLs] = React.useState<string[] | undefined>(undefined);
   const [imagesRetrieving, setImagesRetrieving] = React.useState(true);

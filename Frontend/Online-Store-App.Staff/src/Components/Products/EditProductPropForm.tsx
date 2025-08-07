@@ -75,7 +75,7 @@ export const EditProductPropForm = ({ property, productId, propertyValue }: Prop
                             {...register('value')}>
                         </Form.Control>
                         <Button type="submit">Сохранить</Button>
-                        {successfullySubmitted ? <text>Сохранено успешно</text> : <></>}
+                        {successfullySubmitted ? <b>Сохранено успешно</b> : <></>}
                     </FormGroup>
                 </fieldset>
             </form>

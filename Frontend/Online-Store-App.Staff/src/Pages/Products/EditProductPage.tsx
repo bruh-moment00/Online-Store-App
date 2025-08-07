@@ -1,7 +1,7 @@
 import React from "react";
 import type { Product } from "commonlib/src/Models/Data/Product";
 import { Page } from "../../LayoutComponents/Page"
-import { createSearchParams, useParams } from "react-router-dom";
+import { createSearchParams, Link, useParams } from "react-router-dom";
 import { getImagesURLByProductId } from "commonlib/src/Services/DataOperations/ProductImagesService";
 import { getProductById } from "commonlib/src/Services/DataOperations/ProductsService";
 import { getProperties, getPropertyValues } from "commonlib/src/Services/DataOperations/PropertiesService";
@@ -9,11 +9,10 @@ import type { Property } from "commonlib/src/Models/Data/Property";
 import type { ProductPropValue } from "commonlib/src/Models/Data/ProductPropValue";
 import { EditProductForm } from "../../Components/Products/EditProductForm";
 import { EditProductPropertiesForm } from "../../Components/Products/EditProductPropertiesForm";
-import type { Category } from "commonlib/src/Models/Data/Category";
+import { Button } from "react-bootstrap";
 
 export const EditProductPage = () => {
-    const [product, setProduct] = React.useState<Product | null>(null);
-    const [category, setCategory] = React.useState<Category | null> (null);
+    const [product, setProduct] = React.useState<Product | undefined>(undefined);
     const [properties, setProperties] = React.useState<Property[] | undefined> (undefined);
     const [propertiesValues, setPropertiesValues] = React.useState<ProductPropValue[] | undefined> (undefined);
     const [imagesURLs, setImagesURLs] = React.useState<string[] | undefined>(undefined);
@@ -50,9 +49,14 @@ export const EditProductPage = () => {
     }, [productId]);
     
     return (
-    <Page title="Редактирование">
+    <Page title="Редактирование товара">
         <div>
-            {product ? <EditProductForm product={product} /> : <></>}  
+            {product ? <EditProductForm product={product} /> : <></>}
+            <hr/>
+            <Link to={"images"}>
+                <Button variant="outline-primary">Загрузка изображений</Button>
+            </Link>
+            <hr/>
             <h4>Характеристики</h4>
             {(properties && propertiesValues) ? <EditProductPropertiesForm properties={properties} values={propertiesValues} productId={product!.id}/> : <></>}         
         </div>

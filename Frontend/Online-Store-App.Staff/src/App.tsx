@@ -17,6 +17,7 @@ import { Container } from "react-bootstrap";
 import { CategoriesListPage } from "./Pages/Categories/CategoriesListPage";
 import { CategoryPage } from "./Pages/Categories/CategoryPage";
 import { EditCategoryPage } from "./Pages/Categories/EditCategoryPage";
+import { EditProductImagesPage } from "./Pages/Products/EditProductImagesPage";
 // import { ProfilePage } from "./Pages/ProfilePage";
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
             <Route path="products" element={<ProductsListPage />} />
             <Route path="products/:productId" element={<ProductPage />} />
             <Route path="products/:productId/edit" element={<EditProductPage />} />
+            <Route path="products/:productId/edit/images" element={<EditProductImagesPage />} />
             <Route path="products/create" element={<AddProductPage />} />
             <Route path="categories" element={<CategoriesListPage />} />
             <Route path="categories/:categoryId" element={<CategoryPage />} />

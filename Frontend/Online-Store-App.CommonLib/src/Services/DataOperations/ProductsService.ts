@@ -3,14 +3,14 @@ import type { Product, ProductDataWithPaging, ProductForPost, ProductForPut } fr
 
 export const getProductById = async (
     productId: number
-): Promise<Product | null> => {
+): Promise<Product | undefined> => {
     const result = await http<Product>({
         path: `products/${productId}`
     });
     if (result.ok && result.body){
         return result.body;
     } else {
-        return null;
+        return undefined;
     }
 }
 

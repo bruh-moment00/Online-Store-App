@@ -29,6 +29,7 @@ export const EditProductForm = ({ product }: Props) => {
             price: data.price
         });
         setSuccessfullySubmitted(result !== undefined);
+        setTimeout(() => setSuccessfullySubmitted(false), 1000)
     }
 
     return (
@@ -49,6 +50,7 @@ export const EditProductForm = ({ product }: Props) => {
                 <FormGroup>
                     <Button type="submit">Сохранить</Button>
                     <BackButton />
+                    {successfullySubmitted ? <b>Сохранено успешно</b> : <></>}
                 </FormGroup>
             </fieldset>
         </form>
