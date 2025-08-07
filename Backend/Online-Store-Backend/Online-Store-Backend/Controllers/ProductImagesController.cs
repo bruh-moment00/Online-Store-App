@@ -21,22 +21,22 @@ namespace Online_Store_Backend.Controllers
 
         [Authorize(Roles = "employee")]
         [HttpPost]
-        public async Task<IActionResult> UploadImage([FromBody] IFormFile image, long productID)
+        public async Task<IActionResult> UploadImage([FromForm] ImageDto image)
         {
-            string path = environment.WebRootPath + "\\images\\products\\" + productID;
+            string path = environment.WebRootPath + "\\images\\products\\" + image.ProductId;
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
             }
 
-            using (FileStream fileStream = System.IO.File.Create($"{path}\\{image.FileName}"))
+            using (FileStream fileStream = System.IO.File.Create($"{path}\\{image.File.FileName}"))
             {
-                await image.CopyToAsync(fileStream);
+                await image.File.CopyToAsync(fileStream);
                 fileStream.Flush();
                 ProductImageDto productImage = new ProductImageDto
                 {
-                    ImageAddress = $"images/products/{productID}/{image.FileName}",
-                    ProductID = productID,
+                    ImageAddress = $"images/products/{image.ProductId}/{image.File.FileName}",
+                    ProductID = image.ProductId,
                 };
 
                 var imageId = await productImageService.InsertProductImage(productImage);
@@ -69,7 +69,7 @@ namespace Online_Store_Backend.Controllers
 
         [Authorize]
         [HttpPut]
-        public async Task<IActionResult> RenameImage(string address, string newName)
+        public async Task<IActionResult> RenameImage([FromBody] string address, [FromQuery] string newName)
         {
             string fileName = environment.WebRootPath + '\\' + address.Replace('/', '\\');
             if (System.IO.File.Exists(fileName))
@@ -98,7 +98,7 @@ namespace Online_Store_Backend.Controllers
 
         [Authorize]
         [HttpDelete]
-        public async Task<IActionResult> DeleteImage(string address)
+        public async Task<IActionResult> DeleteImage([FromBody] string address)
         {
             string fileName = environment.WebRootPath + '\\' + address.Replace('/', '\\');
             if (System.IO.File.Exists(fileName))
