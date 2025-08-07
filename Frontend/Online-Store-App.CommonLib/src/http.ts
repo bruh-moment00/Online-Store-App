@@ -1,3 +1,4 @@
+import axios from "axios";
 import { webAPIUrl } from "./AppSettings";
 import authHeader from "./Services/AuthHeader";
 
@@ -13,14 +14,15 @@ export interface HttpResponse<RESB> {
 }
 
 export const http = async <RESB, REQB = undefined>(
-  config: HttpRequest<REQB>
+  config: HttpRequest<REQB>,
+  formData: FormData | undefined = undefined
 ): Promise<HttpResponse<RESB>> => {
   const request = new Request(`${webAPIUrl}/${config.path}`, {
     method: config.method || "get",
-    headers: {
+    headers: formData ? { } : {
       "Content-Type": "application/json",
     },
-    body: config.body ? JSON.stringify(config.body) : undefined,
+    body: formData ? formData : (config.body ? JSON.stringify(config.body) : undefined),
   });
 
   const accessToken = authHeader();
@@ -37,3 +39,4 @@ export const http = async <RESB, REQB = undefined>(
     return { ok: response.ok };
   }
 };
+
