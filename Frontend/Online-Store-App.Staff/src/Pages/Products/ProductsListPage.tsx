@@ -1,20 +1,25 @@
-import React from "react";
+import React, { type ChangeEventHandler, type SyntheticEvent } from "react";
 
-import { Nav, Button } from "react-bootstrap";
+import { Nav, Button, Form } from "react-bootstrap";
 
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 
 import { type ProductDataWithPaging } from "commonlib/src/Models/Data/Product";
 import { getProducts } from "commonlib/src/Services/DataOperations/ProductsService";
 import { Page } from "../../LayoutComponents/Page";
 import { ProductList } from "../../Components/Products/ProductsList";
 import { Paging } from "../../Components/Paging";
+import type { Category } from "commonlib/src/Models/Data/Category";
+import { getCategories } from "commonlib/src/Services/DataOperations/CategoriesService";
 
 export const ProductsListPage = () => {
   const [products, setProducts] = React.useState<
     ProductDataWithPaging | undefined
   >();
   const [productsLoading, setProductsLoading] = React.useState(true);
+
+  const [categories, setCategories] = React.useState<Category[] | undefined>();
+  
   const [searchParams] = useSearchParams();
 
   React.useEffect(() => {
@@ -32,6 +37,32 @@ export const ProductsListPage = () => {
     };
   }, [searchParams]);
 
+  React.useEffect(() => {
+      let cancelled = false;
+      const doGetCategories = async () => {
+        const CategoryList = await getCategories();
+        if (!cancelled) {
+          setCategories(CategoryList);
+        }
+      };
+      doGetCategories();
+      return () => {
+        cancelled = true;
+      };
+    }, []);
+
+  const navigate = useNavigate();
+    
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const id = e.currentTarget.value;
+    if (id != "-1")
+      searchParams.set('categoryId', e.currentTarget.value)
+    else
+      searchParams.delete('categoryId');
+
+    navigate(`?${searchParams.toString()}`);
+  }
+    
   return (
     <Page title="Список товаров" tabTitle="Список товаров">
       <Link to="./create">
@@ -41,7 +72,23 @@ export const ProductsListPage = () => {
       {productsLoading ? (
         <div>Загрузка...</div>
       ) : (
-        <ProductList data={products?.items} />
+        <div>
+          <Form.Select  onChange={handleChange}>
+            <option value={-1}>Выберите категорию</option>
+              {!categories ? (
+                <option>Загрузка...</option>
+              ) : (
+                categories!.map((category) => (
+                  <option 
+                    key={category.id} 
+                    value={category.id} selected={searchParams.get("categoryId") == category.id.toString()}>
+                      {category.name}
+                  </option>
+                ))
+              )}
+          </Form.Select>
+          <ProductList data={products?.items} />
+        </div>       
       )}
       {products !== undefined && (
         <Nav>
