@@ -85,7 +85,8 @@ export const ProductPage = () => {
           <Link to="edit">
             <Button>Редактировать</Button>
           </Link>
-          <Button variant="danger" onClick={handleDelete}>Удалить</Button>
+          <br/>
+          <Button variant="danger" onClick={handleDelete} >Удалить</Button>
         </div>
         <div className="col-sm-6">
           <BackButton />
