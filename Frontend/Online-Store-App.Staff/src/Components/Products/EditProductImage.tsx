@@ -43,7 +43,7 @@ export const EditProductImage = ({ imageURL }: Props) => {
             <tbody>
                 <tr>
                     <td>
-                        <img src={server + "/" + imageURL} />
+                        <img src={server + "/" + imageURL} width={500} height={500}/>
                     </td>
                     <td>
                         <h4>{fileName}</h4>
