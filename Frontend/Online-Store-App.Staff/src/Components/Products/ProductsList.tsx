@@ -30,8 +30,7 @@ export const ProductList = ({ data }: Props) => (
             <td>{product.price}</td>
             <td>{product.categoryID}</td>
             <td>
-              Изменить | <Link to={`/products/${product.id}`}>Подробно</Link> |
-              Удалить
+              <Link to={`/products/${product.id}`}>Подробно</Link> | <Link to={`/products/${product.id}/edit`}>Изменить</Link>
             </td>
           </tr>
         ))}
