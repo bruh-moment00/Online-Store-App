@@ -18,7 +18,7 @@ import { CategoriesListPage } from "./Pages/Categories/CategoriesListPage";
 import { CategoryPage } from "./Pages/Categories/CategoryPage";
 import { EditCategoryPage } from "./Pages/Categories/EditCategoryPage";
 import { EditProductImagesPage } from "./Pages/Products/EditProductImagesPage";
-// import { ProfilePage } from "./Pages/ProfilePage";
+import { ProfilePage } from "./Pages/Profile/ProfilePage";
 
 function App() {
   return (
@@ -37,8 +37,8 @@ function App() {
             <Route path="categories" element={<CategoriesListPage />} />
             <Route path="categories/:categoryId" element={<CategoryPage />} />
             <Route path="categories/:categoryId/edit" element={<EditCategoryPage />} />
+            <Route path="Profile" element={<ProfilePage />} />
           </Route>
-          {/* <Route path="Profile" element={<ProfilePage />} /> */}
         </Routes>
         <Footer />
       </Container>

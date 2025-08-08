@@ -32,12 +32,15 @@ export const Header = () => {
                   <Link to="/products">Товары</Link>
                 </NavDropdown.Item>
                 <NavDropdown.Item>
-                  <Link to="/">Склад</Link>
+                  <Link to="/categories">Категории</Link>
                 </NavDropdown.Item>
                 <NavDropdown.Item>
                   <Link to="/">Заказы</Link>
                 </NavDropdown.Item>
               </NavDropdown>
+              <Nav.Link>
+                <Link to="/profile">Профиль</Link>
+              </Nav.Link>
               <Nav.Item>
                 <Button onClick={handleLogout} variant="danger">Выход</Button>
               </Nav.Item>

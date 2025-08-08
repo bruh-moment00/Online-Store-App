@@ -1,10 +1,11 @@
 import axios, { type AxiosResponse } from "axios";
 
 import { webAPIUrl } from "../AppSettings";
-import { type User } from "../Models/Data/User";
-import authHeader from "./AuthHeader";
 
-export const login = (
+import authHeader from "./AuthHeader";
+import { http } from "../http";
+
+export const login = async (
   email: string,
   password: string
 ): Promise<string | undefined> => {
@@ -21,18 +22,28 @@ export const login = (
     });
 };
 
-export const logout = () => {
+export const logout = async () => {
   localStorage.removeItem("token");
 };
 
-export const getCurrentUser = (): Promise<User | undefined> => {
-  return axios
-    .get(webAPIUrl + "/Auth/GetUserData", {
-      headers: {
-        Authorization: authHeader(),
-      },
-    })
-    .then((response: AxiosResponse) => {
-      return response.data as User;
-    });
+export const getCurrentUserId = async (): Promise<number | undefined> => {
+  const result = await http<number>({
+    path: "login/getUserId",
+    method: "post",
+  });
+  if (result.ok)
+    return result.body
+  else 
+    return undefined
+};
+
+export const getCurrentEmployeeId = async (): Promise<number | undefined> => {
+  const result = await http<number>({
+    path: "login/getEmployeeid",
+    method: "post",
+  });
+  if (result.ok)
+    return result.body
+  else 
+    return undefined
 };
