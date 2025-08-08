@@ -20,3 +20,15 @@ export interface EmployeeForPost {
     login: Date;
     password: string;
 } 
+
+export interface EmployeeForPut {
+    id: number;
+    firstName: string;
+    lastName: string;
+    phoneNum: string;
+    email: string;
+    gender: boolean;
+    birthDate: Date;
+    login: Date;
+    password: string;
+} 

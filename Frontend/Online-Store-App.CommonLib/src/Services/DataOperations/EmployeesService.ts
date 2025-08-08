@@ -1,5 +1,5 @@
 import { http } from "../../http";
-import type { Employee, EmployeeForPost } from "../../Models/Data/Employee";
+import type { Employee, EmployeeForPost, EmployeeForPut } from "../../Models/Data/Employee";
 
 export const getEmployeeById = async (
     employeeId: number
@@ -27,5 +27,35 @@ export const postEmployee = async (
     }
     else {
         return undefined;
+    }
+}
+
+export const putEmployee = async (
+    employee: EmployeeForPut
+): Promise<boolean | undefined> => {
+    const result = await http<boolean, EmployeeForPut>({
+        path: `employees/${employee.id}`,
+        method: "put",
+        body: employee
+    });
+    if (result.ok && result.body) {
+        return result.body;
+    }
+    else {
+        return false;
+    }
+}
+
+export const deleteEmployee = async (
+    employeeId: number
+): Promise<number | null> => {
+    const result = await http<number>({
+        path: `employees/${employeeId}`,
+        method: "delete"
+    });
+    if (result.ok && result.body){
+        return result.body;
+    } else {
+        return null;
     }
 }
