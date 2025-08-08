@@ -79,5 +79,29 @@ namespace Online_Store_Backend.Controllers
             var isValid = await userAuthService.ValidateEmployeeTokenAsync(token);
             return Ok(isValid);
         }
+
+        [Authorize(Roles = "employee")]
+        [HttpPost("getEmployeeId")]
+        public IActionResult GetEmployeeId()
+        {
+            var userIdClaim = HttpContext.User.FindFirst("id");
+
+            if (userIdClaim == null)
+                return BadRequest("User ID not found");
+            else
+                return Ok(Convert.ToInt64(userIdClaim.Value));
+        }
+
+        [Authorize(Roles = "user")]
+        [HttpPost("getUserId")]
+        public IActionResult GetUserId()
+        {
+            var userIdClaim = HttpContext.User.FindFirst("id");
+
+            if (userIdClaim == null)
+                return BadRequest("User ID not found");
+            else 
+                return Ok(Convert.ToInt64(userIdClaim.Value));
+        }
     }
 }
