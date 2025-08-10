@@ -62,6 +62,15 @@ export const ProductsListPage = () => {
 
     navigate(`?${searchParams.toString()}`);
   }
+
+  const getCategoryFromParams = (): number => {
+    let result = searchParams.get('categoryId');
+    if (Number(result)) {
+      return Number(result);
+    }
+    else
+      return -1;
+  }
     
   return (
     <Page title="Список товаров" tabTitle="Список товаров">
@@ -73,7 +82,7 @@ export const ProductsListPage = () => {
         <div>Загрузка...</div>
       ) : (
         <div>
-          <Form.Select  onChange={handleChange}>
+          <Form.Select onChange={handleChange} defaultValue={getCategoryFromParams()}>
             <option value={-1}>Выберите категорию</option>
               {!categories ? (
                 <option>Загрузка...</option>
@@ -81,7 +90,7 @@ export const ProductsListPage = () => {
                 categories!.map((category) => (
                   <option 
                     key={category.id} 
-                    value={category.id} selected={searchParams.get("categoryId") == category.id.toString()}>
+                    value={category.id}>
                       {category.name}
                   </option>
                 ))
