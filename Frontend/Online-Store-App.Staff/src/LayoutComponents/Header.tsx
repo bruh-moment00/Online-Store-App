@@ -24,9 +24,7 @@ export const Header = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse>
             <Nav className="me-auto">
-              <Nav.Link>
-                <Link to="/" >На главную</Link>
-              </Nav.Link>
+              <Nav.Link href="/">На главную</Nav.Link>
               <NavDropdown title="Работа с базой">
                 <NavDropdown.Item>
                   <Link to="/products">Товары</Link>
@@ -38,9 +36,7 @@ export const Header = () => {
                   <Link to="/">Заказы</Link>
                 </NavDropdown.Item>
               </NavDropdown>
-              <Nav.Link>
-                <Link to="/profile">Профиль</Link>
-              </Nav.Link>
+              <Nav.Link href="/profile">Профиль</Nav.Link>
               <Nav.Item>
                 <Button onClick={handleLogout} variant="danger">Выход</Button>
               </Nav.Item>
