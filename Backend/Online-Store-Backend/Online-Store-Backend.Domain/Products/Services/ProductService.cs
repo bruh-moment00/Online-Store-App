@@ -3,6 +3,7 @@ using Online_Store_Backend.Core.Data.Repository;
 using Online_Store_Backend.Database.Products.Models;
 using Online_Store_Backend.Domain.Products.Services.Interfaces;
 using Online_Store_Backend.Domain.Pagination;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Online_Store_Backend.Domain.Products.Services
 {
@@ -16,20 +17,37 @@ namespace Online_Store_Backend.Domain.Products.Services
             return entity == null ? null : MapEntityToDto(entity);
         }
 
-        public async Task<PaginationDto<ProductDto>> GetProducts(string? search = null, long? categoryId = null, int pageNumber = 1, int pageSize = 10)
+        public async Task<PaginationDto<ProductDto>> GetProducts(IGetProductsParams @params)
         {
             var entities = await this.productRepository.Filter(x => !x.IsDeleted); 
-            if (categoryId.HasValue)
+            if (@params.CategoryId.HasValue)
             {
-                entities = entities.Where(e => e.CategoryID == categoryId);
+                entities = entities.Where(e => e.CategoryID == @params.CategoryId);
             }
 
-            if (search != null)
+            if (@params.Search != null)
             {
-                entities = entities.Where(e => e.Name.Contains(search, StringComparison.OrdinalIgnoreCase));
+                entities = entities.Where(e => e.Name.Contains(@params.Search, StringComparison.OrdinalIgnoreCase));
             }
 
-            PaginationEntity<Product> paginatedProducts = new PaginationEntity<Product>(entities, pageNumber, pageSize);
+            switch (@params.SortColumn)
+            {
+                case Enums.SortColumnProduct.Name:
+                    if (@params.SortOrder == SortOrder.Ascending)
+                        entities = entities.OrderBy(e => e.Name);
+                    else
+                        entities = entities.OrderByDescending(e => e.Name);
+                    break;
+
+                case Enums.SortColumnProduct.Price:
+                    if (@params.SortOrder == SortOrder.Ascending)
+                        entities = entities.OrderBy(e => e.Price);
+                    else
+                        entities = entities.OrderByDescending(e => e.Price);
+                    break;
+            }
+
+            PaginationEntity<Product> paginatedProducts = new PaginationEntity<Product>(entities, @params.PageNumber, @params.PageSize);
             return new PaginationDto<ProductDto>(paginatedProducts.Items.Select(MapEntityToDto).ToList(), 
                                                  paginatedProducts.TotalCount,
                                                  paginatedProducts.PageNumber,

@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Online_Store_Backend.Domain.Products.Dto;
+using Online_Store_Backend.Domain.Products.Services;
 using Online_Store_Backend.Domain.Products.Services.Interfaces;
+using Online_Store_Backend.Enums;
 
 namespace Online_Store_Backend.Controllers
 {
@@ -30,9 +33,9 @@ namespace Online_Store_Backend.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public async Task<IActionResult> GetProducts(string? search = null, long? categoryId = null, int pageNumber = 1, int pageSize = 10)
-        {
-            var products = await productService.GetProducts(search, categoryId, pageNumber, pageSize);
+        public async Task<IActionResult> GetProducts([FromQuery]GetProductParams getProductsParams)
+        {           
+            var products = await productService.GetProducts(getProductsParams);
             return Ok(products);
         }
 
