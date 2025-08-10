@@ -16,12 +16,17 @@ namespace Online_Store_Backend.Domain.Products.Services
             return entity == null ? null : MapEntityToDto(entity);
         }
 
-        public async Task<PaginationDto<ProductDto>> GetProducts(long? categoryId = null, int pageNumber = 1, int pageSize = 10)
+        public async Task<PaginationDto<ProductDto>> GetProducts(string? search = null, long? categoryId = null, int pageNumber = 1, int pageSize = 10)
         {
             var entities = await this.productRepository.Filter(x => !x.IsDeleted); 
             if (categoryId.HasValue)
             {
-                entities = entities.Where(c => c.CategoryID == categoryId);
+                entities = entities.Where(e => e.CategoryID == categoryId);
+            }
+
+            if (search != null)
+            {
+                entities = entities.Where(e => e.Name.Contains(search, StringComparison.OrdinalIgnoreCase));
             }
 
             PaginationEntity<Product> paginatedProducts = new PaginationEntity<Product>(entities, pageNumber, pageSize);
