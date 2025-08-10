@@ -11,6 +11,7 @@ import { ProductList } from "../../Components/Products/ProductsList";
 import { Paging } from "../../Components/Paging";
 import type { Category } from "commonlib/src/Models/Data/Category";
 import { getCategories } from "commonlib/src/Services/DataOperations/CategoriesService";
+import { SearchBar } from "../../Components/SearchBar";
 
 export const ProductsListPage = () => {
   const [products, setProducts] = React.useState<
@@ -78,6 +79,7 @@ export const ProductsListPage = () => {
         <Button variant="outline-primary">Создать новый товар</Button>
       </Link>
       <hr />
+      <SearchBar />
       {productsLoading ? (
         <div>Загрузка...</div>
       ) : (

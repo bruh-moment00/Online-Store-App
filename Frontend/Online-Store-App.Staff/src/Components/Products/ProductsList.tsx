@@ -13,8 +13,7 @@ export const ProductList = ({ data }: Props) => (
         <tr>
           <th>Наименование</th>
           <th>Цена</th>
-          <th>Производитель</th>
-          <th>Категория</th>
+          <th></th>
           <th></th>
         </tr>
       </thead>
@@ -28,7 +27,6 @@ export const ProductList = ({ data }: Props) => (
               </Link>
             </td>
             <td>{product.price}</td>
-            <td>{product.categoryID}</td>
             <td>
               <Link to={`/products/${product.id}`}>Подробно</Link> | <Link to={`/products/${product.id}/edit`}>Изменить</Link>
             </td>
