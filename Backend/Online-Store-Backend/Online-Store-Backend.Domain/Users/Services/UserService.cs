@@ -1,5 +1,6 @@
 ﻿using Online_Store_Backend.Core.Data.Repository;
 using Online_Store_Backend.Database.Users.Models;
+using Online_Store_Backend.Domain.Authentication.Dto;
 using Online_Store_Backend.Domain.Users.Dto;
 using Online_Store_Backend.Domain.Users.Services.Interfaces;
 
@@ -20,7 +21,7 @@ namespace Online_Store_Backend.Domain.Users.Services
             var users = await userRepository.Filter(x => x.IsActive && !x.IsDeleted);
             return users.Select(EntityToDtoMapping).ToList();
         }
-        public async Task<long> InsertUser(UserDto user)
+        public async Task<long> InsertUser(UserPostDto user)
         {
             var entity = DtoToEntityMapping(user);
             entity.PasswordHash = BCrypt.Net.BCrypt.HashPassword(user.Password);
@@ -29,8 +30,16 @@ namespace Online_Store_Backend.Domain.Users.Services
         public async Task<bool> UpdateUser(UserDto user)
         {
             var entity = DtoToEntityMapping(user);
-            entity.PasswordHash = BCrypt.Net.BCrypt.HashPassword(user.Password);
             return await userRepository.Update(entity) != 0;
+        }
+        public async Task<bool> ChangePassword(PasswordDto passwordDto)
+        {
+            var user = await userRepository.FindById(passwordDto.ID);
+            if (user == null) return false;
+            if (!BCrypt.Net.BCrypt.Verify(passwordDto.OldPassword, user.PasswordHash))
+                return false;
+            user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(passwordDto.NewPassword);
+            return await userRepository.Update(user) != 0;
         }
         public async Task<bool> DeleteUser(long id) => await userRepository.Delete(id);
 
@@ -49,7 +58,6 @@ namespace Online_Store_Backend.Domain.Users.Services
                 BirthDate = user.BirthDate,
                 PhoneNum = user.PhoneNum,
                 Login = user.Login,
-                Password = user.PasswordHash
             };
         }
         private static User DtoToEntityMapping(UserDto user)

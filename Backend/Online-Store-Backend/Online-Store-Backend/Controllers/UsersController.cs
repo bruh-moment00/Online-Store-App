@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Online_Store_Backend.AuthHelpers;
+using Online_Store_Backend.Domain.Authentication.Dto;
+using Online_Store_Backend.Domain.Employees.Services;
 using Online_Store_Backend.Domain.Users.Dto;
 using Online_Store_Backend.Domain.Users.Services.Interfaces;
 
@@ -40,7 +42,7 @@ namespace Online_Store_Backend.Controllers
         }
         [AllowAnonymous]
         [HttpPost]
-        public async Task<IActionResult> CreateUser([FromBody] UserDto user)
+        public async Task<IActionResult> CreateUser([FromBody] UserPostDto user)
         {
             if (user == null)
             {
@@ -63,6 +65,25 @@ namespace Online_Store_Backend.Controllers
                 return NotFound();
             }
             return Ok(updatedUser);
+        }
+        [HttpPut("{id}/password")]
+        [Authorize]
+        public async Task<IActionResult> ChangePassword(long id, [FromBody] PasswordDto passwordDto)
+        {
+            if (HttpContext.User.Claims.FirstOrDefault(c => c.Type == "id")?.Value != id.ToString())
+            {
+                return Forbid("Access denied");
+            }
+            if (passwordDto == null || id != passwordDto.ID)
+            {
+                return BadRequest("Invalid password data.");
+            }
+            var changed = await userService.ChangePassword(passwordDto);
+            if (!changed)
+            {
+                return NotFound();
+            }
+            return Ok();
         }
         [HttpDelete("{id}")]
         [Authorize]

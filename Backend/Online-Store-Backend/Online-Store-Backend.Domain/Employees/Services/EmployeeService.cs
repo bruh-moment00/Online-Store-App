@@ -1,6 +1,7 @@
 ﻿using Online_Store_Backend.Core.Data.Repository;
 using Online_Store_Backend.Database.Employees.Models;
 using Online_Store_Backend.Database.Users.Models;
+using Online_Store_Backend.Domain.Authentication.Dto;
 using Online_Store_Backend.Domain.Employees.Dto;
 using Online_Store_Backend.Domain.Employees.Services.Interfaces;
 using Online_Store_Backend.Domain.Users.Dto;
@@ -27,17 +28,25 @@ namespace Online_Store_Backend.Domain.Employees.Services
             var users = await employeeRepository.Filter(x => x.IsActive && !x.IsDeleted);
             return users.Select(EntityToDtoMapping).ToList();
         }
-        public async Task<long> InsertEmployee(EmployeeDto user)
+        public async Task<long> InsertEmployee(EmployeePostDto user)
         {
             var entity = DtoToEntityMapping(user);
-            entity.PasswordHash = BCrypt.Net.BCrypt.HashPassword(user.PasswordHash);
+            entity.PasswordHash = BCrypt.Net.BCrypt.HashPassword(user.Password);
             return await employeeRepository.Insert(entity);
         }
         public async Task<bool> UpdateEmployee(EmployeeDto user)
         {
             var entity = DtoToEntityMapping(user);
-            entity.PasswordHash = BCrypt.Net.BCrypt.HashPassword(user.PasswordHash);
             return await employeeRepository.Update(entity) != 0;
+        }
+        public async Task<bool> ChangePassword(PasswordDto passwordDto)
+        {
+            var user = await employeeRepository.FindById(passwordDto.ID);
+            if (user == null) return false;
+            if (!BCrypt.Net.BCrypt.Verify(passwordDto.OldPassword, user.PasswordHash))
+                return false;
+            user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(passwordDto.NewPassword);
+            return await employeeRepository.Update(user) != 0;
         }
         public async Task<bool> DeleteEmployee(long id) => await employeeRepository.Delete(id);
 
@@ -56,7 +65,6 @@ namespace Online_Store_Backend.Domain.Employees.Services
                 PhoneNum = user.PhoneNum,
                 Gender = user.Gender,
                 Login = user.Login,
-                PasswordHash = user.PasswordHash
             };
         }
         private static Employee DtoToEntityMapping(EmployeeDto user)
