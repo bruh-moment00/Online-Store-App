@@ -2,7 +2,6 @@ import React from "react";
 import type { Product } from "commonlib/src/Models/Data/Product";
 import { Page } from "../../LayoutComponents/Page"
 import { createSearchParams, Link, useParams } from "react-router-dom";
-import { getImagesURLByProductId } from "commonlib/src/Services/DataOperations/ProductImagesService";
 import { getProductById } from "commonlib/src/Services/DataOperations/ProductsService";
 import { getProperties, getPropertyValues } from "commonlib/src/Services/DataOperations/PropertiesService";
 import type { Property } from "commonlib/src/Models/Data/Property";
@@ -15,8 +14,6 @@ export const EditProductPage = () => {
     const [product, setProduct] = React.useState<Product | undefined>(undefined);
     const [properties, setProperties] = React.useState<Property[] | undefined> (undefined);
     const [propertiesValues, setPropertiesValues] = React.useState<ProductPropValue[] | undefined> (undefined);
-    const [imagesURLs, setImagesURLs] = React.useState<string[] | undefined>(undefined);
-    const [imagesRetrieving, setImagesRetrieving] = React.useState(true);
 
     const { productId } = useParams();
 
@@ -33,9 +30,6 @@ export const EditProductPage = () => {
                     setProperties(foundCategoryProperties);
                     const foundProductPropertiesValues = await getPropertyValues(createSearchParams({productId: [`${foundProduct.id}`]}));
                     setPropertiesValues(foundProductPropertiesValues);
-                    const foundImagesURLs = await getImagesURLByProductId(productId);
-                    setImagesURLs(foundImagesURLs);
-                    setImagesRetrieving(false);
                 }
             }
         };

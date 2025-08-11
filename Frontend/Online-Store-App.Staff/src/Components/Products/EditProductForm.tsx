@@ -36,7 +36,7 @@ export const EditProductForm = ({ product }: Props) => {
         <form onSubmit={handleSubmit(submitForm)}>
             <fieldset>
                 <FormGroup>
-                    <label className="constrol-label">Наименование</label>
+                    <label className="control-label">Наименование</label>
                     <Form.Control id="name" {...register('name', {required: true})} defaultValue={product.name}></Form.Control>
                 </FormGroup>
                 <FormGroup>

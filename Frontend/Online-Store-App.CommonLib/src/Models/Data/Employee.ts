@@ -5,9 +5,9 @@ export interface Employee extends BaseEntity {
     lastName: string;
     phoneNum: string;
     email: string;
-    gender: boolean;
+    gender: boolean | undefined;
     birthDate: Date;
-    login: Date;
+    login: string;
 }
 
 export interface EmployeeForPost {
@@ -15,10 +15,11 @@ export interface EmployeeForPost {
     lastName: string;
     phoneNum: string;
     email: string;
-    gender: boolean;
+    gender: boolean | undefined;
     birthDate: Date;
-    login: Date;
+    login: string;
     password: string;
+    passwordConfirm: string;
 } 
 
 export interface EmployeeForPut {
@@ -27,8 +28,7 @@ export interface EmployeeForPut {
     lastName: string;
     phoneNum: string;
     email: string;
-    gender: boolean;
+    gender: boolean | undefined;
     birthDate: Date;
-    login: Date;
-    password: string;
+    login: string;
 } 

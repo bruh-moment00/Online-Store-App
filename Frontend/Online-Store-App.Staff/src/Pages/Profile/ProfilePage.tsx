@@ -28,7 +28,7 @@ export const ProfilePage = () => {
         return () => {
             cancelled = true;
         };
-    }, [])
+    }, []);
 
     const dateParse = (date: Date) => {
         const dateString = new Date(date).toLocaleDateString();

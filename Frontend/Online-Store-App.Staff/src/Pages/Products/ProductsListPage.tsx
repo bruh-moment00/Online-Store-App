@@ -1,4 +1,4 @@
-import React, { type ChangeEventHandler, type SyntheticEvent } from "react";
+import React from "react";
 
 import { Nav, Button, Form } from "react-bootstrap";
 

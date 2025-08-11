@@ -1,5 +1,6 @@
 import { http } from "../../http";
 import type { Employee, EmployeeForPost, EmployeeForPut } from "../../Models/Data/Employee";
+import { Password } from "../../Models/Data/Password";
 
 export const getEmployeeById = async (
     employeeId: number
@@ -37,6 +38,22 @@ export const putEmployee = async (
         path: `employees/${employee.id}`,
         method: "put",
         body: employee
+    });
+    if (result.ok && result.body) {
+        return result.body;
+    }
+    else {
+        return false;
+    }
+}
+
+export const changePassword = async (
+    password: Password
+): Promise<boolean | undefined> => {
+    const result = await http<boolean, Password>({
+        path: `employees/${password.id}/password`,
+        method: "put",
+        body: password
     });
     if (result.ok && result.body) {
         return result.body;
