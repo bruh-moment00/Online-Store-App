@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { Page } from "../../LayoutComponents/Page";
 import { getCategories, postCategory } from "commonlib/src/Services/DataOperations/CategoriesService";
