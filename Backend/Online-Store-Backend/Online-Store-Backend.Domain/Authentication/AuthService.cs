@@ -33,8 +33,11 @@ namespace Online_Store_Backend.Domain.Authentication
 
         public async Task<string?> ValidateAndGetUserTokenAsync(AuthData userData)
         {
-            var users = await userRepository.Filter(u => u.Email == userData.Email || 
-                u.PhoneNum == userData.PhoneNum || u.Login == userData.Login);
+            IEnumerable<User> users;
+            if (userData.PhoneNum != null) users = await userRepository.Filter(u => u.PhoneNum == userData.PhoneNum);
+            else if (userData.Email != null) users = await userRepository.Filter(u => u.Email == userData.Email);
+            else if (userData.Login != null) users = await userRepository.Filter(u => u.Login == userData.Login);
+            else return null;
             var user = users.FirstOrDefault();
 
             if (user != null)
