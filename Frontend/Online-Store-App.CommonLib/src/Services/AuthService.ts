@@ -1,8 +1,6 @@
-import axios, { type AxiosResponse } from "axios";
+import axios from "axios";
 
 import { webAPIUrl } from "../AppSettings";
-
-import authHeader from "./AuthHeader";
 import { http } from "../http";
 
 export const login = async (
@@ -11,6 +9,27 @@ export const login = async (
 ): Promise<string | undefined> => {
   return axios
     .post(webAPIUrl + "/login/employee", {
+      email: email,
+      password: password,
+    })
+    .then((response) => {
+      if (response.data) {
+        localStorage.setItem("token", JSON.stringify(response.data));
+      }
+      return response.data;
+    });
+};
+
+export const loginUser = async (
+  password: string,
+  email: string | undefined = undefined,
+  phoneNum: string | undefined = undefined,
+  login: string | undefined = undefined
+): Promise<string | undefined> => {
+  return axios
+    .post(webAPIUrl + "/login/user", {
+      phoneNum: phoneNum,
+      login: login,
       email: email,
       password: password,
     })
@@ -39,7 +58,7 @@ export const getCurrentUserId = async (): Promise<number | undefined> => {
 
 export const getCurrentEmployeeId = async (): Promise<number | undefined> => {
   const result = await http<number>({
-    path: "login/getEmployeeid",
+    path: "login/getEmployeeId",
     method: "post",
   });
   if (result.ok)

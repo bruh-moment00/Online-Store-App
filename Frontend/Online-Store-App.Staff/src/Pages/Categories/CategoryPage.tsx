@@ -13,7 +13,7 @@ import { CategoryPropertiesList } from "../../Components/Categories/CategoryProp
 import { getProperties } from "commonlib/src/Services/DataOperations/PropertiesService";
 
 export const CategoryPage = () => {
-  const [category, setCategory] = React.useState<Category | null> (null);
+  const [category, setCategory] = React.useState<Category | undefined> (undefined);
   const [properties, setProperties] = React.useState<Property[] | undefined> (undefined);
 
   const { categoryId } = useParams();
