@@ -20,6 +20,7 @@ import { EditCategoryPage } from "./Pages/Categories/EditCategoryPage";
 import { EditProductImagesPage } from "./Pages/Products/EditProductImagesPage";
 import { ProfilePage } from "./Pages/Profile/ProfilePage";
 import { EditProfilePage } from "./Pages/Profile/EditProfilePage";
+import { EmployeesListPage } from "./Pages/Employees/EmployeesListPage";
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
             <Route path="categories/:categoryId/edit" element={<EditCategoryPage />} />
             <Route path="profile" element={<ProfilePage />} />
             <Route path="profile/edit" element={<EditProfilePage />} />
+            <Route path="employees" element={<EmployeesListPage />} />
           </Route>
         </Routes>
         <Footer />

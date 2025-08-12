@@ -30,7 +30,7 @@ export const MainPage = () => {
           </Link>
         </div>
         <div className="col-xs-12 col-sm-12 col-md-4">
-          <Link to="/">
+          <Link to="/employees">
             <div className="floating-block transition">
               <h4>Список сотрудников</h4>
               <p>

@@ -15,6 +15,16 @@ export const getEmployeeById = async (
     }
 }
 
+export const getEmployees = async (): Promise<Employee[] | undefined> => {
+    const result = await http<Employee[]>({
+        path: "employees"
+    });
+    if (result.ok || result.body)
+        return result.body;
+    else
+        return undefined;
+}
+
 export const postEmployee = async (
     employee: EmployeeForPost
 ): Promise<number | undefined> => {
