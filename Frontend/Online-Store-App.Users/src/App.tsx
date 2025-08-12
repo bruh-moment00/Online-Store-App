@@ -8,6 +8,7 @@ import { Footer } from './Components/Layout/Footer';
 import { MainPage } from './Pages/MainPage';
 import { LoginPage } from './Pages/LoginPage';
 import { RegisterPage } from './Pages/RegisterPage';
+import { ProductsListPage } from './Pages/Products/ProductsListPage';
 
 function App() {
     return (
@@ -18,6 +19,7 @@ function App() {
                     <Route path='' element={<MainPage />} />
                     <Route path='login' element={<LoginPage />} />
                     <Route path='register' element={<RegisterPage />} />
+                    <Route path="products" element={<ProductsListPage />} />
                 </Routes>
                 <Footer/>
             </Container>

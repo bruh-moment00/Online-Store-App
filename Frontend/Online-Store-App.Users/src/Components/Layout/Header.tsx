@@ -27,10 +27,11 @@ export const Header = () => {
                                 <Nav.Item>
                                     <Button onClick={handleLogout} variant="danger">Выход</Button>
                                 </Nav.Item>
-                            : 
+                                : 
                                 <Nav.Link href="/login">
                                     <Button>Войти</Button>
                                 </Nav.Link>}
+                                <Nav.Link href="/cart">Корзина</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
