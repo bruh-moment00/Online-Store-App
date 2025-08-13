@@ -23,15 +23,18 @@ export const Header = () => {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse className="justify-content-end">
                         <Nav className="me-auto">
+                            <Nav.Link href="/cart">Корзина</Nav.Link>
                             {logged ?
+                                <>
+                                <Nav.Link href="/profile">Профиль</Nav.Link>
                                 <Nav.Item>
                                     <Button onClick={handleLogout} variant="danger">Выход</Button>
                                 </Nav.Item>
+                                </>
                                 : 
                                 <Nav.Link href="/login">
                                     <Button>Войти</Button>
                                 </Nav.Link>}
-                                <Nav.Link href="/cart">Корзина</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
