@@ -27,6 +27,19 @@ namespace Online_Store_Backend.Core.Data.Repository
 
             return await this.dbContext.SaveChangesAsync();
         }
+        public async Task<long> SoftUpdate(TEntity entity)
+        {
+            var entry = this.dbContext.Entry(entity);
+            var values = await entry.GetDatabaseValuesAsync();
+            foreach (var property in this.dbContext.Entry(entity).Properties)
+            {
+                if (property.CurrentValue == null)
+                    property.CurrentValue = values[property.Metadata];
+            }
+            entry.State = EntityState.Modified;
+            return await this.dbContext.SaveChangesAsync();
+        }
+
         /// <returns>The <see cref="Task"/>.</returns>
         public async Task<bool> Delete(long id)
         {

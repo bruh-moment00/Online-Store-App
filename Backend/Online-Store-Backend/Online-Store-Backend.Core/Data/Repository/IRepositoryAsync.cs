@@ -13,6 +13,7 @@ namespace Online_Store_Backend.Core.Data.Repository
         Task<TEntity> FindById(long id);
         Task<long> Insert(TEntity entity);
         Task<long> Update(TEntity entity);
+        Task<long> SoftUpdate(TEntity entity);
         Task<bool> Delete(long id);
         Task<IEnumerable<TEntity>> Filter(Expression<Func<TEntity, bool>> predicate);
     }

@@ -30,7 +30,7 @@ namespace Online_Store_Backend.Domain.Users.Services
         public async Task<bool> UpdateUser(UserDto user)
         {
             var entity = DtoToEntityMapping(user);
-            return await userRepository.Update(entity) != 0;
+            return await userRepository.SoftUpdate(entity) != 0;
         }
         public async Task<bool> ChangePassword(PasswordDto passwordDto)
         {
