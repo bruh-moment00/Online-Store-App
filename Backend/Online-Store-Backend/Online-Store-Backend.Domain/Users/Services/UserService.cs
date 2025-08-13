@@ -70,6 +70,7 @@ namespace Online_Store_Backend.Domain.Users.Services
                 Email = user.Email,
                 PhoneNum = user.PhoneNum,
                 Gender = user.Gender,
+                BirthDate = user.BirthDate,
                 Login = user.Login,
             };
         }

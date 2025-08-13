@@ -26,6 +26,7 @@ export const Header = () => {
                             <Nav.Link href="/cart">Корзина</Nav.Link>
                             {logged ?
                                 <>
+                                <Nav.Link href="/orders">Заказы</Nav.Link>
                                 <Nav.Link href="/profile">Профиль</Nav.Link>
                                 <Nav.Item>
                                     <Button onClick={handleLogout} variant="danger">Выход</Button>

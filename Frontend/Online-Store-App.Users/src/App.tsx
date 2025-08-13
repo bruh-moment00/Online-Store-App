@@ -10,6 +10,8 @@ import { LoginPage } from './Pages/LoginPage';
 import { RegisterPage } from './Pages/RegisterPage';
 import { ProductsListPage } from './Pages/Products/ProductsListPage';
 import { ProductPage } from './Pages/Products/ProductPage';
+import { ProfilePage } from './Pages/Profile/ProfilePage';
+import { EditProfilePage } from './Pages/Profile/EditProfilePage';
 
 function App() {
     return (
@@ -22,6 +24,8 @@ function App() {
                     <Route path='register' element={<RegisterPage />} />
                     <Route path="products" element={<ProductsListPage />} />
                     <Route path="products/:productId" element={<ProductPage />} />
+                    <Route path="profile" element={<ProfilePage />} />
+                    <Route path="profile/edit" element={<EditProfilePage />} />
                 </Routes>
                 <Footer/>
             </Container>
