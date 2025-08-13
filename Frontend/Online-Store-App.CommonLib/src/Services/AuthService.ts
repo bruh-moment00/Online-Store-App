@@ -4,11 +4,15 @@ import { webAPIUrl } from "../AppSettings";
 import { http } from "../http";
 
 export const login = async (
-  email: string,
-  password: string
+  password: string,
+  email: string | undefined = undefined,
+  phoneNum: string | undefined = undefined,
+  login: string | undefined = undefined
 ): Promise<string | undefined> => {
   return axios
     .post(webAPIUrl + "/login/employee", {
+      phoneNum: phoneNum,
+      login: login,
       email: email,
       password: password,
     })

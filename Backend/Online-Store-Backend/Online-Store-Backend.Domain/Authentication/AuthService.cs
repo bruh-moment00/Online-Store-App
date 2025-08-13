@@ -5,6 +5,7 @@ using Online_Store_Backend.Core.Data.Repository;
 using Online_Store_Backend.Database.Employees.Models;
 using Online_Store_Backend.Database.Users.Models;
 using Online_Store_Backend.Domain.Authentication.Interfaces;
+using Online_Store_Backend.Domain.Users.Dto;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -71,8 +72,11 @@ namespace Online_Store_Backend.Domain.Authentication
 
         public async Task<string?> ValidateAndGetEmployeeTokenAsync(AuthData employeeData)
         {
-            var employees = await employeeRepository.Filter(u => u.Email == employeeData.Email ||
-                u.PhoneNum == employeeData.PhoneNum || u.Login == employeeData.Login);
+            IEnumerable<Employee> employees;
+            if (employeeData.PhoneNum != null) employees = await employeeRepository.Filter(u => u.PhoneNum == employeeData.PhoneNum);
+            else if (employeeData.Email != null) employees = await employeeRepository.Filter(u => u.Email == employeeData.Email);
+            else if (employeeData.Login != null) employees = await employeeRepository.Filter(u => u.Login == employeeData.Login);
+            else return null;
 
             var employee = employees.FirstOrDefault();
 

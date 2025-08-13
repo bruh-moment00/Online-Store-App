@@ -4,17 +4,19 @@ import { Page } from "../../LayoutComponents/Page"
 import type { Employee } from "commonlib/src/Models/Data/Employee"
 import { getCurrentEmployeeId } from "commonlib/src/Services/AuthService";
 import { getEmployeeById } from "commonlib/src/Services/DataOperations/EmployeesService";
-import { Link } from "react-router";
+import { Link, useParams } from "react-router";
 import { Button } from "react-bootstrap";
 
 export const ProfilePage = () => {
     const [employee, setEmployee] = React.useState<Employee | undefined>(undefined);
 
+    const { employeeId } = useParams();
+
     React.useEffect(() => {
         let cancelled = false;
 
         const doGetEmployee = async () => {
-            const id = await getCurrentEmployeeId();
+            const id = employeeId ? Number(employeeId) : await getCurrentEmployeeId();
             if (id) {
                 const foundEmployee = await getEmployeeById(id);
                 if (foundEmployee){
@@ -28,7 +30,7 @@ export const ProfilePage = () => {
         return () => {
             cancelled = true;
         };
-    }, []);
+    }, [employeeId]);
 
     const dateParse = (date: Date) => {
         const dateString = new Date(date).toLocaleDateString();

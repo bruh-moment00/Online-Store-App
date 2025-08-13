@@ -5,15 +5,18 @@ import React from "react";
 import { Page } from "../../LayoutComponents/Page";
 import { EditProfileForm } from "../../Components/Profile/EditProfileForm";
 import { ChangePasswordForm } from "../../Components/Profile/ChangePasswordForm";
+import { useParams } from "react-router-dom";
 
 export const EditProfilePage = () => {
     const [employee, setEmployee] = React.useState<Employee | undefined>(undefined);
+
+    const { employeeId } = useParams();
 
     React.useEffect(() => {
             let cancelled = false;
     
             const doGetEmployee = async () => {
-                const id = await getCurrentEmployeeId();
+                const id = employeeId ? Number(employeeId) : await getCurrentEmployeeId();
                 if (id) {
                     const foundEmployee = await getEmployeeById(id);
                     if (foundEmployee){
@@ -27,7 +30,7 @@ export const EditProfilePage = () => {
             return () => {
                 cancelled = true;
             };
-        }, []);
+        }, [employeeId]);
 
     return (
         <Page title="Редактирование профиля сотрудника" tabTitle="Редактирование профиля">

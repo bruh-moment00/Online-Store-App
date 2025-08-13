@@ -27,7 +27,7 @@ export const LoginForm = () => {
   const submitForm = (data: FormData) => {
     setLoading(true);
     setError("");
-    login(data.email, data.password).then(() => {
+    login(data.password, data.email).then(() => {
       navigate("/profile");
       window.location.reload();
     })

@@ -12,14 +12,14 @@ export interface Employee extends BaseEntity {
 
 export interface EmployeeForPost {
     firstName: string;
-    lastName: string;
-    phoneNum: string;
-    email: string;
+    lastName: string | undefined;
+    phoneNum: string | undefined;
+    email: string | undefined;
     gender: boolean | undefined;
-    birthDate: Date;
+    birthDate: Date | undefined;
     login: string;
     password: string;
-    passwordConfirm: string;
+    confirmPassword: string;
 } 
 
 export interface EmployeeForPut {

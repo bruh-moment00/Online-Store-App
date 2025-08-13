@@ -8,7 +8,7 @@ namespace Online_Store_Backend.Domain.Employees.Dto
 {
     public class EmployeePostDto : EmployeeDto
     {
-        public string Password { get; set; }
-        public string ConfirmPassword { get; set; }
+        public required string Password { get; set; }
+        public required string ConfirmPassword { get; set; }
     }
 }
