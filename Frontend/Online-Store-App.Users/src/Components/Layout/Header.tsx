@@ -22,8 +22,10 @@ export const Header = () => {
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse className="justify-content-end">
-                        <Nav className="me-auto">
-                            <Nav.Link href="/cart">Корзина</Nav.Link>
+                        <Nav variant="pills" className="me-auto">
+                            <Nav.Item>
+                                <Nav.Link href="/cart">Корзина</Nav.Link>
+                            </Nav.Item>
                             {logged ?
                                 <>
                                 <Nav.Link href="/orders">Заказы</Nav.Link>
@@ -33,9 +35,12 @@ export const Header = () => {
                                 </Nav.Item>
                                 </>
                                 : 
-                                <Nav.Link href="/login">
-                                    <Button>Войти</Button>
-                                </Nav.Link>}
+                                <Nav.Item>
+                                    <Nav.Link href="/login">
+                                        <Button>Войти</Button>
+                                    </Nav.Link>
+                                </Nav.Item>
+                                }
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

@@ -12,6 +12,7 @@ import { ProductsListPage } from './Pages/Products/ProductsListPage';
 import { ProductPage } from './Pages/Products/ProductPage';
 import { ProfilePage } from './Pages/Profile/ProfilePage';
 import { EditProfilePage } from './Pages/Profile/EditProfilePage';
+import { CartPage } from './Pages/Cart/CartPage';
 
 function App() {
     return (
@@ -26,6 +27,7 @@ function App() {
                     <Route path="products/:productId" element={<ProductPage />} />
                     <Route path="profile" element={<ProfilePage />} />
                     <Route path="profile/edit" element={<EditProfilePage />} />
+                    <Route path='cart' element={<CartPage />} />
                 </Routes>
                 <Footer/>
             </Container>

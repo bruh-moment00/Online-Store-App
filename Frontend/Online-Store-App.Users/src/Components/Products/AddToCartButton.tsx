@@ -24,7 +24,7 @@ export const AddToCartButton = ({ productId }: Props) => {
 
     const handleCartClick = () => {
         const cart = getCookie("cart");
-        setCookie("cart", cart + `;${productId}`);
+        setCookie("cart", cart ? cart + `;${productId}` : productId);
         setInCart(true);
     }
 
