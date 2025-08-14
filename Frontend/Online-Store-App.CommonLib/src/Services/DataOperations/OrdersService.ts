@@ -43,7 +43,7 @@ export const putOrder = async (
     order: OrderForPut
 ): Promise<boolean | undefined> => {
     const result = await http<boolean, OrderForPut>({
-        path: "properties",
+        path: `orders/${order.id}`,
         method: "put",
         body: order
     });
