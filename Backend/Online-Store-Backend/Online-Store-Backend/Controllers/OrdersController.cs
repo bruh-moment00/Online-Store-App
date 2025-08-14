@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Online_Store_Backend.AuthHelpers;
+using Online_Store_Backend.Database.Users.Models;
 using Online_Store_Backend.Domain.Orders.Dto;
 using Online_Store_Backend.Domain.Orders.Services.Interfaces;
+using Online_Store_Backend.Enums;
 
 namespace Online_Store_Backend.Controllers
 {
@@ -33,7 +35,7 @@ namespace Online_Store_Backend.Controllers
 
         [Authorize]
         [HttpGet]
-        public async Task<IActionResult> GetOrders(long? userId = null ,int page = 1, int size = 10)
+        public async Task<IActionResult> GetOrders(long? userId = null ,int pageNumber = 1, int pageSize = 10)
         {
             if (userId == null && !HttpContext.User.IsInRole("employee"))
             {
@@ -43,7 +45,7 @@ namespace Online_Store_Backend.Controllers
             {
                 return Forbid("Access denied");
             }
-            var orders = await orderService.GetOrders(userId, page, size);
+            var orders = await orderService.GetOrders(userId, pageNumber, pageSize);
             return Ok(orders);
         }
 
@@ -61,10 +63,17 @@ namespace Online_Store_Backend.Controllers
             return orderId > 0 ? Ok(orderId) : BadRequest("Failed to insert order");
         }
 
-        [Authorize(Roles = "employee")]
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<ActionResult<bool>> UpdateOrder([FromBody] OrderDto order)
         {
+            if (!HttpContext.User.IsInRole("employee"))
+            {
+                if (order.Status != OrderStatus.Paid || !AuthHelper.CheckSameUserId(HttpContext, order.UserID))
+                {
+                    return Forbid("Нет доступа");
+                }
+            }
             if (order == null)
             {
                 return BadRequest("Order data is invalid");
