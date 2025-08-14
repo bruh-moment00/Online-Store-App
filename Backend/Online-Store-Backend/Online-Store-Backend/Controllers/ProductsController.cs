@@ -33,8 +33,8 @@ namespace Online_Store_Backend.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public async Task<IActionResult> GetProducts([FromQuery]GetProductParams getProductsParams)
-        {           
+        public async Task<IActionResult> GetProducts([FromQuery] GetProductParams getProductsParams)
+        {
             var products = await productService.GetProducts(getProductsParams);
             return Ok(products);
         }
@@ -73,6 +73,18 @@ namespace Online_Store_Backend.Controllers
                 return Ok("Product deleted successfully");
             }
             return NotFound("Product not found or delete failed");
+        }
+
+        [HttpPost("cost")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetProductsCost([FromBody] IEnumerable<long> productIds)
+        {
+            if (productIds == null || !productIds.Any())
+            {
+                return BadRequest("Product IDs cannot be null or empty");
+            }
+            var totalCost = await productService.GetCostByIds(productIds);
+            return Ok(totalCost);
         }
     }
 }

@@ -24,5 +24,8 @@ namespace Online_Store_Backend.Database.Orders.Models
 
         [ForeignKey("ProductID")]
         public virtual Product Product { get; set; }
+        [DataMember]
+        [Required]
+        public required double PriceWhenAdded { get; set; }
     }
 }

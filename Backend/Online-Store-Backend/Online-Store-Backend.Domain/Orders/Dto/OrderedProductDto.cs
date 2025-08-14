@@ -6,5 +6,6 @@ namespace Online_Store_Backend.Domain.Orders.Dto
     {
         public long OrderID { get; set; }
         public long ProductID { get; set; }
+        public double PriceWhenAdded { get; set; }
     }
 }

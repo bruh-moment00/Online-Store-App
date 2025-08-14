@@ -1,5 +1,6 @@
-﻿using Online_Store_Backend.Core.Data.Repository;
+using Online_Store_Backend.Core.Data.Repository;
 using Online_Store_Backend.Database.Orders.Models;
+using Online_Store_Backend.Database.Products.Models;
 using Online_Store_Backend.Domain.Orders.Dto;
 using Online_Store_Backend.Domain.Orders.Services.Interfaces;
 
@@ -8,9 +9,11 @@ namespace Online_Store_Backend.Domain.Orders.Services
     public class OrderedProductService : IOrderedProductService
     {
         private readonly IRepositoryAsync<OrderedProduct> orderedProductRepository;
-        public OrderedProductService(IRepositoryAsync<OrderedProduct> orderedProductRepository)
+        private readonly IRepositoryAsync<Product> productRepository;
+        public OrderedProductService(IRepositoryAsync<OrderedProduct> orderedProductRepository, IRepositoryAsync<Product> productRepository)
         {
             this.orderedProductRepository = orderedProductRepository;
+            this.productRepository = productRepository;
         }
         public async Task<OrderedProductDto> GetById(long id)
         {
@@ -25,6 +28,7 @@ namespace Online_Store_Backend.Domain.Orders.Services
         public async Task<long> InsertOrderedProduct(OrderedProductDto orderedProduct)
         {
             var entity = MapDtoToEntity(orderedProduct);
+            entity.PriceWhenAdded = (await productRepository.FindById(orderedProduct.ProductID)).Price;
             return await this.orderedProductRepository.Insert(entity);
         }
         public async Task<bool> UpdateOrderedProduct(OrderedProductDto orderedProduct)
@@ -33,6 +37,7 @@ namespace Online_Store_Backend.Domain.Orders.Services
             return await this.orderedProductRepository.Update(entity) != 0;
         }
         public async Task<bool> DeleteOrderedProduct(long id) => await this.orderedProductRepository.Delete(id);
+
         private static OrderedProductDto MapEntityToDto(OrderedProduct orderedProduct)
         {
             return new OrderedProductDto
@@ -44,6 +49,7 @@ namespace Online_Store_Backend.Domain.Orders.Services
                 UpdateDateTime = orderedProduct.UpdateDateTime,
                 OrderID = orderedProduct.OrderID,
                 ProductID = orderedProduct.ProductID,
+                PriceWhenAdded = orderedProduct.PriceWhenAdded,
             };
         }
         private static OrderedProduct MapDtoToEntity(OrderedProductDto orderedProduct)
@@ -53,6 +59,7 @@ namespace Online_Store_Backend.Domain.Orders.Services
                 ID = orderedProduct.ID,
                 OrderID = orderedProduct.OrderID,
                 ProductID = orderedProduct.ProductID,
+                PriceWhenAdded = orderedProduct.PriceWhenAdded,
             };
         }
     }

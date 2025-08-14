@@ -10,7 +10,7 @@ namespace Online_Store_Backend.Core.Data.Repository
 {
     public interface IRepositoryAsync<TEntity> where TEntity : BaseEntity
     {
-        Task<TEntity> FindById(long id);
+        Task<TEntity> FindById(long id, bool addCollections = false);
         Task<long> Insert(TEntity entity);
         Task<long> Update(TEntity entity);
         Task<long> SoftUpdate(TEntity entity);

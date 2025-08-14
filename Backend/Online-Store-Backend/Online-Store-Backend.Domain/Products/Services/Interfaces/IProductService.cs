@@ -9,6 +9,7 @@ namespace Online_Store_Backend.Domain.Products.Services.Interfaces
         Task<PaginationDto<ProductDto>> GetProducts(IGetProductsParams @params);
         Task<long> InsertProduct(ProductDto product);
         Task<bool> UpdateProduct(ProductDto product);
+        Task<double> GetCostByIds(IEnumerable<long> productIds);
         Task<bool> DeleteProduct(long id);
     }
 }

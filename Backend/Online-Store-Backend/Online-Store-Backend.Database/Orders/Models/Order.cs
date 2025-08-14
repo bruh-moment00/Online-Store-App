@@ -13,7 +13,21 @@ namespace Online_Store_Backend.Database.Orders.Models
     public class Order : BaseEntity
     {
         [DataMember]
-        public Double TotalPrice { get; set; }
+        public Double TotalPrice 
+        { 
+            get 
+            { 
+                double total = 0;
+                if (OrderedProducts != null)
+                {
+                    foreach (var orderedProduct in OrderedProducts)
+                    {
+                        total += orderedProduct.PriceWhenAdded;
+                    }
+                }
+                return total;
+            } 
+        }
         
         public ICollection<OrderedProduct>? OrderedProducts { get; set; }
 

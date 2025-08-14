@@ -10,7 +10,15 @@ namespace Online_Store_Backend.Core.Data.Repository
 
         public RepositoryAsync(DbContext context) => this.dbContext = context;
 
-        public async Task<TEntity> FindById(long id) => await this.dbContext.Set<TEntity>().FindAsync(id);
+        public async Task<TEntity> FindById(long id, bool addCollections = false)
+        {
+            var entity = await this.dbContext.Set<TEntity>().FindAsync(id);
+            if (entity != null && addCollections)
+                foreach (var collection in this.dbContext.Entry(entity).Collections)
+                    collection.Load();
+
+            return entity;
+        }
 
         public async Task<long> Insert(TEntity entity)
         {

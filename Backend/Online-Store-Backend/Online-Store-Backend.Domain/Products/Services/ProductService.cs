@@ -67,6 +67,16 @@ namespace Online_Store_Backend.Domain.Products.Services
             return await this.productRepository.Update(entity) != 0;
         }
 
+        public async Task<double> GetCostByIds(IEnumerable<long> productIds)
+        {
+            double result = 0;
+            foreach (var id in productIds)
+            {
+                result += (await this.productRepository.FindById(id)).Price;
+            }
+            return result;
+        }
+
         public async Task<bool> DeleteProduct(long id) => await this.productRepository.Delete(id);
         private static ProductDto MapEntityToDto(Product product)
         {

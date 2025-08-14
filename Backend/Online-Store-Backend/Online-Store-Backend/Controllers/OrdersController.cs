@@ -23,7 +23,7 @@ namespace Online_Store_Backend.Controllers
         public async Task<IActionResult> GetOrderById(long id)
         {
             var order = await orderService.GetById(id);
-            if (User == null) return NotFound();
+            if (User == null && order == null) return NotFound();
             else if (!(HttpContext.User.IsInRole("employee") || AuthHelper.CheckSameUserId(HttpContext, order.UserID)))
             {
                 return Forbid("Access denied");
@@ -49,19 +49,16 @@ namespace Online_Store_Backend.Controllers
 
         [Authorize]
         [HttpPost]
-        public async Task<ActionResult<long>> InsertOrder([FromBody] OrderDto order)
+        public async Task<ActionResult<long>> InsertOrder()
         {
-            if (order == null)
-            {
-                return BadRequest("Order cannot be null");
-            }
-            else if (order.Status != Enums.OrderStatus.Pending)
-            {
-                return Forbid("You can only create orders with status Pending");
-            }
+            var userId = HttpContext.User.IsInRole("user") ? HttpContext.User.Claims.FirstOrDefault(c => c.Type == "id")?.Value : null;
 
-            var orderId = await orderService.InsertOrder(order);
-            return orderId > 0 ? Ok(orderId) : BadRequest("Failed to insert product");
+            if (userId == null)
+            {
+                return BadRequest("User ID is required to create an order");
+            }
+            var orderId = await orderService.CreateOrder(Convert.ToInt64(userId));
+            return orderId > 0 ? Ok(orderId) : BadRequest("Failed to insert order");
         }
 
         [Authorize(Roles = "employee")]
