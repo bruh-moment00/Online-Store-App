@@ -22,7 +22,7 @@ export const MainPage = () => {
           </Link>
         </div>
         <div className="col-xs-12 col-sm-12 col-md-4">
-          <Link to="/">
+          <Link to="/orders">
             <div className="floating-block transition">
               <h4>Обработка заказов</h4>
               <p>Работа с заказами, ожидающих обработки</p>

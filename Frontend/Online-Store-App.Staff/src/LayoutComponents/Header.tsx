@@ -33,7 +33,7 @@ export const Header = () => {
                   <Link to="/categories">Категории</Link>
                 </NavDropdown.Item>
                 <NavDropdown.Item>
-                  <Link to="/">Заказы</Link>
+                  <Link to="/orders">Заказы</Link>
                 </NavDropdown.Item>
               </NavDropdown>
               <Nav.Link href="/profile">Профиль</Nav.Link>
