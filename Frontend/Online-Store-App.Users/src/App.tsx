@@ -13,6 +13,8 @@ import { ProductPage } from './Pages/Products/ProductPage';
 import { ProfilePage } from './Pages/Profile/ProfilePage';
 import { EditProfilePage } from './Pages/Profile/EditProfilePage';
 import { CartPage } from './Pages/Cart/CartPage';
+import { OrderPage } from './Pages/Orders/OrderPage';
+import { OrdersListPage } from './Pages/Orders/OrdersListPage';
 
 function App() {
     return (
@@ -28,6 +30,8 @@ function App() {
                     <Route path="profile" element={<ProfilePage />} />
                     <Route path="profile/edit" element={<EditProfilePage />} />
                     <Route path='cart' element={<CartPage />} />
+                    <Route path="orders" element={<OrdersListPage />} />
+                    <Route path="orders/:orderId" element={<OrderPage />} />
                 </Routes>
                 <Footer/>
             </Container>
