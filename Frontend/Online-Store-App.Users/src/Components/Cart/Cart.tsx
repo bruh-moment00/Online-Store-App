@@ -30,10 +30,13 @@ export const Cart = ({ data }: Props) => {
         if (cart) {
             for (let i = 0; i < cart?.length; i++) {
                 if (cart[i] && !isNaN(Number(cart[i])))
-                    rows.push(ProductInCart({
+                {
+                    const productInCart = ProductInCart({
                         productId: Number(cart[i]),
                         onRemove: (() => handleRemove(i))
-                }))
+                    });
+                    rows.push(productInCart)
+                }                  
             }    
         }  
         return rows;

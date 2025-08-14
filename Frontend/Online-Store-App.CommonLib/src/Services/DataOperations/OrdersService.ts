@@ -1,5 +1,5 @@
 import { http } from "../../http";
-import type { Order, OrderDataWithPaging, OrderForPost, OrderForPut } from "../../Models/Data/Order";
+import type { Order, OrderDataWithPaging, OrderForPut } from "../../Models/Data/Order";
 import type { OrderedProduct, OrderedProductForPost } from "../../Models/Data/OrderedProduct";
 
 export const getOrderById = async (
@@ -26,13 +26,10 @@ export const getOrders = async (params: URLSearchParams): Promise<OrderDataWithP
     }
 }
 
-export const postOrder = async (
-    order: OrderForPost
-): Promise<number | undefined> => {
-    const result = await http<number, OrderForPost>({
+export const postOrder = async (): Promise<number | undefined> => {
+    const result = await http<number>({
         path: "orders",
         method: "post",
-        body: order
     });
     if (result.ok && result.body) {
         return result.body;

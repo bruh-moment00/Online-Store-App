@@ -57,6 +57,22 @@ export const putProduct = async (
     }
 }
 
+export const getProductsCost = async (
+    productIds: number[]
+): Promise<number | undefined> => {
+    const result = await http<number, number[]>({
+        path: "products/cost",
+        method: "post",
+        body: productIds
+    });
+    if (result.ok && result.body) {
+        return result.body;
+    }
+    else {
+        return undefined;
+    }
+}
+
 export const deleteProduct = async (
     productId: number
 ): Promise<number | null> => {
