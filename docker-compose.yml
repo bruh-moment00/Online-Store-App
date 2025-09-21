@@ -4,6 +4,8 @@ services:
     build:
       context: ./Backend/Online-Store-Backend
       dockerfile: ./Online-Store-Backend/Dockerfile
+    volumes:
+      - ./Backend/Online-Store-Backend/Online-Store-Backend/wwwroot/:/app/wwwroot:rw
     environment:
       - ASPNETCORE_ENVIRONMENT=Release
     ports:
@@ -12,7 +14,7 @@ services:
     depends_on: 
       - db
   pgadmin:
-    image: dpage/pgadmin4:7.2
+    image: dpage/pgadmin4
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@pgadmin.com
       PGADMIN_DEFAULT_PASSWORD: password

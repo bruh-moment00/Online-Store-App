@@ -13,6 +13,7 @@ namespace Online_Store_Backend.Controllers
     {
         private readonly IProductImageService productImageService;
         private readonly IWebHostEnvironment environment;
+        private readonly char separator = Path.DirectorySeparatorChar;
         public ProductImagesController(IProductImageService productImageService, IWebHostEnvironment environment)
         {
             this.productImageService = productImageService;
@@ -23,13 +24,13 @@ namespace Online_Store_Backend.Controllers
         [HttpPost]
         public async Task<IActionResult> UploadImage([FromForm] ImageDto image)
         {
-            string path = environment.WebRootPath + "\\images\\products\\" + image.ProductId;
+            string path = environment.WebRootPath + String.Format("{0}images{0}products{0}{1}", separator, image.ProductId);
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
             }
 
-            using (FileStream fileStream = System.IO.File.Create($"{path}\\{image.File.FileName}"))
+            using (FileStream fileStream = System.IO.File.Create($"{path}{separator}{image.File.FileName}"))
             {
                 await image.File.CopyToAsync(fileStream);
                 fileStream.Flush();
@@ -48,7 +49,7 @@ namespace Online_Store_Backend.Controllers
         [HttpGet]
         public async Task<IActionResult> GetImagesByProductID(long productID)
         {
-            string path = environment.WebRootPath + "\\images\\products\\" + productID;
+            string path = environment.WebRootPath + String.Format("{0}images{0}products{0}{1}", separator, productID);
 
             if (Directory.Exists(path))
             {
@@ -71,7 +72,7 @@ namespace Online_Store_Backend.Controllers
         [HttpPut]
         public async Task<IActionResult> RenameImage([FromBody] string address, [FromQuery] string newName)
         {
-            string fileName = environment.WebRootPath + '\\' + address.Replace('/', '\\');
+            string fileName = environment.WebRootPath + separator + address.Replace('/', separator);
             if (System.IO.File.Exists(fileName))
             {
                 bool resultOk = false;
@@ -81,7 +82,7 @@ namespace Online_Store_Backend.Controllers
                     string ext = Path.GetExtension(fileName);   
                     try
                     {
-                        System.IO.File.Move(fileName, path + "\\" + newName + ext);
+                        System.IO.File.Move(fileName, path + separator + newName + ext);
                         resultOk = true;
                     } 
                     catch (IOException ex)
@@ -100,7 +101,7 @@ namespace Online_Store_Backend.Controllers
         [HttpDelete]
         public async Task<IActionResult> DeleteImage([FromBody] string address)
         {
-            string fileName = environment.WebRootPath + '\\' + address.Replace('/', '\\');
+            string fileName = environment.WebRootPath + separator + address.Replace('/', separator);
             if (System.IO.File.Exists(fileName))
             {
                 await Task.Run(() =>
