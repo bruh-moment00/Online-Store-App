@@ -22,7 +22,7 @@ export const CreateOrderButton = () => {
                 });
                 setCreated(true);
                 removeCookie('cart');
-                setTimeout(() => {navigate(`orders/${orderId}`)}, 1500);
+                setTimeout(() => {navigate(`/orders/${orderId}`)}, 1500);
             }
         }
 
