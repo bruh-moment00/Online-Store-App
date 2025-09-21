@@ -10,3 +10,14 @@ services:
         - action: sync
           path: ./Online-Store-App.Staff
           target: /app/Online-Store-App.Staff
+  client:
+    image: client
+    build:
+      context: ./
+      dockerfile: ./DockerfileClient
+    network_mode: "host"
+    develop:
+      watch:
+        - action: sync
+          path: ./Online-Store-App.Users
+          target: /app/Online-Store-App.Users
