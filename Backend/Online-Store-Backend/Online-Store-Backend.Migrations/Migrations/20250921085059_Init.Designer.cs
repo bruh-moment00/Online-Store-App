@@ -12,8 +12,8 @@ using Online_Store_Backend.Database.Contexts;
 namespace Online_Store_Backend.Migrations.Migrations
 {
     [DbContext(typeof(OnlineStoreDbContext))]
-    [Migration("20250814081803_OrdersUpdate")]
-    partial class OrdersUpdate
+    [Migration("20250921085059_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -210,9 +210,6 @@ namespace Online_Store_Backend.Migrations.Migrations
 
                     b.Property<int>("Status")
                         .HasColumnType("integer");
-
-                    b.Property<double>("TotalPrice")
-                        .HasColumnType("double precision");
 
                     b.Property<long>("UserID")
                         .HasColumnType("bigint");

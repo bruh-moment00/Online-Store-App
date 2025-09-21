@@ -217,7 +217,6 @@ namespace Online_Store_Backend.Migrations.Migrations
                 {
                     ID = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    TotalPrice = table.Column<double>(type: "double precision", nullable: false),
                     UserID = table.Column<long>(type: "bigint", nullable: false),
                     Status = table.Column<int>(type: "integer", nullable: false),
                     CreatedDateTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -331,6 +330,7 @@ namespace Online_Store_Backend.Migrations.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     OrderID = table.Column<long>(type: "bigint", nullable: false),
                     ProductID = table.Column<long>(type: "bigint", nullable: false),
+                    PriceWhenAdded = table.Column<double>(type: "double precision", nullable: false),
                     CreatedDateTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     IsActive = table.Column<bool>(type: "boolean", nullable: false),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
@@ -360,6 +360,27 @@ namespace Online_Store_Backend.Migrations.Migrations
                 schema: "public",
                 table: "category_prop",
                 column: "CategoryID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_employee_Email",
+                schema: "public",
+                table: "employee",
+                column: "Email",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_employee_Login",
+                schema: "public",
+                table: "employee",
+                column: "Login",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_employee_PhoneNum",
+                schema: "public",
+                table: "employee",
+                column: "PhoneNum",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_employee_permission_EmployeeID",
@@ -410,16 +431,38 @@ namespace Online_Store_Backend.Migrations.Migrations
                 column: "ProductID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_product_property_value_ProductID",
+                name: "IX_product_property_value_ProductID_PropID",
                 schema: "public",
                 table: "product_property_value",
-                column: "ProductID");
+                columns: new[] { "ProductID", "PropID" },
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_product_property_value_PropID",
                 schema: "public",
                 table: "product_property_value",
                 column: "PropID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_user_Email",
+                schema: "public",
+                table: "user",
+                column: "Email",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_user_Login",
+                schema: "public",
+                table: "user",
+                column: "Login",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_user_PhoneNum",
+                schema: "public",
+                table: "user",
+                column: "PhoneNum",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_user_token_UserID",
